@@ -1,0 +1,71 @@
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  color: white;
+}
+
+.title {
+  color: #20bf55 !important;
+}
+
+.left {
+  overflow-y: hidden;
+  left: 0;
+  background-image: url("../../../../assets/img/bg-img.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.right {
+  top: 5%;
+  padding: 0 10%;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  right: 0;
+  background-color: white;
+}
+
+.right::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.left h5 {
+  font-size: xx-large;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  color: #fff;
+}
+
+.left p {
+  font-size: medium;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .left {
+    display: none;
+  }
+  .right {
+    right: unset;
+  }
+  .split {
+    width: 90%;
+  }
+}

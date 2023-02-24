@@ -1,0 +1,196 @@
+<app-side-nav *ngIf="role == 'customer'"> </app-side-nav>
+<app-dsa-sidenav *ngIf="role == 'dsa'"></app-dsa-sidenav>
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <section class="offer-detail-section">
+    <a (click)="back()">
+      <div class="offer-detail-head">
+        <i class="fa-solid fa-angle-left offer-detail-head-icon"></i>
+        <h6 class="offer-detail-head-h6">Back</h6>
+      </div>
+    </a>
+
+    <div class="offer-detail-div">
+      <div class="row">
+        <div class="col-md-9 col-12">
+          <div class="offer-detail-div-1">
+            <div class="offer-detail-img-div">
+              <img src="{{ offerDetails.imageUrl }}" class="offer-detail-img" />
+            </div>
+            <div class="offer-detail-content-div">
+              <h5 class="offer-detail-h5">
+                {{ offerDetails.title }}
+              </h5>
+              <p class="offer-detail-p">
+                {{ offerDetails.secondaryTitle }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-12" *ngIf="onBoarded">
+          <div
+            class="offer-detail-button-div"
+            *ngIf="type !== 3 && type !== 4 && !offerDetails.interested"
+          >
+            <a
+              (click)="applyOffer(offerDetails.id, offerDetails.status)"
+              *ngIf="offerDetails.status == 10"
+            >
+              <button class="offer-detail-button">Apply Now</button>
+            </a>
+            <a
+              (click)="applyOffer(offerDetails.id, offerDetails.status)"
+              *ngIf="offerDetails.status == 0 || offerDetails.status == 6"
+            >
+              <button class="offer-detail-button">On Process</button>
+            </a>
+            <!-- <a
+            (click)="applyOffer(offerDetails.id, offerDetails.status)"
+            *ngIf="offerDetails.status == 0 || offerDetails.status == 6"
+          >
+            <button class="offer-detail-button">On Process</button>
+          </a> -->
+          </div>
+          <div class="offer-detail-button-div" *ngIf="offerDetails.interested">
+            <a
+              (click)="interestPop(offerDetails.id)"
+              *ngIf="!offerDetails.offerInterest"
+            >
+              <button class="offer-detail-button">Show Interest</button>
+            </a>
+            <a
+              (click)="applyOffer(offerDetails.id, offerDetails.status)"
+              *ngIf="offerDetails.status == 0 || offerDetails.status == 6"
+            >
+              <button class="offer-detail-button">On Process</button>
+            </a>
+            <!-- <a
+            (click)="applyOffer(offerDetails.id, offerDetails.status)"
+            *ngIf="offerDetails.status == 0 || offerDetails.status == 6"
+          >
+            <button class="offer-detail-button">On Process</button>
+          </a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offer-detail-div">
+      <div class="offer-detail-content-2">
+        <h3 class="offer-detail-h3 mb-4">Description</h3>
+        <div
+          class="offer-detail-p-1"
+          style="text-align: justify; line-height: 1.6"
+          [innerHTML]="offerDetails.description"
+        ></div>
+      </div>
+    </div>
+
+    <div class="offer-detail-div">
+      <div class="offer-detail-content-2">
+        <h3 class="offer-detail-h3">Features List</h3>
+        <ul class="offer-detail-ul">
+          <li
+            class="offer-detail-li"
+            *ngFor="let feature of offerDetails.features; let i = index"
+          >
+            <div class="offer-detail-li-img-div">
+              <img
+                src="../../../../assets/img/tick.svg"
+                class="offer-detail-li-img"
+              />
+            </div>
+            <p class="offer-detail-p-2">{{ feature }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="offer-card-section" *ngIf="suggestedOffers.length > 0">
+      <h5 class="offer-card-h5">Suggested Offers</h5>
+      <div
+        class="offer-card d-flex flex-column flex-lg-row card"
+        *ngFor="let suggestion of suggestedOffers; let i = index"
+      >
+        <div class="offer-card-logo-part">
+          <div class="offer-card-img-div">
+            <img src="{{ suggestion.imageUrl }}" class="offer-card-img" />
+          </div>
+          <h6 class="offer-card-h6">{{ suggestion.secondaryTitle }}</h6>
+        </div>
+
+        <div class="offer-card-list">
+          <div
+            class="offer-card-list-div"
+            *ngFor="let feature of suggestion.features; let i = index"
+          >
+            <div class="offer-card-list-img-div">
+              <img
+                src="../../../../assets/img/tick.svg"
+                class="offer-card-list-img"
+              />
+            </div>
+            <p class="offer-card-list-p o-text-1">{{ feature }}</p>
+          </div>
+        </div>
+
+        <div class="offer-card-list-btn">
+          <a (click)="viewOffer(suggestion.id)">
+            <button class="offer-card-list-button">
+              View Details
+              <img
+                src="../../../../assets/img/right-arrow.svg"
+                alt=""
+                class="mx-1"
+                width="15px"
+              /></button
+          ></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<div
+  class="modal fade"
+  id="interest"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">Are you sure wants to show interest?</p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="showInterest()"
+              >
+                <p class="approve-btn-p pe-2">Yes</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

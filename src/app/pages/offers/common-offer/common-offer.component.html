@@ -1,0 +1,128 @@
+<section class="side-nav-div">
+  <div class="container" *ngIf="!isLoading">
+    <div
+      class="d-flex flex-wrap justify-content-md-start justify-content-center align-items-center"
+    >
+      <button
+        (click)="switchCat(category.slug, category.category)"
+        class="loan-btn align-items-center mx-3"
+        [ngClass]="{ 'loan-btn-active': category.selected === true }"
+        *ngFor="let category of categoryList; let i = index"
+      >
+        <div class="loan-btn-div">
+          <img src="{{ category.imageUrl }}" class="loan-btn-icon" />
+        </div>
+        <p class="loan-btn-p" style="white-space: wrap">
+          {{ category.category }}
+        </p>
+      </button>
+    </div>
+  </div>
+  <!-- <app-loader *ngIf="isLoading"> </app-loader> -->
+
+  <app-empty
+    [title]="'No Offers Found'"
+    *ngIf="offerList.length == 0 && !isLoading"
+  ></app-empty>
+  <div
+    class="container py-2 d-offer-div"
+    *ngIf="offerList.length !== 0 && !isLoading"
+  >
+    <div class="row mt-3">
+      <div class="col-12 my-2">
+        <div class="row">
+          <div
+            class="col-12 col-lg-6 my-4"
+            *ngFor="let offer of offerList; let i = index"
+          >
+            <section class="approve-section">
+              <div class="approve-card h-100 pb-4">
+                <h6 class="approve-h6">{{ offer.title | titlecase }}</h6>
+                <div class="approve-content-div">
+                  <p class="approve-p">{{ badgeName }}</p>
+                  <div class="approve-content-div-1 mb-4">
+                    <img src="{{ offer.imageUrl }}" class="approve-logo" />
+                    <h5 class="approve-h5 mx-3 o-text-1">
+                      {{ offer.secondaryTitle }}
+                    </h5>
+                  </div>
+
+                  <div
+                    class="approve-content-div-2"
+                    *ngFor="let item of offer.features; let i = index"
+                  >
+                    <div
+                      class="approve-content-1 d-flex align-items-center px-2 py-1"
+                    >
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        width="13px"
+                      />
+                      <p class="approve-p-1 o-text-1 mb-0">{{ item }}</p>
+                    </div>
+                  </div>
+
+                  <h6 class="approve-h6-1 mt-2" (click)="viewOffer(offer.id)">
+                    View Details >>
+                  </h6>
+                  <button
+                    *ngIf="!onBoarded"
+                    (click)="onboard()"
+                    class="approve-btn py-2 d-flex align-items-center"
+                  >
+                    <p class="approve-btn-p pe-2">Get Credit Score</p>
+                  </button>
+                  <div *ngIf="onBoarded">
+                    <button
+                      (click)="applyOffer(offer.id, offer.status)"
+                      *ngIf="offer.status == 10"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/right-arrow.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="offer.status == 0 || offer.status == 6"
+                      class="approve-btn py-2 d-flex align-items-center"
+                      (click)="applyOffer(offer.id, offer.status)"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="
+                        offer.status !== 0 &&
+                        offer.status !== 6 &&
+                        offer.status !== 10
+                      "
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">Applied</p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

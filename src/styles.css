@@ -1,0 +1,497 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap");
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+  margin: 0;
+  overflow-x: hidden !important;
+  font-family: "Montserrat", sans-serif !important;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll !important;
+  text-overflow: wrap;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.r-text {
+  color: red !important;
+  font-weight: 600 !important;
+}
+
+.g-text {
+  color: #35c772 !important;
+  font-weight: 600 !important;
+}
+.o-text-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.o-text-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.o-text-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.field-icon {
+  cursor: pointer;
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  opacity: 0.7;
+  z-index: 2;
+}
+.application-sub-title {
+  font-family: Montserrat;
+  font-size: medium !important;
+  font-weight: bold;
+  line-height: 0.79;
+  text-align: left;
+  color: #000;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.application-p {
+  text-align: justify;
+  font-family: Montserrat;
+  font-size: medium;
+  font-weight: 500;
+  line-height: 1.58;
+  color: #868686;
+}
+.cus-button {
+  padding: 3px 15px 6px 15px !important ;
+  font-family: inherit;
+  font-size: small !important;
+  font-weight: 500;
+  color: #ffb300;
+  background-color: #fff;
+  border: 2px solid #ffb300 !important;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+.cus-button:hover {
+  background-color: #ffb300;
+  box-shadow: 0px 15px 20px #ffb300(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+.title {
+  font-family: inherit;
+  font-size: xx-large;
+  font-weight: bold;
+  line-height: 1.56;
+  text-align: left;
+  color: #000;
+}
+
+.title-description {
+  font-family: inherit;
+  font-size: small;
+  font-weight: 500;
+  line-height: 2.07;
+  /* text-align: left; */
+  color: #999;
+}
+
+.page-crump {
+  margin: 0 50px 30px 20px;
+  font-family: Montserrat;
+  font-size: medium;
+  font-weight: bold;
+  line-height: 1.06;
+  text-align: left;
+  color: #000;
+  margin-bottom: -20px !important;
+}
+
+.title-description span {
+  color: #20bf55 !important;
+  cursor: pointer;
+}
+
+.sub-title {
+  font-family: inherit;
+  font-size: x-large;
+  font-weight: 600;
+  line-height: 1.58;
+  text-align: center;
+  color: #000;
+}
+.bg-section {
+  min-height: 100vh !important;
+  min-width: 100vw;
+  /* background-image: url(./assets/img/Background\ Image.jpg); */
+  background-image: url("./assets/img/bg2.webp");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 100%;
+}
+.main-div {
+  width: 100px;
+  height: 100px;
+}
+
+input.picker[type="date"] {
+  position: relative !important;
+}
+
+input.picker[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  color: transparent;
+  background: transparent;
+}
+.btn {
+  flex: 1 1 auto;
+  margin: auto;
+  padding: 11px 50px;
+  text-align: center;
+  font-size: small;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  /* text-transform: uppercase; */
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white !important;
+  /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 8px;
+  border: none !important;
+}
+
+.btn:hover {
+  background-position: right center; /* change the direction of the change here */
+}
+
+.ggl-img {
+  width: 20%;
+  padding-right: 2px;
+  margin: -1px 5px 0px 0;
+}
+
+.btn-g:hover {
+  transform: scale(0.9);
+}
+
+.btn-g {
+  flex: 1 1 auto;
+  margin: auto;
+  padding: 8px 20px;
+  text-align: center;
+  font-size: small;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: black !important;
+  box-shadow: 0 0 2px #20bf55;
+  border-radius: 8px;
+  background-color: white;
+  border: 1.5px solid #20bf55 !important;
+}
+
+.btn-1 {
+  background-image: linear-gradient(
+    to right,
+    #20bf55 0%,
+    #01baef 51%,
+    #20bf55 100%
+  );
+}
+.form-input {
+  width: 100%;
+  height: auto;
+  background: white;
+  margin: auto;
+  position: relative;
+  margin-bottom: 35px;
+}
+.form-element-input {
+  outline: none;
+  height: 1.5rem;
+  display: block;
+  background: none;
+  padding: 0.125rem 0.125rem 0.0625rem;
+  font-size: medium;
+  font-weight: 500;
+  border: 0;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  width: 100%;
+  color: #333;
+  box-shadow: none;
+  opacity: 0.001;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+  color: #333;
+  font-size: small;
+  margin-left: 1px;
+  font-weight: 500;
+  line-height: 1.5;
+  /* letter-spacing: 1px; */
+  /* width: 100%; */
+  color: #333;
+  box-shadow: none;
+  opacity: 0.5;
+  transition: opacity 0.28s ease;
+  will-change: opacity;
+  /* display: block; */
+  background: none;
+}
+
+.ng-select .ng-select-container .ng-value-container {
+  align-items: center;
+  padding-left: 0px;
+  color: #333;
+  font-weight: 500;
+  /* letter-spacing: 1.5px; */
+  font-size: medium;
+}
+
+.form-element-input::placeholder {
+  color: #a6a6a6;
+  transform: scale(0.9);
+  transform-origin: left top;
+}
+
+.form-element-bar {
+  height: 1px;
+  background: #999;
+  position: relative;
+  display: block;
+}
+
+.form-element-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #20bf55;
+  height: 1px;
+  display: block;
+  transform: rotateY(90deg);
+  transition: transform 0.28s ease;
+  will-change: transform;
+}
+
+.form-element-label {
+  position: absolute;
+  top: 0.65rem;
+  line-height: 1.5rem;
+  pointer-events: none;
+  padding-left: 0.125rem;
+  z-index: 1;
+  font-size: small;
+  margin: 0;
+  color: #a6a6a6;
+  transform: translateY(-50%);
+  transform-origin: left center;
+  transition: transform 0.28s ease, color 0.28s linear, opacity 0.28s linear;
+  will-change: transform, color, opacity;
+  cursor: text;
+}
+
+.form-element-hint {
+  color: #aaa;
+}
+
+.form-element-input:focus ~ .form-element-bar::after {
+  transform: rotateY(0deg);
+}
+.form-element-input.hasValue ~ .form-element-label,
+.form-element-input:focus ~ .form-element-label {
+  color: #20bf55;
+}
+
+.form-element-input.hasValue,
+.form-element-input:focus {
+  opacity: 1;
+  color: #333;
+  letter-spacing: 1.5px;
+  font-size: medium;
+}
+.form-element-input.hasValue ~ .form-element-label,
+.form-element-input:focus ~ .form-element-label {
+  transform: translateY(-100%) translateY(-0.5em) translateY(-2px) scale(0.94);
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: none;
+  margin-top: 1px;
+}
+
+.form-element-hint {
+  color: #fd1c03;
+  font-size: small;
+  margin-top: 2px;
+}
+/*
+input:focus:invalid,
+textarea:focus:invalid,
+select:focus:invalid {
+  color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+} */
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: #35c7724f !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.12rem rgba(13, 253, 77, 0.14) !important;
+}
+
+input {
+  box-shadow: none;
+}
+
+input[type="radio"] {
+  appearance: none;
+}
+
+input[type="radio"] + label {
+  cursor: pointer;
+  position: relative;
+  font-size: small;
+  padding-left: 30px;
+  line-height: 20px;
+}
+
+input[type="radio"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  aspect-ratio: 1;
+  border: 1px solid #20bf55;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+  height: 36px;
+  border: none !important;
+}
+
+input[type="radio"] + label::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  aspect-ratio: 1;
+  border: 1px solid #20bf55;
+  background: #20bf55;
+  border-radius: 50%;
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+input[type="radio"]:checked + label::after {
+  opacity: 1;
+}
+
+.radio-title {
+  margin-top: -10px;
+  font-size: small;
+  font-weight: 500;
+  color: #333;
+}
+.pre-radio {
+  margin-bottom: 12px !important;
+}
+.uCase {
+  text-transform: uppercase;
+}
+.lCase {
+  text-transform: lowercase;
+}
+.cCase {
+  text-transform: capitalize;
+}
+.mob-none {
+  display: block;
+}
+.web-none {
+  display: none;
+}
+.side-nav-div {
+  margin-left: 320px;
+  margin-top: 100px;
+}
+@media (max-width: 767px) {
+  .mob-none {
+    display: none;
+  }
+  .web-none {
+    display: block;
+  }
+  .side-nav-div {
+    margin-left: 0px !important;
+    margin-top: 25px !important;
+  }
+  .form-element-hint {
+    font-size: x-small;
+  }
+}
+
+.form-sub-title {
+  font-family: Montserrat;
+  font-size: small;
+  font-weight: 600;
+  line-height: 1.06;
+  text-align: left;
+  color: #868686;
+}
+
+.applied-btn {
+  color: #20bf55 !important;
+  background-color: #a6a6a6 !important;
+  background-image: #a6a6a6 !important;
+}

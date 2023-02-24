@@ -1,0 +1,189 @@
+<app-dsa-sidenav></app-dsa-sidenav>
+<section class="side-nav-div">
+  <div class="container" *ngIf="!isLoading">
+    <h5 class="cibil_text text-end me-5 my-3">Cibil Score: {{ cibilScore }}</h5>
+    <div class="d-flex align-items-center">
+      <button
+        (click)="switchCat(category.slug, category.category)"
+        class="loan-btn align-items-center mx-3"
+        [ngClass]="{ 'loan-btn-active': category.selected === true }"
+        *ngFor="let category of categoryList; let i = index"
+      >
+        <div class="loan-btn-div">
+          <img src="{{ category.imageUrl }}" class="loan-btn-icon" />
+        </div>
+        <p class="loan-btn-p">{{ category.category }}</p>
+      </button>
+    </div>
+  </div>
+  <app-loader *ngIf="isLoading"> </app-loader>
+
+  <app-empty
+    [title]="'No Offers Found'"
+    *ngIf="offerList.length == 0 && !isLoading"
+  ></app-empty>
+  <div
+    class="container py-2 d-offer-div"
+    *ngIf="offerList.length !== 0 && !isLoading"
+  >
+    <div class="row mt-3">
+      <div class="col-12 my-2">
+        <div class="row">
+          <div
+            class="col-12 col-lg-6 my-4"
+            *ngFor="let offer of offerList; let i = index"
+          >
+            <section class="approve-section">
+              <div class="approve-card h-100 pb-4">
+                <h6 class="approve-h6">{{ offer.title | titlecase }}</h6>
+                <div class="approve-content-div">
+                  <p class="approve-p">{{ badgeName }}</p>
+                  <div class="approve-content-div-1 mb-4">
+                    <img src="{{ offer.imageUrl }}" class="approve-logo" />
+                    <h5 class="approve-h5 mx-3 o-text-1">
+                      {{ offer.secondaryTitle }}
+                    </h5>
+                  </div>
+
+                  <div
+                    class="approve-content-div-2"
+                    *ngFor="let item of offer.features; let i = index"
+                  >
+                    <div
+                      class="approve-content-1 d-flex align-items-center px-2 py-1"
+                    >
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        width="13px"
+                      />
+                      <p class="approve-p-1 o-text-1 mb-0">{{ item }}</p>
+                    </div>
+                  </div>
+
+                  <h6 class="approve-h6-1 mt-2" (click)="viewOffer(offer.id)">
+                    View Details >>
+                  </h6>
+
+                  <div>
+                    <button
+                      (click)="applyOfferRoute(offer.id)"
+                      *ngIf="offer.status == 10"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">
+                        {{ offer.statusName | titlecase }}
+                      </p>
+                      <img
+                        src="../../../../assets/img/right-arrow.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="offer.status == 0 || offer.status == 6"
+                      (click)="applyOffer(offer.id, offer.status)"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="
+                        offer.status !== 0 &&
+                        offer.status !== 6 &&
+                        offer.status !== 10
+                      "
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">
+                        {{ offer.statusName | titlecase }}
+                      </p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="cibilScore"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h6 class="cibil_text mt-4 mb-4">Cibil Score</h6>
+
+        <div class="gauge-chart-section mb-5">
+          <div class="gauge-chart-div">
+            <div class="gauge-chart-img-div">
+              <img
+                src="../../../../assets/img/Dashboard/gauge.svg"
+                class="gauge-chart-img"
+              />
+              <div class="gauge-chart-content">
+                <div class="gauge-chart-icon-div">
+                  <div class="gauge-chart-icon-div-1">
+                    <img
+                      src="../../../../assets/img/Dashboard/up-arrow.svg"
+                      class="gauge-chart-icon"
+                    />
+                  </div>
+                  <p class="gauge-chart-p">20</p>
+                </div>
+                <h2
+                  id="nbr"
+                  class="gauge-chart-h2"
+                  [countUp]="cibilScore"
+                  [duration]="1500"
+                >
+                  {{ cibilScore }}
+                </h2>
+                <h6 class="gauge-chart-h6">Cibil Score</h6>
+              </div>
+            </div>
+
+            <button
+              class="gauge-btn mt-3"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              (click)="unsetCounter()"
+            >
+              <p class="gauge-p-1">
+                Close ( <span id="count"> {{ count }} </span> )
+              </p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<app-top-nav></app-top-nav>
+<app-steps-side-nav [id]="id" [currentStep]="1"></app-steps-side-nav>
+
+<section class="side-nav-div" *ngIf="!isLoading">
+  <div class="container px-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="float-end me-5">
+          <a
+            class="btn-emi btn btn-primary"
+            routerLink="/emi"
+            role="button"
+            align="center"
+            ><img
+              src="../../../../assets/img/Hamburger/EMI Calculator.svg"
+              alt=""
+              class="mx-2"
+              width="15px"
+            />
+            EMI Calculator</a
+          >
+        </div>
+      </div>
+      <div class="col-12 marg-mob mb-5">
+        <div align="center" class="title">{{ data.type }}</div>
+      </div>
+      <div class="col-12 col-sm-11">
+        <h4 class="application-sub-title mb-3">{{ data.title }}</h4>
+        <p class="application-p">
+          {{ data.description }}
+        </p>
+      </div>
+      <div
+        class="col-12 col-sm-11 mt-4"
+        [formGroup]="loanApplicationForm"
+        *ngIf="type !== 'Credit Card'"
+      >
+        <div class="row justify-content-between">
+          <div class="col-12">
+            <h4 class="application-sub-title mb-4">
+              Select your Loan Amount & Terms
+            </h4>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="9"
+                  (keypress)="
+                    keyPressNumbers($event) && currencyFromat('requestedAmount')
+                  "
+                  formControlName="requestedAmount"
+                  name="requestedAmount"
+                  id="requestedAmount"
+                  required
+                />
+                <label for="homeStatus">Requested Amount (Rs)*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('requestedAmount')"
+                class="form-element-hint"
+                >*Please enter valid Requested Amount.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="type !== 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="3"
+                  (keypress)="keyPressNumbers($event)"
+                  formControlName="loanTerm"
+                  name="loanTerm"
+                  id="loanTerm"
+                  required
+                />
+                <label for="homeStatus">Loan Term (Months)*</label>
+              </div>
+
+              <small *ngIf="validateLogin('loanTerm')" class="form-element-hint"
+                >*Please enter valid Loan Term.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="type == 'Vehicle Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="10"
+                  (keypress)="keyPressNumbers($event)"
+                  formControlName="quotedAmount"
+                  name="quotedAmount"
+                  id="quotedAmount"
+                  required
+                />
+                <label for="homeStatus">Quoted Amount (Rs)*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('quotedAmount')"
+                class="form-element-hint"
+                >*Please enter valid Loan Amount.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="type == 'Vehicle Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="vehicleType"
+                  name="vehicleType"
+                  id="vehicleType"
+                  aria-label="Default select example"
+                >
+                  <option value="">Select vehicle type</option>
+                  <option value="Two Wheeler">Two Wheeler</option>
+                  <option value="Four Wheeler">Four Wheeler</option>
+                </select>
+              </div>
+              <small
+                *ngIf="validateLogin('vehicleType')"
+                class="form-element-hint"
+                >*Please select vehicle Type.</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="mb-5"></div> -->
+
+    <div class="d-flex align-items-center mt-3">
+      <div class="form-group">
+        <input type="checkbox" id="html" [(ngModel)]="termAccepted" />
+        <label class="application-p" for="html"
+          >I accept the terms & conditions</label
+        >
+      </div>
+    </div>
+    <small *ngIf="!termAccepted && isSubmitted" class="form-element-hint"
+      >*Please Accept terms to continue.</small
+    >
+    <div class="row justify-content-center mt-5 mb-5">
+      <div class="col-10">
+        <a class="btn btn-1 float-end px-5" (click)="submit()">Next </a>
+      </div>
+    </div>
+  </div>
+</section>

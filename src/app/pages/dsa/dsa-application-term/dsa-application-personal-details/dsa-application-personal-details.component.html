@@ -1,0 +1,1824 @@
+<app-top-nav-dsa></app-top-nav-dsa>
+<app-steps-side-nav
+  [id]="id"
+  [cibilId]="cibilId"
+  [currentStep]="2"
+></app-steps-side-nav>
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 marg-mob">
+        <div align="center" class="title mt-5">{{ data.type }}</div>
+      </div>
+      <div class="col-12 col-sm-10 mt-5" [formGroup]="personalDetailsForm">
+        <div class="row justify-content-between">
+          <h4
+            class="application-sub-title my-3"
+            *ngIf="data.type == 'Education Loan'"
+          >
+            Parent/Nominee Details
+          </h4>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nomineeName"
+                  [maxlength]="50"
+                  name="nomineeName"
+                  id="nomineeName"
+                  [required]="data.type == 'Education Loan'"
+                />
+                <label for="homeStatus">Nominee's Name*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeName')"
+                class="form-element-hint"
+                >*Enter valid Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="nomineeRelation"
+                  name="nomineeRelation"
+                  id="nomineeRelation"
+                  aria-label="Default select example"
+                >
+                  <option value="0">Nominee's Relation</option>
+                  <option
+                    *ngFor="let status of relation; let i = index"
+                    value="{{ status.value }}"
+                  >
+                    {{ status.name }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeRelation')"
+                class="form-element-hint"
+                >*Select Nominee's Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="nomineeOccupationType"
+                  name="nomineeOccupationType"
+                  id="nomineeOccupationType"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Select Occupation Type</option>
+                  <option value="1">Salaried</option>
+                  <option value="2">Self - Business</option>
+                </select>
+                <!-- <label for="homeStatus">Work Type*</label> -->
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeOccupationType')"
+                class="form-element-hint"
+                >*Select Occupation Type.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nomineeIncome"
+                  (keypress)="keyPressNumbers($event)"
+                  [maxlength]="9"
+                  name="nomineeIncome"
+                  [required]="data.type == 'Education Loan'"
+                  id="nomineeIncome"
+                />
+                <label for="homeStatus">Annual Income*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeIncome')"
+                class="form-element-hint"
+                >*Enter valid Amount.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nomineeOccupation"
+                  [maxlength]="50"
+                  name="nomineeOccupation"
+                  id="nomineeOccupation"
+                  [required]="data.type == 'Education Loan'"
+                />
+                <label for="homeStatus">Occupation*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeOccupation')"
+                class="form-element-hint"
+                >*Enter valid Occupation.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keypress)="keyPressNumbers($event)"
+                  formControlName="nomineeNumber"
+                  [maxlength]="10"
+                  name="nomineeNumber"
+                  id="nomineeNumber"
+                  [required]="data.type == 'Education Loan'"
+                />
+                <label for="nomineeNumber">Contact Number*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeNumber')"
+                class="form-element-hint"
+                >*Enter valid Contact Number.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nomineePan"
+                  [maxlength]="11"
+                  name="nomineePan"
+                  id="nomineePan"
+                  [required]="data.type == 'Education Loan'"
+                />
+                <label for="homeStatus">PAN Number*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineePan')"
+                class="form-element-hint"
+                >*Enter valid PAN.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="nomineeAadhar"
+                  [maxlength]="50"
+                  name="nomineeAadhar"
+                  id="nomineeAadhar"
+                  [required]="data.type == 'Education Loan'"
+                />
+                <label for="nomineeAadhar">Aadhar Number*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('nomineeAadhar')"
+                class="form-element-hint"
+                >*Enter valid Aadhar Number.</small
+              >
+            </div>
+          </div>
+          <h4 class="application-sub-title mb-3">Personal Information</h4>
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="group">
+              <input
+                type="text"
+                name="name"
+                [maxlength]="100"
+                [attr.disabled]="true"
+                class="form-control"
+                formControlName="name"
+                id="name"
+                red
+              />
+              <label for="">Full Name*</label>
+            </div>
+            <small *ngIf="validateLogin('name')" class="form-element-hint"
+              >*Please enter valid Name.</small
+            >
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keypress)="keyPressNumbers($event)"
+                  formControlName="number"
+                  [maxlength]="10"
+                  name="number"
+                  id="number"
+                  [attr.disabled]="true"
+                  red
+                />
+                <label for="homeStatus">Mobile Number*</label>
+              </div>
+
+              <!-- <small *ngIf="validateLogin('number')" class="form-element-hint"
+                >*Please enter valid Mobile Number.</small
+              > -->
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                  name="email"
+                  [maxlength]="30"
+                  id="email"
+                  red
+                />
+                <label for="homeStatus">Email ID*</label>
+              </div>
+              <small *ngIf="validateLogin('email')" class="form-element-hint"
+                >*Please enter valid Email ID.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="dob"
+                  [attr.disabled]="true"
+                  (keypress)="dateFormat('dob', $event)"
+                  name="dob"
+                  id="dob"
+                  red
+                />
+                <label for="homeStatus">DOB*</label>
+              </div>
+              <small *ngIf="validateLogin('dob')" class="form-element-hint"
+                >*Enter Valid DOB.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="gender"
+                  name="gender"
+                  [attr.disabled]="true"
+                  id="gender"
+                  aria-label="Default select example"
+                >
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                  <option value="3">Others</option>
+                </select>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  formControlName="gender"
+                  name="gender"
+                  id="gender"
+                  [attr.disabled]="true"
+                   red
+                />
+                <label for="homeStatus">Gender*</label> -->
+              </div>
+
+              <!-- <small
+                *ngIf="validateLogin('gender')"
+                class="form-element-hint"
+                >*Please select state.</small
+              > -->
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="nationality"
+                  name="nationality"
+                  id="nationality"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Select Nationality</option>
+                  <option
+                    *ngFor="let nation of nationality; let i = index"
+                    value="{{ nation.value }}"
+                  >
+                    {{ nation.name }}
+                  </option>
+                </select>
+              </div>
+              <small
+                *ngIf="validateLogin('nationality')"
+                class="form-element-hint"
+                >*Please select Nationality.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type !== 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="pan"
+                  [maxlength]="10"
+                  (input)="changeTextToUppercase('pan')"
+                  name="pan"
+                  id="pan"
+                  [attr.disabled]="true"
+                  red
+                />
+                <label for="homeStatus">PAN Number*</label>
+              </div>
+
+              <!-- <small *ngIf="validateLogin('pan')" class="form-element-hint"
+                >*Please enter valid PAN Number.</small
+              > -->
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keypress)="keyPressNumbers($event)"
+                  [maxlength]="12"
+                  formControlName="aadhar"
+                  name="aadhar"
+                  id="aadhar"
+                  required
+                  red
+                />
+                <label for="homeStatus">Aadhar Number*</label>
+              </div>
+
+              <small *ngIf="validateLogin('aadhar')" class="form-element-hint"
+                >*Please enter valid Aadhar Number.</small
+              >
+            </div>
+          </div>
+          <h4 class="form-sub-title my-3">Communication Address</h4>
+
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  (keyup)="addressChange(1)"
+                  [maxlength]="100"
+                  class="form-control"
+                  name="communicationAddressLine"
+                  formControlName="communicationAddressLine"
+                  id="communicationAddressLine"
+                  required
+                  red
+                />
+                <label for="communicationAddressLine">Address line*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('communicationAddressLine')"
+                class="form-element-hint"
+                >*Please enter valid Address.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  [maxlength]="50"
+                  (keyup)="addressChange(1)"
+                  class="form-control"
+                  name="communicationLocality"
+                  formControlName="communicationLocality"
+                  id="communicationLocality"
+                  required
+                  red
+                />
+                <label for="">Locality*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('communicationLocality')"
+                class="form-element-hint"
+                >*Please enter valid Locality.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keyup)="addressChange(1)"
+                  [maxlength]="20"
+                  name="communicationCity"
+                  formControlName="communicationCity"
+                  id="communicationCity"
+                  required
+                  red
+                />
+                <label for="">City*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('communicationCity')"
+                class="form-element-hint"
+                >*Please enter valid City Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="100"
+                  (keyup)="addressChange(1)"
+                  formControlName="communicationLandmark"
+                  name="communicationLandmark"
+                  id="communicationLandmark"
+                  required
+                  red
+                />
+                <label for="communicationLandmark">Landmark*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('communicationLandmark')"
+                class="form-element-hint"
+                >*Please enter valid Landmark.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div>
+                <select
+                  class="form-select"
+                  formControlName="communicationState"
+                  (change)="addressChange(1)"
+                  name="communicationState"
+                  id="communicationState"
+                  aria-label="Default select example"
+                  placeHolder="dsfsd"
+                >
+                  <option value="null">Select State</option>
+                  <option
+                    *ngFor="let state of stateList; let i = index"
+                    value="{{ state.value }}"
+                  >
+                    {{ state.name }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('communicationState')"
+                class="form-element-hint"
+                >*Please select State.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="6"
+                  (keyup)="addressChange(1)"
+                  formControlName="communicationPincode"
+                  name="communicationPincode"
+                  id="communicationPincode"
+                  required
+                />
+                <label for="">Pincode*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('communicationPincode')"
+                class="form-element-hint"
+                >*Please enter valid Pincode.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="homeStatus"
+                  name="homeStatus"
+                  id="homeStatus"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Current Home Status</option>
+                  <option
+                    *ngFor="let status of homeStatus; let i = index"
+                    value="{{ status.value }}"
+                  >
+                    {{ status.name }}
+                  </option>
+                </select>
+              </div>
+              <small
+                *ngIf="validateLogin('homeStatus')"
+                class="form-element-hint"
+                >*Please select Home Status.</small
+              >
+            </div>
+          </div>
+
+          <h4 class="form-sub-title my-3">Permanent Address</h4>
+
+          <!-- <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Default checkbox
+            </label>
+          </div> -->
+          <div class="d-flex align-items-center mb-3 mt-0">
+            <div class="form-group">
+              <input
+                type="checkbox"
+                formControlName="permanentRequired"
+                name="permanentRequired"
+                (change)="addressChange(1)"
+                id="permanentRequired"
+                id="html"
+              />
+              <label class="form-sub-title" for="html"
+                >Same as Communication Address</label
+              >
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keyup)="addressChange(2)"
+                  name="permanentAddressLine"
+                  [maxlength]="100"
+                  formControlName="permanentAddressLine"
+                  id="permanentAddressLine"
+                  [disabled]="
+                    personalDetailsForm.controls['permanentRequired'].value
+                  "
+                  required
+                />
+                <label for="homeStatus">Address line*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('permanentAddressLine')"
+                class="form-element-hint"
+                >*Please enter valid Address.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  (keyup)="addressChange(2)"
+                  class="form-control"
+                  name="permanentLocality"
+                  [maxlength]="50"
+                  formControlName="permanentLocality"
+                  id="permanentLocality"
+                  required
+                />
+                <label for="homeStatus">Locality*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('permanentLocality')"
+                class="form-element-hint"
+                >*Please enter valid Locality.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  (keyup)="addressChange(2)"
+                  class="form-control"
+                  name="permanentCity"
+                  [maxlength]="30"
+                  formControlName="permanentCity"
+                  id="permanentCity"
+                  required
+                />
+                <label for="homeStatus">City*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('permanentCity')"
+                class="form-element-hint"
+                >*Please enter valid city name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="100"
+                  (keyup)="addressChange(2)"
+                  formControlName="permanentLandmark"
+                  name="permanentLandmark"
+                  id="permanentLandmark"
+                  required
+                />
+                <label for="homeStatus">Landmark</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('permanentLandmark')"
+                class="form-element-hint"
+                >*Please enter valid Landmark.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="permanentState"
+                  name="permanentState"
+                  (change)="addressChange(2)"
+                  id="permanentState"
+                  aria-label="Default select example"
+                  placeHolder="dsfsd"
+                >
+                  <option value="null">Select State</option>
+                  <option
+                    *ngFor="let state of stateList; let i = index"
+                    value="{{ state.value }}"
+                  >
+                    {{ state.name }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('permanentState')"
+                class="form-element-hint"
+                >*Please select state.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  (keyup)="addressChange(2)"
+                  [maxlength]="6"
+                  formControlName="permanentPincode"
+                  name="permanentPincode"
+                  id="permanentPincode"
+                  required
+                />
+                <label for="homeStatus">Pincode*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('permanentPincode')"
+                class="form-element-hint"
+                >*Please select state.</small
+              >
+            </div>
+          </div>
+          <!--------------------- permanent address ending ---------------------------------->
+
+          <h4
+            class="application-sub-title my-3"
+            *ngIf="
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            Work Information
+          </h4>
+          <h4
+            class="application-sub-title my-3"
+            *ngIf="data.type == 'Business Loan'"
+          >
+            Business Information
+          </h4>
+
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  (change)="getOrgType()"
+                  class="form-select"
+                  formControlName="occupationType"
+                  name="occupationType"
+                  id="occupationType"
+                  aria-label="Default select example"
+                >
+                  <option value="1">Salaried</option>
+                  <option value="2">Self - Business</option>
+                </select>
+              </div>
+              <small
+                *ngIf="validateLogin('occupationType')"
+                class="form-element-hint"
+                >*Please select Occupation Type.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="data.type !== 'Gold Loan' && data.type !== 'Education Loan'"
+          >
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  (change)="getOrgSector()"
+                  class="form-select"
+                  formControlName="organizationType"
+                  name="organizationType"
+                  id="organizationType"
+                  aria-label="Default select example"
+                >
+                  <option *ngIf="data.type !== 'Business Loan'" value="null">
+                    Select Organization Type
+                  </option>
+                  <option *ngIf="data.type == 'Business Loan'" value="null">
+                    Select Business Type
+                  </option>
+
+                  <option
+                    *ngFor="let org of orgTypeList; let i = index"
+                    value="{{ org.value }}"
+                  >
+                    {{ org.name }}
+                  </option>
+                </select>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  formControlName="organizationType"
+                  name="organizationType"
+                  id="organizationType"
+                />
+                <label for="homeStatus">Organization Type*</label> -->
+              </div>
+
+              <small
+                *ngIf="validateLogin('organizationType')"
+                class="form-element-hint"
+                >*Enter valid Organization Type.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="organizationSector"
+                  name="organizationSector"
+                  id="organizationSector"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Select Organization Sector</option>
+                  <option
+                    *ngFor="let sector of sectorList; let i = index"
+                    value="{{ sector.value }}"
+                  >
+                    {{ sector.name }}
+                  </option>
+                </select>
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  formControlName="organizationType"
+                  name="organizationType"
+                  id="organizationType"
+                  required
+                />
+                <label for="homeStatus">Organization Type*</label> -->
+              </div>
+
+              <small
+                *ngIf="validateLogin('organizationSector')"
+                class="form-element-hint"
+                >*Enter valid Organization Sector.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="data.type !== 'Gold Loan' && data.type !== 'Education Loan'"
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  list="datalistOptions"
+                  (keyup)="
+                  getOrg(
+                    this.personalDetailsForm.controls['organizationName']
+                      .value
+                  )
+                "
+                  class="form-control"
+                  [maxlength]="50"
+                  formControlName="organizationName"
+                  name="organizationName"
+                  id="organizationName"
+                />
+                <datalist id="datalistOptions">
+                  <option
+                    value="{{ org.name }}"
+                    *ngFor="let org of orgList; let i = index"
+                  ></option>
+                </datalist>
+                <label
+                  for="homeStatus"
+                  *ngIf="
+                    this.personalDetailsForm.controls['occupationType'].value ==
+                      1 && data.type !== 'Business Loan'
+                  "
+                  >Organization Name*</label
+                ><label for="homeStatus" *ngIf="data.type == 'Business Loan'"
+                  >Business Name*</label
+                >
+                <label
+                  for="homeStatus"
+                  *ngIf="
+                    this.personalDetailsForm.controls['occupationType'].value ==
+                      2 && data.type !== 'Business Loan'
+                  "
+                  >Business Name*</label
+                >
+                <label
+                  for="homeStatus"
+                  *ngIf="
+                    this.personalDetailsForm.controls['occupationType'].value ==
+                    2
+                  "
+                  >Business Name*</label
+                >
+              </div>
+              <small
+                *ngIf="validateLogin('organizationName')"
+                class="form-element-hint"
+                >*Please enter valid organization name.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type == 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="designation"
+                  name="designation"
+                  id="designation"
+                  aria-label="Default select example"
+                >
+                  <option value="Individual">Individual</option>
+                  <option value="Partnership">Partnership</option>
+                </select>
+              </div>
+              <small
+                *ngIf="validateLogin('designation')"
+                class="form-element-hint"
+                >*Please select ownership Type.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="data.type !== 'Gold Loan' && data.type !== 'Education Loan'"
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="income"
+                  [maxlength]="9"
+                  name="income"
+                  id="income"
+                />
+                <label
+                  for="homeStatus"
+                  *ngIf="
+                    this.personalDetailsForm.controls['occupationType'].value ==
+                    1
+                  "
+                  >Enter your Gross Monthly Income*</label
+                >
+                <label
+                  for="homeStatus"
+                  *ngIf="
+                    this.personalDetailsForm.controls['occupationType'].value ==
+                    2
+                  "
+                  >Enter your Annual Turnover*</label
+                >
+              </div>
+              <small *ngIf="validateLogin('income')" class="form-element-hint"
+                >*Please enter valid Income.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  #startDate
+                  type="date"
+                  (keypress)="dateFormat('startDate', $event)"
+                  class="form-control picker"
+                  max="{{ maxDate }}"
+                  formControlName="startDate"
+                  name="startDate"
+                  id="startDate"
+                />
+                <label for="homeStatus">Start Date (dd-mm-yyyy)*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('startDate')"
+                class="form-element-hint"
+                >*Please enter valid date.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              this.personalDetailsForm.controls['occupationType'].value == 1 &&
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="employeeId"
+                  [maxlength]="20"
+                  name="employeeId"
+                  id="employeeId"
+                />
+                <label for="homeStatus">Employee ID*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('employeeId')"
+                class="form-element-hint"
+                >*Enter valid employee ID.</small
+              >
+            </div>
+          </div>
+
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type !== 'Business Loan' &&
+              data.type !== 'Gold Loan' &&
+              this.personalDetailsForm.controls['occupationType'].value == 1 &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="designation"
+                  [maxlength]="50"
+                  name="designation"
+                  id="designation"
+                />
+                <label for="homeStatus">Designation*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('designation')"
+                class="form-element-hint"
+                >*Enter valid designation.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              this.personalDetailsForm.controls['occupationType'].value == 1 &&
+              data.type !== 'Gold Loan' &&
+              data.type !== 'Education Loan'
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="experience"
+                  [maxlength]="4"
+                  name="experience"
+                  id="experience"
+                />
+                <label for="homeStatus" *ngIf="data.type !== 'Business Loan'"
+                  >Total Years of Experience*</label
+                >
+                <label for="homeStatus" *ngIf="data.type == 'Business Loan'"
+                  >Business Age*</label
+                >
+              </div>
+
+              <small
+                *ngIf="validateLogin('experience')"
+                class="form-element-hint"
+                >*Enter valid year of experience.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  [maxlength]="100"
+                  class="form-control"
+                  [maxlength]="15"
+                  name="gst"
+                  formControlName="gst"
+                  id="gst"
+                  red
+                />
+                <label for="gst">GST*</label>
+              </div>
+              <small *ngIf="validateLogin('gst')" class="form-element-hint"
+                >*Please enter valid GST.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  (keypress)="keyPressNumbers($event)"
+                  [maxlength]="10"
+                  class="form-control"
+                  name="companyNumber"
+                  formControlName="companyNumber"
+                  id="companyNumber"
+                  red
+                />
+                <label for="gst">Company Landline Number*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('companyNumber')"
+                class="form-element-hint"
+                >*Please enter valid Landline number.</small
+              >
+            </div>
+          </div>
+
+          <h4 class="form-sub-title my-3" *ngIf="data.type == 'Business Loan'">
+            Registered Address
+          </h4>
+
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  [maxlength]="100"
+                  class="form-control"
+                  name="registeredAddressLine"
+                  formControlName="registeredAddressLine"
+                  id="registeredAddressLine"
+                  red
+                />
+                <label for="registeredAddressLine">Address line*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('registeredAddressLine')"
+                class="form-element-hint"
+                >*Please enter valid Address.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  [maxlength]="50"
+                  class="form-control"
+                  name="registeredLocality"
+                  formControlName="registeredLocality"
+                  id="registeredLocality"
+                  red
+                />
+                <label for="">Locality*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('registeredLocality')"
+                class="form-element-hint"
+                >*Please enter valid Locality.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="20"
+                  name="registeredCity"
+                  formControlName="registeredCity"
+                  id="registeredCity"
+                  red
+                />
+                <label for="">City*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('registeredCity')"
+                class="form-element-hint"
+                >*Please enter valid City Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="100"
+                  formControlName="registeredLandmark"
+                  name="registeredLandmark"
+                  id="registeredLandmark"
+                  red
+                />
+                <label for="registeredLandmark">Landmark*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('registeredLandmark')"
+                class="form-element-hint"
+                >*Please enter valid Landmark.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div>
+                <select
+                  class="form-select"
+                  formControlName="registeredState"
+                  name="registeredState"
+                  id="registeredState"
+                  aria-label="Default select example"
+                  placeHolder="dsfsd"
+                >
+                  <option value="null">Select State</option>
+                  <option
+                    *ngFor="let state of stateList; let i = index"
+                    value="{{ state.value }}"
+                  >
+                    {{ state.name }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('registeredState')"
+                class="form-element-hint"
+                >*Please select State.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Business Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  [maxlength]="6"
+                  formControlName="registeredPincode"
+                  name="registeredPincode"
+                  id="registeredPincode"
+                />
+                <label for="">Pincode*</label>
+              </div>
+              <small
+                *ngIf="validateLogin('registeredPincode')"
+                class="form-element-hint"
+                >*Please enter valid Pincode.</small
+              >
+            </div>
+          </div>
+
+          <h4
+            class="application-sub-title my-3"
+            *ngIf="data.type == 'Gold Loan'"
+          >
+            Gold Information
+          </h4>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Gold Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="goldDetails"
+                  [maxlength]="50"
+                  name="goldDetails"
+                  [required]="data.type == 'Gold Loan'"
+                  id="goldDetails"
+                />
+                <label for="homeStatus">Gold Details*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('goldDetails')"
+                class="form-element-hint"
+                >*Enter valid details.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Gold Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="karat"
+                  [maxlength]="5"
+                  name="karat"
+                  [required]="data.type == 'Gold Loan'"
+                  id="karat"
+                />
+                <label for="homeStatus">Karat*</label>
+              </div>
+
+              <small *ngIf="validateLogin('karat')" class="form-element-hint"
+                >*Enter valid karat.
+              </small>
+            </div>
+          </div>
+          <h4
+            class="application-sub-title my-3"
+            *ngIf="data.type == 'Education Loan'"
+          >
+            Educational Details
+          </h4>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="sslcName"
+                  [required]="data.type == 'Education Loan'"
+                  [maxlength]="50"
+                  name="sslcName"
+                  id="sslcName"
+                />
+                <label for="sslcName">SSLC School Name*</label>
+              </div>
+
+              <small *ngIf="validateLogin('sslcName')" class="form-element-hint"
+                >*Enter valid School Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="sslcYear"
+                  [required]="data.type == 'Education Loan'"
+                  [maxlength]="4"
+                  name="sslcYear"
+                  id="sslcYear"
+                />
+                <label for="sslcYear">Year of Passing*</label>
+              </div>
+
+              <small *ngIf="validateLogin('sslcYear')" class="form-element-hint"
+                >*Enter valid Year.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="hscName"
+                  [required]="data.type == 'Education Loan'"
+                  [maxlength]="50"
+                  name="hscName"
+                  id="hscName"
+                />
+                <label for="hscName">HSC School Name*</label>
+              </div>
+
+              <small *ngIf="validateLogin('hscName')" class="form-element-hint"
+                >*Enter valid School Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="hscYear"
+                  [required]="data.type == 'Education Loan'"
+                  [maxlength]="4"
+                  name="hscYear"
+                  id="hscYear"
+                />
+                <label for="hscYear">Year of Passing*</label>
+              </div>
+
+              <small *ngIf="validateLogin('hscYear')" class="form-element-hint"
+                >*Enter valid Year.</small
+              >
+            </div>
+          </div>
+          <h4
+            class="form-sub-title mb-3 mt-1"
+            *ngIf="data.type == 'Education Loan'"
+          >
+            UG Details
+          </h4>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="collegeName"
+                  [required]="data.type == 'Education Loan'"
+                  [maxlength]="50"
+                  name="collegeName"
+                  id="collegeName"
+                />
+                <label for="collegeName">College Name*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('collegeName')"
+                class="form-element-hint"
+                >*Enter valid College Name.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="courseName"
+                  name="courseName"
+                  id="courseName"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Course Name</option>
+                  <option
+                    *ngFor="let course of ugCourses; let i = index"
+                    value="{{ course.courseId }}"
+                  >
+                    {{ course.course }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('courseName')"
+                class="form-element-hint"
+                >*Select Course.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control picker"
+                  formControlName="courseDuration"
+                  name="courseDuration"
+                  [required]="data.type == 'Education Loan'"
+                  id="courseDuration"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                />
+                <label for="courseDuration">Course Duration (Years)*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('courseDuration')"
+                class="form-element-hint"
+                >*Enter valid Course Duration.</small
+              >
+            </div>
+          </div>
+          <div class="col-12 col-sm-6" *ngIf="data.type == 'Education Loan'">
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="date"
+                  class="form-control picker"
+                  formControlName="collegeJoiningDate"
+                  name="collegeJoiningDate"
+                  id="collegeJoiningDate"
+                />
+                <label for="collegeJoiningDate">Joining Date*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('collegeJoiningDate')"
+                class="form-element-hint"
+                >*Enter valid date.</small
+              >
+            </div>
+          </div>
+          <div
+            class="d-flex align-items-center mb-1 mt-0"
+            *ngIf="data.type == 'Education Loan'"
+          >
+            <div class="form-group">
+              <input
+                type="checkbox"
+                formControlName="pgCourse"
+                name="pgCourse"
+                id="pgCourse"
+              />
+              <label class="form-sub-title" for="pgCourse"
+                >Requesting loan for PG course</label
+              >
+            </div>
+          </div>
+          <h4
+            class="form-sub-title mb-3 mt-1"
+            *ngIf="
+              data.type == 'Education Loan' &&
+              personalDetailsForm.controls['pgCourse'].value == true
+            "
+          >
+            PG Details
+          </h4>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type == 'Education Loan' &&
+              personalDetailsForm.controls['pgCourse'].value == true
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="pgCollegeName"
+                  [required]="
+                    data.type == 'Education Loan' &&
+                    personalDetailsForm.controls['pgCourse'].value == true
+                  "
+                  [maxlength]="50"
+                  name="pgCollegeName"
+                  id="pgCollegeName"
+                />
+                <label for="pgCollegeName">College Name*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('pgCollegeName')"
+                class="form-element-hint"
+                >*Enter valid College Name.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type == 'Education Loan' &&
+              personalDetailsForm.controls['pgCourse'].value == true
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <select
+                  class="form-select"
+                  formControlName="pgCourseName"
+                  name="pgCourseName"
+                  [required]="
+                    data.type == 'Education Loan' &&
+                    personalDetailsForm.controls['pgCourse'].value == true
+                  "
+                  id="pgCourseName"
+                  aria-label="Default select example"
+                >
+                  <option value="null">Course Name</option>
+                  <option
+                    *ngFor="let course of pgCourses; let i = index"
+                    value="{{ course.courseId }}"
+                  >
+                    {{ course.course }}
+                  </option>
+                </select>
+              </div>
+
+              <small
+                *ngIf="validateLogin('pgCourseName')"
+                class="form-element-hint"
+                >*Select Course.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type == 'Education Loan' &&
+              personalDetailsForm.controls['pgCourse'].value == true
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="text"
+                  class="form-control picker"
+                  formControlName="pgCourseDuration"
+                  name="pgCourseDuration"
+                  [required]="
+                    data.type == 'Education Loan' &&
+                    personalDetailsForm.controls['pgCourse'].value == true
+                  "
+                  id="pgCourseDuration"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                />
+                <label for="pgCourseDuration">Course Duration (Years)*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('pgCourseDuration')"
+                class="form-element-hint"
+                >*Enter valid Course Duration.</small
+              >
+            </div>
+          </div>
+          <div
+            class="col-12 col-sm-6"
+            *ngIf="
+              data.type == 'Education Loan' &&
+              personalDetailsForm.controls['pgCourse'].value == true
+            "
+          >
+            <div class="mb-3">
+              <div class="group">
+                <input
+                  type="date"
+                  class="form-control picker"
+                  formControlName="pgCollegeJoiningDate"
+                  name="pgCollegeJoiningDate"
+                  id="pgCollegeJoiningDate"
+                />
+                <label for="pgCollegeJoiningDate">Joining Date*</label>
+              </div>
+
+              <small
+                *ngIf="validateLogin('pgCollegeJoiningDate')"
+                class="form-element-hint"
+                >*Enter valid date.</small
+              >
+            </div>
+          </div>
+          <div class="col-12">
+            <h4 class="form-sub-title mb-3 mt-3" style="color: #20bf55">
+              Confirm & Submit*
+            </h4>
+            <div class="d-flex align-items-center mt-3">
+              <div class="form-group check2">
+                <input
+                  type="checkbox"
+                  class="terms"
+                  id="termAccepted"
+                  name="term"
+                  formControlName="term"
+                />
+                <label class="application-p" for="termAccepted"
+                  >I authorize that the details furnished were True
+                </label>
+              </div>
+            </div>
+
+            <small
+              *ngIf="
+                personalDetailsForm.controls['term'].value === false &&
+                isChecked
+              "
+              class="form-element-hint mt-0"
+              >*Please Accept terms to continue.</small
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-sm-10">
+        <a class="btn btn-1 float-start px-5" (click)="back()">Back </a>
+        <!-- <a
+          class="btn btn-1 float-end px-5"
+          routerLink="/offer/application/details/{{ id }}"
+          >Next
+        </a> -->
+        <a class="btn btn-1 float-end px-5" (click)="confirmPop()">Next </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="homeLoan"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">
+              Please wait until verification process, once verification is
+              completed successfully, able to upload your documents
+            </p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="closeHomeLoanPop()"
+              >
+                <p class="approve-btn-p pe-2">Done</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="confirm"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">
+              Upload valid documents. If any
+              <span class="r-text">SCAMS</span> noticed your account will be
+              blocked.
+            </p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="submit()"
+              >
+                <p class="approve-btn-p pe-2">OK</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

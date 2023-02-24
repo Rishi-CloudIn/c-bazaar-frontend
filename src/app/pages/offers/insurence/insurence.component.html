@@ -1,0 +1,147 @@
+<app-side-nav> </app-side-nav>
+<section class="side-nav-div">
+  <div class="container mb-5 mb-md-2">
+    <div class="d-flex flex-wrap justify-content-md-start justify-content-center align-items-center">
+      <button
+        (click)="switchCat(category.slug, category.category)"
+        class="loan-btn align-items-center mx-3"
+        [ngClass]="{ 'loan-btn-active': category.selected === true }"
+        *ngFor="let category of categoryList; let i = index"
+      >
+        <div class="loan-btn-div">
+          <img src="{{ category.imageUrl }}" class="loan-btn-icon" />
+        </div>
+        <p class="loan-btn-p">{{ category.category }}</p>
+      </button>
+    </div>
+  </div>
+
+  <app-empty
+    [title]="'No Offers Found'"
+    *ngIf="offerList.length == 0 && !isLoading"
+  ></app-empty>
+
+  <div
+    class="container py-2 d-offer-div my-2 my-lg-1"
+    *ngIf="offerList.length !== 0 && !isLoading"
+  >
+    <div class="row mt-3">
+      <div class="col-12 my-2">
+        <div class="row">
+          <div
+            class="col-12 col-lg-6 my-4"
+            *ngFor="let offer of offerList; let i = index"
+          >
+            <section class="approve-section">
+              <div class="approve-card h-100 pb-4">
+                <h6 class="approve-h6">{{ offer.title | titlecase }}</h6>
+                <div class="approve-content-div">
+                  <p class="approve-p">{{ badgeName }}</p>
+                  <div class="approve-content-div-1 mb-4">
+                    <img src="{{ offer.imageUrl }}" class="approve-logo" />
+                    <h5 class="approve-h5 mx-3">
+                      {{ offer.secondaryTitle }}
+                    </h5>
+                  </div>
+
+                  <div
+                    class="approve-content-div-2"
+                    *ngFor="let item of offer.features; let i = index"
+                  >
+                    <div
+                      *ngIf="i < 3"
+                      class="approve-content-1 d-flex align-items-center px-2 py-1"
+                    >
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        width="13px"
+                      />
+                      <p class="approve-p-1 mb-0 o-text-1">{{ item }}</p>
+                    </div>
+                  </div>
+
+                  <h6
+                    class="approve-h6-1 mt-2"
+                    (click)="viewOffer(offer.id)"
+                  >
+                    View Details >>
+                  </h6>
+                  <button
+                    class="approve-btn py-2 d-flex align-items-center"
+                    *ngIf="!offer.offerInterest"
+                    (click)="interestPop(offer.id)"
+                  >
+                    <p class="approve-btn-p pe-2">Show Interest</p>
+                    <img
+                      src="../../../../assets/img/right-arrow.svg"
+                      alt=""
+                      class="mx-1"
+                      width="15px"
+                    />
+                  </button>
+                  <button
+                    class="approve-btn py-2 d-flex align-items-center"
+                    *ngIf="offer.offerInterest"
+                  >
+                    <img
+                      src="../../../../assets/img/tick.svg"
+                      alt=""
+                      class="mx-1"
+                      width="15px"
+                    />
+                    <p class="approve-btn-p pe-2">Interested</p>
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="interest"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">Are you sure wants to show interest?</p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="showInterest()"
+              >
+                <p class="approve-btn-p pe-2">Yes</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

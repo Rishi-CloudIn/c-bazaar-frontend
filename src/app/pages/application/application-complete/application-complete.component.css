@@ -1,0 +1,25 @@
+.title {
+  font-family: Montserrat;
+  font-size: large;
+  font-weight: bold;
+  line-height: 0.63;
+  text-align: center;
+  color: #868686;
+}
+
+.greeting{
+  font-family: Montserrat;
+  font-size: larger;
+  font-weight: bold;
+  line-height: 0.79;
+  text-align: center;
+  color: #20bf55;
+}
+
+.note{
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.28;
+  text-align: left;
+  color: #868686;
+}

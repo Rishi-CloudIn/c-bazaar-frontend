@@ -1,0 +1,607 @@
+<!-- header -->
+<header id="header" class="mt-3">
+  <nav class="">
+    <div class="container-fluid">
+      <div
+        class="nav-link-container d-flex justify-content-between align-items-center px-md-5 px-3"
+      >
+        <div class="nav-logo d-flex align-items-center">
+          <img
+            src="https://cbazzar.cloudinlabs.com/storage/icons/C_Bazaar.svg"
+            class="logo"
+          />
+        </div>
+        <div class="links">
+          <ul>
+            <li>
+              <a (click)="scrollToId('about')">About</a>
+            </li>
+            <li>
+              <a (click)="scrollToId('service')">Service</a>
+            </li>
+            <li>
+              <a routerLink="/dsa/signup">DSA Registration</a>
+            </li>
+            <!-- <li>
+              <a href="#FO">FO Registration</a>
+            </li> -->
+            <li class="ms-lg-4">
+              <a routerLink="/home">Log in</a>
+            </li>
+            <li>
+              <a routerLink="/signup" class="active">Sign Up</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="hamburger-menu" (click)="hamToggle()">
+          <div class="bar"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header-content mt-lg-5 mt-5">
+    <div class="container grid-2 px-3 px-md-5">
+      <div class="column-1 mb-lg-0 mb-5">
+        <h1 class="h2 fw-bold lh-base text-justify">
+          View Credit Score for Customized Offers! Get your Dream Card & Loan
+        </h1>
+        <p class="fs-6 text-secondary lh-base my-4 text-justify">
+          Blends banking and financial services on a single platform. It helps
+          with personalized benefits for credit cards & loans for a brighter
+          future.
+        </p>
+        <a routerLink="/home" class="btn">Get Started</a>
+      </div>
+
+      <div class="column-2 image">
+        <img
+          src="../../assets/img/landing/Card-01.png"
+          class="img-element"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+  <div id="about"></div>
+</header>
+
+<!-- about-section -->
+<section class="about-section container">
+  <div class="about-content-div">
+    <h2 class="about-h2">About Us</h2>
+    <div class="about-p-div">
+      <p class="about-p mt-4">
+        Credit Bazaar is a Fintech application that provides free credit reports
+        from multiple bureaus and offers a customized credit card & loan to
+        every individual. At its core, it seeks to improve and automate the
+        delivery and use of financial services. ​​​Credit Bazaar helps
+        consumers, companies, and business owners better manage their financial
+        operations seamlessly in digital and reduces the processing time by
+        utilizing the application in one touch.
+      </p>
+    </div>
+    <div class="about-li-div mt-4">
+      <h5 class="about-h5">Introduction</h5>
+      <ul class="about-ul">
+        <li>Get Free Credit Report from multiple bureaus.</li>
+        <li>Multiple choices of from 6+ partners, 5+NBFCs and 3+FI’s.</li>
+        <li>
+          Personalized Customization of Credit Card and loan services with
+          minimal necessary documentations.
+        </li>
+        <li>
+          Choose & Apply for the most preferable card & loan with ease,
+          digitally.
+        </li>
+        <li>
+          Show interest on investment and insurance which uplifts lives to the
+          next step.
+        </li>
+        <li>
+          Stay updated with the current information on governments schemes and
+          other financial services.
+        </li>
+        <li>Track applications and their status wisely at anytime.</li>
+        <li>
+          Real-time calculations on interest rate, principal amount and tenure
+          periods for the Loan amount.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- credit score -->
+
+<section class="container-fluid score-section">
+  <div class="score-content-div">
+    <div class="row">
+      <div class="col-lg-5 col-12">
+        <div class="score-img-div">
+          <img src="../../assets/img/landing/Credit Score.svg" alt="img" />
+        </div>
+      </div>
+      <div class="col-lg-7 col-12">
+        <div class="score-div-1 mt-lg-0 mt-5">
+          <div class="score-sub-div">
+            <h2 class="score-h2">FREE! Get your Present Credit Score</h2>
+            <p class="score-p">
+              This 3 digit value will validate and have control over on your
+              capitals
+            </p>
+            <h6 class="score-h6">Customized offers</h6>
+            <p class="score-p-1">
+              Based on scores, offers are customized on your eligibility
+            </p>
+            <h6 class="score-h6">Ease of Approvals</h6>
+            <p class="score-p-1">
+              Possibility of chances to receive your credit card / loan is high
+            </p>
+            <h6 class="score-h6">Control Over your Finance / Monetary</h6>
+            <p class="score-p-1">
+              Based on your score, it shows a better future on your capitals &
+              helps to improve them.
+            </p>
+            <h6 class="score-h6">Get Free Credit Score!</h6>
+            <p class="score-p-1">
+              Know your current creditworthiness free! from Credit Bazaar
+            </p>
+
+            <a class="btn btn-new" routerLink="/home"
+              >Get Your Free Credit Score</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- services -->
+
+<section class="service-section container pt-2 pb-5" id="service">
+  <h2 class="about-h2 mb-5">Services</h2>
+  <div class="service-content-div mx-3">
+    <div class="row">
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/Credit Card.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">Credit Cards</h5>
+            <p class="card-text pt-sm-0 pt-1 h6 text-secondary">
+              Life-time Free cashback credit cards and less KYC process
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/Loan.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">Loans</h5>
+            <p class="card-text pt-sm-0 pt-1 h6 text-secondary">
+              Quick disbursement from multiple lenders, reduces paperwork by
+              digitally
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/Investment.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">Investments</h5>
+            <p class="card-text pt-sm-0 pt-1 h6 text-secondary">
+              Online Trading & Demat account with top Banks, NBFCs and FI’s
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/Insurance.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">Insurance</h5>
+            <p class="card-text pt-sm-0 pt-1 h6 text-secondary">
+              Top health and other claims for family welfare and future
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/Profile.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">DSA Registration</h5>
+            <p class="card-text pt-sm-0 pt-1h6 text-secondary">
+              DSAs, Banks, NBFCs, financial institutions and other digital
+              lenders in online registrations
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-sm-6 col-12 px-lg-4 px-2 my-lg-3 my-2">
+        <div class="card">
+          <div class="card-body px-4">
+            <div class="card-img-div mt-2 ms-2">
+              <img
+                src="../../assets/img/landing/EMI Calculator.svg"
+                alt="img"
+                class="card-img"
+              />
+            </div>
+            <h5 class="card-title h6 fw-bold mt-3">EMI Calculator</h5>
+            <p class="card-text pt-sm-0 pt-1 h6 text-secondary">
+              Analysis and real time calculations on loan amount with their
+              interest and tenure
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- count -->
+
+<section class="container-fluid count-container py-sm-5 py-4">
+  <div
+    class="count-content-div d-flex flex-row align-items-center justify-content-center"
+  >
+    <div class="d-flex flex-sm-row flex-column">
+      <div class="count-1 mx-lg-5 mx-sm-3 mx-3">
+        <h2 class="count-h2">1000 +</h2>
+        <h6 class="count-h6">Location Covered</h6>
+      </div>
+      <div class="count-1 mx-lg-5 mx-sm-3 mx-3 mt-sm-0 mt-3">
+        <h2 class="count-h2">50 +</h2>
+        <h6 class="count-h6">Partner Banks</h6>
+      </div>
+    </div>
+
+    <div class="d-flex flex-sm-row flex-column">
+      <div class="count-1 mx-lg-5 mx-sm-3 mx-3">
+        <h2 class="count-h2">1000Cr +</h2>
+        <h6 class="count-h6">Disbursement</h6>
+      </div>
+      <div class="count-1 mx-lg-5 mx-sm-3 mx-3 mt-sm-0 mt-3">
+        <h2 class="count-h2">175000+</h2>
+        <h6 class="count-h6">Partners</h6>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faq section -->
+
+<section class="faq-section my-5">
+  <div class="faq-content-div">
+    <h2 class="about-h2">FAQ's</h2>
+    <div
+      class="card faq-card"
+      *ngFor="let item of faq; let i = index"
+      (click)="click(i)"
+    >
+      <div class="card-body">
+        <div class="row">
+          <div class="col-1 cus-col">
+            <div
+              class="faq-plus-icon"
+              [ngClass]="{
+                'faq-plus-icon-clicked': item.status
+              }"
+            >
+              <div class="faq-bar"></div>
+              <div class="faq-bar-1"></div>
+            </div>
+          </div>
+          <div class="col-11">
+            <div class="faq-content-div-1">
+              <h3 class="faq-h3">{{ item.question }}</h3>
+              <div
+                class="faq-content-p faq-content-p-active"
+                [ngClass]="{
+                  'faq-content-p-active': !item.status
+                }"
+              >
+                <p class="faq-p">
+                  {{ item.answer }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- card-2 -->
+
+    <!-- <div class="card faq-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <div id="faq-plus-icon" class="faq-plus-icon">
+              <div class="faq-bar"></div>
+              <div class="faq-bar-1"></div>
+            </div>
+          </div>
+          <div class="col-10">
+            <div class="faq-content-div-1">
+              <h3 class="faq-h3">
+                What is the eligibility criteria to become a C-Bazaar DSA
+                Partner?
+              </h3>
+              <div
+                id="faq-content-p"
+                class="faq-content-p faq-content-p-active"
+              >
+                <p class="faq-p">
+                  We need minimal documentation from your side to become partner
+                  that includes Aadhar Card, PAN Card, Cancelled Cheque, A
+                  Photograph, Address Proof
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- pagination -->
+    <!-- <div class="pagination">
+      <a href="#" style="border-radius: 50%; border: 1px solid black"
+        >&laquo;</a
+      >
+      <a href="#">1</a>
+      <a class="active" href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#" style="border-radius: 50%; border: 1px solid black"
+        >&raquo;</a
+      >
+    </div> -->
+  </div>
+</section>
+
+<!-- footer -->
+
+<!-------------------------------------- footer section ------------------------------------ -->
+
+<section class="footer-section container">
+  <div class="row px-0 mx-0 py-5">
+    <div class="col-md-2 col-12">
+      <div class="footer-logo-div ms-4">
+        <img
+          src="https://cbazzar.cloudinlabs.com/storage/icons/C_Bazaar.svg"
+          class="footer-logo"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+      <div class="footer-content-div mt-md-0 mt-5">
+        <h4 class="footer-content-h4">Credit Card</h4>
+        <a href="#">
+          <p class="footer-content-p mt-md-4 mt-3">Best Credit Cards</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Check your Credit Score</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Cibil</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+      <div class="footer-content-div">
+        <h4 class="footer-content-h4">Loan</h4>
+        <a href="#">
+          <p class="footer-content-p mt-md-4 mt-3">Personal Loan</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Home Loan</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Educational Loan</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Business Loan</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Vehicle Loan</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Gold Loan</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+      <div class="footer-content-div">
+        <h4 class="footer-content-h4">Insurance</h4>
+        <a href="#">
+          <p class="footer-content-p mt-md-4 mt-3">Life Insurance</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Home Insurance</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Health Insurance</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Vehicle Insurance</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Property Insurance</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-2 col-12">
+      <div class="footer-content-div">
+        <h4 class="footer-content-h4">Investment</h4>
+        <a href="#">
+          <p class="footer-content-p mt-md-4 mt-3">Mutual Funds</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Fixed Deposit</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Recurring Deposit</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Demat & Trading</p>
+        </a>
+        <a href="#">
+          <p class="footer-content-p">Government Schemes</p>
+        </a>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-2 col-12">
+      <div class="footer-content-div">
+        <h4 class="footer-content-h4">Subscribe Newsletter</h4>
+        <div class="footer-div-form mt-4">
+          <input
+            type="text"
+            class="footer-input"
+            placeholder="Enter Your Email"
+          />
+          <button class="footer-btn">Subscribe</button>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-md-2 col-12">
+      <div class="footer-content-div">
+        <h4 class="footer-content-h4">Connect with us</h4>
+        <div class="footer-div-form mt-4">
+          <a href="mailto:gbazaar@gmail.com">
+            <p class="footer-content-p">gbazaar@gmail.com</p>
+          </a>
+          <a href="tel:+9187788**777">
+            <p class="footer-content-p">Call us: 87788**777</p></a
+          >
+          <a href="">
+            <p class="footer-content-p">
+              57, Zaylo street, <br />
+              Sacramento, <br />
+              California.
+            </p>
+          </a>
+
+          <!-- <input
+            type="text"
+            class="footer-input"
+            placeholder="Enter Your Email"
+          />
+          <button class="footer-btn">Subscribe</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-icon-section">
+    <div class="profile-icon-content-div d-flex align-items-center">
+      <h6 class="profile-icon-h6">Follow Us :</h6>
+      <div class="profile-icon-div">
+        <!-- <img
+          src="../../assets/img/landing/gearGreen.svg"
+          alt="img"
+          width="100"
+        /> -->
+        <i class="fa-brands fa-facebook-f fs-6"></i>
+      </div>
+      <div class="profile-icon-div">
+        <!-- <img
+          src="../../assets/img/landing/gearGreen.svg"
+          alt="img"
+          width="100"
+        /> -->
+        <i class="fa-brands fa-twitter fs-6"></i>
+      </div>
+      <div class="profile-icon-div">
+        <!-- <img
+          src="../../assets/img/landing/gearGreen.svg"
+          alt="img"
+          width="100"
+        /> -->
+        <i class="fa-brands fa-instagram fs-6"></i>
+      </div>
+      <div class="profile-icon-div">
+        <!-- <img
+          src="../../assets/img/landing/gearGreen.svg"
+          alt="img"
+          width="100"
+        /> -->
+        <i class="fa-brands fa-linkedin-in fs-6"></i>
+      </div>
+      <div class="profile-icon-div">
+        <!-- <img
+          src="../../assets/img/landing/gearGreen.svg"
+          alt="img"
+          width="100"
+        /> -->
+        <i class="fa-brands fa-whatsapp fs-6"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-policy-section">
+    <div class="footer-policy-div">
+      <p class="footer-policy-h6">
+        Copyright &#169; 2022
+        <a href="#" class="footer-policy-span">C-Bazaar Team</a>
+      </p>
+    </div>
+    <div class="footer-policy-div">
+      <p class="footer-policy-h6">
+        Developed by
+        <a
+          class="footer-policy-span"
+          target="_blank"
+          href="https://www.cloudinlabs.com/"
+          >Cloudin Software Tech Labs</a
+        >
+      </p>
+    </div>
+  </div>
+</section>

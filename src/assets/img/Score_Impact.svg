@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37.06 37.06">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #20bf55;
+      }
+
+      .cls-2 {
+        fill: #f1fff5;
+      }
+    </style>
+  </defs>
+  <circle id="Ellipse_9" data-name="Ellipse 9" class="cls-2" cx="18.53" cy="18.53" r="18.53"/>
+  <g id="Page-1">
+    <g id="Group_787" data-name="Group 787">
+      <g id="Desktop---Download-button">
+        <g id="R">
+          <g id="Group-8">
+            <path id="Path_656" data-name="Path 656" class="cls-1" d="M10.33,24.68c-.41,0-.75-.34-.75-.75,0-.19,.07-.37,.2-.51l6.37-6.99,3.77,3.19,7.59-9.81c.26-.33,.73-.38,1.05-.13,.32,.25,.38,.72,.13,1.05l-8.55,11.05-3.86-3.27-5.4,5.92c-.14,.16-.34,.25-.55,.25Z"/>
+            <path id="Path_657" data-name="Path 657" class="cls-1" d="M28.1,14.87c-.41,0-.75-.34-.75-.75v-3.1h-3.31c-.41,.02-.77-.3-.79-.71-.02-.41,.3-.77,.71-.79,.03,0,.05,0,.08,0h4.81v4.6c0,.41-.34,.75-.75,.75Z"/>
+            <path id="Path_658" data-name="Path 658" class="cls-1" d="M28.1,27.54H8.96c-.41-.02-.73-.37-.71-.79,.02-.38,.33-.69,.71-.71H28.1c.41,.02,.73,.37,.71,.79-.02,.38-.33,.69-.71,.71h0Z"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

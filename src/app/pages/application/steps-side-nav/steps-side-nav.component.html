@@ -1,0 +1,187 @@
+<section class="step-card-section mob-none" *ngIf="!loading">
+  <div class="card step-card title-card mb-3">
+    <div class="card-body">
+      <div class="d-flex align-items-center">
+        <img src="{{ offerImg }}" class="title-img" alt="" />
+        <div class="d-flex flex-column px-2">
+          <p class="title-p step-inner-p-checked">{{ offerType }}</p>
+          <p class="title-p step-inner-h5 o-text-2">{{ offerTitle }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card step-card" style="width: 18rem">
+    <div class="card-body">
+      <div class="step-progress">
+        <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 1">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 1">
+                <h6 class="step-card-h6-enable">1</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 1">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 1">
+              <h6 class="step-card-h6-disable">1</h6>
+            </div>
+            <div
+              class="step-vertical-line"
+              [ngClass]="{
+                'step-vertical-line-checked': currentStep > 1
+              }"
+            ></div>
+          </div>
+
+          <div class="step-inner-div">
+            <p
+              class="step-inner-p"
+              [ngClass]="{
+                'step-inner-p-checked': currentStep > 1
+              }"
+            >
+              {{ step1.step | titlecase }}
+            </p>
+            <h5 class="step-inner-h5">{{ step1.title | titlecase }}</h5>
+          </div>
+        </div>
+
+        <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 2">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 2">
+                <h6 class="step-card-h6-enable">2</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 2">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 2">
+              <h6 class="step-card-h6-disable">2</h6>
+            </div>
+            <div
+              class="step-vertical-line"
+              [ngClass]="{
+                'step-vertical-line-checked': currentStep > 2
+              }"
+            ></div>
+          </div>
+
+          <div class="step-inner-div">
+            <p class="step-inner-p"   [ngClass]="{
+              'step-inner-p-checked': currentStep > 2
+            }">{{ step2.step | titlecase }}</p>
+            <h5 class="step-inner-h5">{{ step2.title | titlecase }}</h5>
+          </div>
+        </div>
+
+        <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 3">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 3">
+                <h6 class="step-card-h6-enable">3</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 3">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 3">
+              <h6 class="step-card-h6-disable">3</h6>
+            </div>
+            <div
+              class="step-vertical-line"
+              [ngClass]="{
+                'step-vertical-line-checked': currentStep > 3
+              }"
+            ></div>
+          </div>
+
+          <div class="step-inner-div">
+            <p class="step-inner-p"   [ngClass]="{
+              'step-inner-p-checked': currentStep > 3
+            }">{{ step3.step | titlecase }}</p>
+            <h5 class="step-inner-h5">{{ step3.title | titlecase }}</h5>
+          </div>
+        </div>
+
+        <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 4">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 4">
+                <h6 class="step-card-h6-enable">4</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 4">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 4">
+              <h6 class="step-card-h6-disable">4</h6>
+            </div>
+            <div
+              class="step-vertical-line"
+              [ngClass]="{
+                'step-vertical-line-checked': currentStep > 4
+              }"
+            ></div>
+          </div>
+
+          <div class="step-inner-div">
+            <p class="step-inner-p"   [ngClass]="{
+              'step-inner-p-checked': currentStep > 4
+            }">{{ step4.step | titlecase }}</p>
+            <h5 class="step-inner-h5">{{ step4.title | titlecase }}</h5>
+          </div>
+        </div>
+
+        <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 5">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 5">
+                <h6 class="step-card-h6-enable">5</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 5">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 5">
+              <h6 class="step-card-h6-disable">5</h6>
+            </div>
+          </div>
+
+          <div class="step-inner-div">
+            <p class="step-inner-p"   [ngClass]="{
+              'step-inner-p-checked': currentStep > 4
+            }">Step 5</p>
+            <!-- <h5 class="step-inner-h5">{{ step5.title | titlecase }}</h5> -->
+            <h5 class="step-inner-h5">Complete</h5>
+
+          </div>
+        </div>
+
+        <!-- <div class="step-content-div">
+          <div class="step-content-1">
+            <div class="step-circle-line" *ngIf="currentStep >= 6">
+              <div class="step-circle-number-enable" *ngIf="currentStep == 6">
+                <h6 class="step-card-h6-enable">6</h6>
+              </div>
+              <div class="step-card-icon-div" *ngIf="currentStep > 6">
+                <i class="fa-solid fa-check step-card-icon"></i>
+              </div>
+            </div>
+            <div class="step-circle-number-disable" *ngIf="currentStep < 6">
+              <h6 class="step-card-h6-disable">6</h6>
+            </div>
+          </div>
+
+          <div class="step-inner-div">
+            <p class="step-inner-p"   [ngClass]="{
+              'step-inner-p-checked': currentStep > 5
+            }">Step 6</p>
+            <h5 class="step-inner-h5">{{ step6.title | titlecase }}</h5>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+.card {
+  width: 80%;
+  height: 100% !important;
+  max-height: 100%;
+  border-radius: 8.6px;
+  box-shadow: 7px 7px 15px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  margin: 0px auto !important;
+}
+
+span {
+  font-family: Montserrat;
+  font-size: small;
+  font-weight: bold;
+  opacity: 0.5;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.06;
+  letter-spacing: normal;
+  text-align: left;
+  color: #333;
+}
+b {
+  opacity: 1 !important;
+  color: #000;
+}
+/* h4 {
+  font-family: Montserrat;
+  font-size: medium;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.06;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+} */
+
+.row-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: #20bf55;
+}

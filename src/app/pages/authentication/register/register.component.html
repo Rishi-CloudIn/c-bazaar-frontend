@@ -1,0 +1,435 @@
+<section class="bg-section container">
+  <div class="row auth-section">
+    <div class="col-lg-5 col-md-12 col-sm-12" align="center">
+      <div class="auth-left">
+        <div class="mob-none">
+          <img
+            class="auth-left-img"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="200px"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-md-12 col-sm-12">
+      <div class="container">
+        <div align="center" class="d-lg-none">
+          <img
+            class="mb-5"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="40%"
+          />
+        </div>
+        <div class="card auth-card" align="left" *ngIf="!otpSented">
+          <div class="card-body p-5">
+            <div class="container px-4 py-4">
+              <h5 class="title">Create Account</h5>
+              <p class="title-description">
+                Already have an account?
+                <span (click)="login()"> Signin</span>
+              </p>
+              <h4 class="sub-title mb-4 mt-2">Signup</h4>
+
+              <form
+                id="login-form"
+                method="POST"
+                (ngSubmit)="register()"
+                [formGroup]="registerForm"
+              >
+                <div class="form-input">
+                  <input
+                    id="name"
+                    class="form-element-input cCase"
+                    formControlName="name"
+                    type="text"
+                    [maxLength]="30"
+                    placeholder="Enter your Full Name"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Full Name (as per PAN)*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('name')"
+                    class="form-element-hint"
+                    >*Please enter valid name</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="mobile"
+                    class="form-element-input"
+                    type="tel"
+                    (keypress)="keyPressNumbers($event)"
+                    formControlName="number"
+                    [maxLength]="10"
+                    placeholder="Enter your Phone number"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+
+                  <label class="form-element-label" for="number"
+                    >Phone Number*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('number')"
+                    class="form-element-hint"
+                    >*Please enter valid mobile number.</small
+                  >
+                </div>
+                <div class="form-input pre-radio">
+                  <input
+                    id="name"
+                    class="form-element-input lCase"
+                    type="input"
+                    [maxLength]="25"
+                    formControlName="email"
+                    placeholder="Enter your Mail ID"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name">Email ID*</label>
+                  <small
+                    *ngIf="validateRegister('email')"
+                    class="form-element-hint"
+                    >*Please enter valid mail ID</small
+                  >
+                </div>
+                <label class="mb-1 radio-title mt-3" for="name">Gender*</label>
+                <div class="d-flex my-2">
+                  <input
+                    type="radio"
+                    [defaultChecked]="true"
+                    formControlName="gender"
+                    id="male"
+                    name="gender"
+                    value="1"
+                  />
+                  <label for="male" class="mx-2">Male</label><br />
+                  <input
+                    type="radio"
+                    formControlName="gender"
+                    id="female"
+                    name="gender"
+                    value="2"
+                  />
+                  <label for="female" class="mx-2">Female</label><br />
+                  <input
+                    type="radio"
+                    formControlName="gender"
+                    id="others"
+                    name="gender"
+                    value="3"
+                  />
+                  <label for="others" class="mx-2">Others</label><br />
+                </div>
+                <label class="mb-1 radio-title mt-2">Occupation Type*</label>
+                <div class="d-flex my-2">
+                  <input
+                    type="radio"
+                    [defaultChecked]="true"
+                    formControlName="type"
+                    id="salaried"
+                    name="type"
+                    value="1"
+                  />
+                  <label for="salaried" class="mx-2">Salaried</label><br />
+                  <input
+                    type="radio"
+                    formControlName="type"
+                    id="self"
+                    name="type"
+                    value="2"
+                  />
+                  <label for="self" class="mx-2">Self - Business</label><br />
+                </div>
+                <!-- <div
+                  class="form-input mt-4"
+                  *ngIf="this.registerForm.controls['type'].value == '1'"
+                >
+                  <input
+                    id="name"
+                    class="form-element-input"
+                    type="text"
+                    formControlName="companyName"
+                    [maxLength]="25"
+                    placeholder="Enter your company name"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Organization Name</label
+                  >
+                  <small
+                    *ngIf="validateRegister('companyName')"
+                    class="form-element-hint"
+                    >*Please enter valid Organization Name</small
+                  >
+                </div> -->
+                <div
+                  class="form-input mt-4"
+                  *ngIf="this.registerForm.controls['type'].value == '1'"
+                >
+                  <!-- <ng-select
+                    (search)="getOrg(searchTerm)"
+                    [(ngModel)]="searchTerm"
+                    class="form__field form__select"
+                    [items]="orgList"
+                    bindLabel="name"
+                    bindValue="name"
+                    [searchable]="true"
+                    formControlName="companyName"
+                    placeholder="Select Organization"
+                  >
+                  </ng-select> -->
+                  <input
+                    class="form-control bs-in"
+                    list="datalistOptions"
+                    maxlength="50"
+                    (change)="
+                      getOrg(
+                        this.registerForm.controls['companyName'].value,
+                        'search'
+                      )
+                    "
+                    formControlName="companyName"
+                    id="companyName"
+                    placeholder="Type Organization Name"
+                  />
+                  <datalist id="datalistOptions">
+                    <option
+                      value="{{ org.name }}"
+                      *ngFor="let org of orgList; let i = index"
+                    ></option>
+                  </datalist>
+                  <div class="form-element-bar"></div>
+                  <!-- <label class="form-element-label" for="name"
+                    >Organization Name</label
+                  > -->
+                  <small
+                    *ngIf="validateRegister('companyName')"
+                    class="form-element-hint"
+                    >*Please enter valid organization name</small
+                  >
+                </div>
+                <div
+                  class="form-input mt-4"
+                  *ngIf="this.registerForm.controls['type'].value == '2'"
+                >
+                  <!-- <ng-select
+                    (search)="getOrg(searchTerm)"
+                    [(ngModel)]="searchTerm"
+                    class="form__field form__select"
+                    [items]="orgList"
+                    bindLabel="name"
+                    bindValue="name"
+                    [searchable]="true"
+                    formControlName="companyName"
+                    placeholder="Select Business Name"
+                  >
+                  </ng-select> -->
+
+                  <input
+                    class="form-control bs-in"
+                    list="datalistOptions"
+                    (change)="
+                      getOrg(
+                        this.registerForm.controls['companyName'].value,
+                        'search'
+                      )
+                    "
+                    maxlength="50"
+                    formControlName="companyName"
+                    autocomplete="off"
+                    id="companyName"
+                    placeholder="Type Business Name"
+                  />
+                  <datalist id="datalistOptions">
+                    <option
+                      value="{{ org.name }}"
+                      *ngFor="let org of orgList; let i = index"
+                    ></option>
+                  </datalist>
+
+                  <div class="form-element-bar"></div>
+                  <!-- <label class="form-element-label" for="name"
+                    >Business Name</label
+                  > -->
+                  <small
+                    *ngIf="validateRegister('companyName')"
+                    class="form-element-hint"
+                    >*Please enter valid business name</small
+                  >
+                </div>
+                <div
+                  class="form-input"
+                  *ngIf="this.registerForm.controls['type'].value == '1'"
+                >
+                  <input
+                    id="amount"
+                    class="form-element-input"
+                    type="tel"
+                    (keypress)="keyPressNumbers($event)"
+                    [maxLength]="9"
+                    formControlName="amount"
+                    placeholder="Enter Your Monthly Income"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Monthly Income*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('amount')"
+                    class="form-element-hint"
+                    >*Please enter valid income</small
+                  >
+                </div>
+                <div
+                  class="form-input"
+                  *ngIf="this.registerForm.controls['type'].value == '2'"
+                >
+                  <input
+                    id="amount"
+                    class="form-element-input"
+                    type="tel"
+                    (keypress)="keyPressNumbers($event)"
+                    [maxLength]="9"
+                    formControlName="amount"
+                    placeholder="Enter Your Monthly Income"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Annual Turnover*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('amount')"
+                    class="form-element-hint"
+                    >*Please enter annual turnover</small
+                  >
+                </div>
+              </form>
+              <div align="center">
+                <a class="btn btn-1" (click)="register()">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card auth-card" align="left" *ngIf="otpSented">
+          <div class="card-body p-5">
+            <div class="container px-4 py-4">
+              <h5 class="title">Verify your identity</h5>
+              <p class="title-description" *ngIf="!otpWhatsapp">
+                Verification code sent to your mobile number
+                <span> {{ hideMobile() }}</span>
+                <!-- <i class="ms-2 fa-solid fa-edit fs-9" (click)="edit()"></i> -->
+              </p>
+              <p class="title-description" *ngIf="otpWhatsapp">
+                Verification code sent to your whatsapp number
+                <span> {{ hideMobile() }}</span>
+                <!-- <i class="ms-2 fa-solid fa-edit fs-9" (click)="edit()"></i> -->
+              </p>
+              <!-- <label class="radio-title ms-1">OTP*</label> -->
+              <form
+                id="otp"
+                [formGroup]="otpForm"
+                autocomplete="off"
+                class="inputs d-flex flex-row justify-content-center mt-2"
+              >
+                <input
+                  #digitOne
+                  formControlName="d1"
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="onDigitInput($event)"
+                />
+                <input
+                  #digitTwo
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d2"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="onDigitInput($event)"
+                />
+                <input
+                  #digitThree
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                  formControlName="d3"
+                  (keyup)="onDigitInput($event)"
+                />
+                <input
+                  #digitFour
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                  formControlName="d4"
+                  (keyup)="onDigitInput($event)"
+                />
+                <input
+                  #digitFive
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                  formControlName="d5"
+                  (keyup)="onDigitInput($event)"
+                />
+                <input
+                  #digitSix
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  (keypress)="keyPressNumbers($event)"
+                  maxlength="1"
+                  formControlName="d6"
+                  (keyup)="onDigitInput($event)"
+                />
+              </form>
+              <label
+                for="name"
+                class="form-element-hint"
+                *ngIf="otpForm.invalid && isChecked"
+                >*Please enter valid otp code</label
+              >
+              <div class="my-3" align="center">
+                <p class="title-description">
+                  Didn't received your code?
+                  <!-- <span (click)="resentOtp()"> Recent OTP</span> -->
+                  <span (click)="resentOtp()" *ngIf="count <= 0">
+                    Resend OTP</span
+                  >
+                  <span *ngIf="count > 0"> 00 : {{ count }} </span>
+                </p>
+                <p class="title-description mt-2" *ngIf="!otpWhatsapp">
+                  Receive code on
+                  <span (click)="resentOtpW()"> Whatsapp</span>
+                </p>
+                <p class="title-description mt-2" *ngIf="otpWhatsapp">
+                  Receive code on
+                  <span (click)="resentOtpW()"> Mobile Number</span>
+                </p>
+              </div>
+
+              <div align="center">
+                <a (click)="validateOTP()" class="btn btn-1">Verify OTP</a>
+                <p class="title-description mt-2">
+                  <small>Your OTP will expire in 5 minutes</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

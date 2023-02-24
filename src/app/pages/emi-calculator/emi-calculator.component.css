@@ -1,0 +1,328 @@
+/* .container {
+  width: 416px;
+  padding: 50px;
+  margin: 50px auto;
+  background-color: #fee;
+  border: 1px solid #fa0;
+  box-shadow: 0 0 20px #000;
+} */
+/* Teardrop reader */
+
+.slidewrapper {
+  width: 516px;
+  margin: 50px auto;
+  padding: 0 4px 0 4px;
+}
+
+/* Pointer Reader */
+
+.slider0 {
+  -webkit-appearance: none;
+  appearance: none;
+  border-top: 70px solid #00f;
+  border-radius: 50px;
+  /* border-left: 9px solid transparent; */
+  /* border-right: 9px solid transparent; */
+  height: 0px;
+  width: 300px;
+  padding: 0;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.5s;
+  transition: opacity 0.5s;
+}
+.slider0::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  width: 0;
+  height: 0;
+  top: -12px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid red;
+  cursor: pointer;
+}
+.slider0::-moz-range-thumb {
+  position: relative;
+  width: 0;
+  height: 0;
+  top: -12px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid red;
+  cursor: pointer;
+}
+
+.spa {
+  display: inline-block;
+  width: 20px;
+  padding: 10px 3px 0 0;
+  border-right: 1px solid #f00;
+  text-align: right;
+}
+.span {
+  display: inline-block;
+  width: 16px;
+  padding: 10px 3px 0 0;
+  border-right: 1px solid #f00;
+  text-align: right;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,800&display=swap");
+
+/*------------------------------------ credit report section --------------------------------- */
+
+.emi-calculator-section {
+  width: 100%;
+}
+
+.emi-calculator-line {
+  width: 100%;
+  height: 2px;
+  background-color: #e1ffeb;
+}
+
+.row > * {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.emi-calculator-content-div {
+  width: 100%;
+  cursor: pointer;
+}
+
+.emi-calculator-content-1 {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.emi-calculator-h5 {
+  font-size: small;
+  font-weight: 700;
+  color: #828080;
+  margin-bottom: 0;
+}
+
+.emi-calculator-line-active {
+  background-color: #20bf55 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .emi-calculator-section {
+    width: 100%;
+  }
+  .loan-amount-range {
+    display: none !important;
+  }
+  .emi-calculator-line {
+    width: 100%;
+    height: 2px;
+    background-color: #e1ffeb;
+  }
+
+  .row > * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .emi-calculator-content-div {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .emi-calculator-content-1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  .emi-calculator-img {
+    width: 70px;
+    height: 15px;
+  }
+
+  .emi-calculator-line-active {
+    background-color: #20bf55 !important;
+  }
+}
+
+/*------------------------------------ end credit report section --------------------------------- */
+
+/* loan-range-slider */
+
+.loan-amount-btn {
+  border: none;
+  background: none;
+}
+/*
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+} */
+
+.loan-amount-range {
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid #bfbfc0;
+  border-radius: 20px;
+  background-color: transparent;
+  width: 100%;
+  max-height: 150px;
+  padding: 5px 20px;
+}
+
+.loan-input {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #bfbfc0 !important;
+}
+
+/* .loan-input:focus {
+	border: none;
+	border-bottom: 2px solid #bfbfc0 !important;
+} */
+
+#rangeValue {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 6em;
+  color: #999;
+  font-weight: 400;
+}
+.range {
+  width: 100%;
+  background-color: transparent;
+  height: 25px;
+  border-radius: 20px !important;
+  appearance: none;
+
+  -webkit-appearance: none;
+  outline: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.range::-webkit-slider-thumb {
+  appearance: none;
+
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  /* border-radius: 50%; */
+  background: url("../../../assets/img/Miscellaneous/Slider.svg");
+  background-size: 77%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  /* border: 3px solid #bfbfc0; */
+  box-shadow: -407px 0 0 400px white;
+}
+
+li {
+  list-style: none;
+}
+
+.loan-range-big {
+  width: 2px;
+  height: 25px;
+  background-color: gray;
+  position: relative;
+}
+
+.loan-range-sm {
+  width: 2px !important;
+  position: relative;
+  height: 10px;
+  background-color: gray;
+}
+
+.label-span {
+  position: absolute;
+  top: 100%;
+  color: #333;
+  font-size: x-small;
+  font-weight: 600;
+  margin-left: -4px;
+  margin-top: 3px;
+}
+
+.loan-input-1 {
+  border: none;
+  outline: none;
+  width: min-content;
+}
+
+.calculate-btn {
+  border: none;
+  background: linear-gradient(to right, blue, red);
+  padding: 5px 20px;
+  border-radius: 7px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+/* loan amount end */
+
+/* chart */
+
+.loan-chart {
+  width: 80%;
+  height: 350px;
+  border-radius: 10px;
+  margin: 30px auto;
+  background-color: #828080;
+}
+
+.loan-chart-div-main {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+/* .loan-chart-div-2 {
+	width: max-content;
+	height: max-content;
+} */
+
+.chart-box-1 {
+  width: 15px;
+  height: 15px;
+  background-color: #828080;
+  border: 2px solid #5c5c5c;
+}
+
+.loan-chart-h6 {
+  margin-bottom: 0px;
+  margin: 0 25px;
+  font-size: medium;
+  font-weight: 700;
+}
+
+.loan-chart-h6-1 {
+  margin-bottom: 0px;
+  color: #20bf55;
+  font-size: medium;
+  font-weight: 700;
+}
+
+/* table */
+
+.hiddenRow {
+  padding: 0 !important;
+}
+
+a {
+  appearance: none;
+}
+
+.pointer {
+  cursor: pointer;
+}

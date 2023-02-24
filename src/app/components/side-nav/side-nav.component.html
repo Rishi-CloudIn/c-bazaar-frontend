@@ -1,0 +1,278 @@
+<!-- <header class="container-fluid">
+  <div class="row">
+    <div class="nav-section">
+      <div class="nav-logo-div">
+        <img src="./Images/logo.png" alt="logo" class="nav-logo" />
+      </div>
+
+      <div class="nav-button-div">
+        <button class="nav-btn">Log Out</button>
+      </div>
+
+      <div class="hamburger-menu" (click)="hamToggle()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="nav-ul-div">
+        <ul class="nav-ul" id="nav-ul">
+          <li class="nav-li nav-active">
+            <a href="#"
+              ><span class="material-symbols-outlined nav-icon">settings</span>
+              <p class="nav-p">Credit Report</p></a
+            >
+          </li>
+          <li class="nav-li">
+            <a href="#"
+              ><span class="material-symbols-outlined nav-icon">settings</span>
+              <p class="nav-p">Credit Cards</p></a
+            >
+          </li>
+          <li class="nav-li">
+            <a href="#"
+              ><span class="material-symbols-outlined nav-icon">settings</span>
+              <p class="nav-p">Loans</p></a
+            >
+          </li>
+
+          <div class="quick-content-div">
+            <div class="quick-card">
+              <h6 class="quick-h6">Get a quick call with C-Bazaar</h6>
+              <div class="quick-card-1">
+                <span class="material-symbols-outlined quick-icon"
+                  >settings</span
+                >
+                <p class="quick-p">9361087223</p>
+              </div>
+              <div class="quick-card-1">
+                <span class="material-symbols-outlined quick-icon"
+                  >settings</span
+                >
+                <p class="quick-p">abc@gmail.com</p>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header> -->
+
+<header class="container-fluid">
+  <div class="row">
+    <div class="nav-section">
+      <div class="nav-logo-div">
+        <img
+          src="../../../assets/img/logo-nav.svg"
+          alt="logo"
+          class="nav-logo"
+          routerLink="/dashboard"
+        />
+      </div>
+      <div class="nav-button-div">
+        <div class="nav-not-img-div me-4">
+          <img
+            src="../../../../assets/img/nav/notification.svg"
+            alt="img"
+            class="nav-not-img"
+            (click)="showNotification()"
+            (focusout)="hideNotification()"
+            #toggleButton
+          />
+        </div>
+        <div
+          class="not-drop"
+          [ngClass]="{ 'not-drop-active': showNotifications }"
+          (onblur)="hideNotification()"
+          #menu
+        >
+          <app-empty
+            *ngIf="notificationList.length == 0"
+            class="mb-5"
+            [title]="'No Notification Found'"
+          ></app-empty>
+          <ul
+            class="not-ul p-0 m-0"
+            *ngIf="notificationList.length !== 0"
+            #menu
+          >
+            <li
+              #menu
+              *ngFor="let notification of notificationList; let i = index"
+            >
+              <a>{{ notification.message }} <br /> </a>
+              <span class="float-end createdAt">
+                <small>
+                  {{ notification.createdAt }}
+                </small>
+              </span>
+              <div class="u-line"></div>
+            </li>
+          </ul>
+        </div>
+        <!-- <button class="nav-btn d-flex align-items-center">Log Out</button> -->
+        <!-- </div> -->
+      </div>
+
+      <div class="nav-button-div" (click)="logout2()">
+        <button class="nav-btn">Log Out</button>
+      </div>
+
+      <div class="hamburger-menu" (click)="hamToggle()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="nav-ul-div">
+        <div>
+          <ul class="nav-ul" id="nav-ul">
+            <li
+              class="nav-li"
+              routerLink="/dashboard"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_c_report.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Credit Report</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/offers/credit-card"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_cc.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Credit Cards</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/offers/loan"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_insurance.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Loans</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/offers/insurance"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_loan.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Insurance</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/offers/investment"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_inverstments.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Investment</p>
+              </a>
+            </li>
+            <li class="nav-li" routerLink="/emi" routerLinkActive="nav-active">
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_emi_calc.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">EMI Calculator</p>
+              </a>
+            </li>
+            <li class="nav-li" routerLink="/info" routerLinkActive="nav-active">
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav-info.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">General Information</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/my_applications"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav-my-app.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">My Applications</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/profile"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/Profile.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Profile</p>
+              </a>
+            </li>
+            <li class="nav-li" routerLink="/faq" routerLinkActive="nav-active">
+              <a>
+                <img src="../../../assets/img/nav/faq.svg" class="nav-icon" />
+                <p class="nav-p">FAQ's</p>
+              </a>
+            </li>
+            <li
+              class="nav-li mb-3"
+              routerLink="/contact"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_contact.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Contact Us</p>
+              </a>
+            </li>
+
+            <!-- <div class="quick-content-div">
+              <div class="quick-card">
+                <h6 class="quick-h6">Get a quick call with C-Bazaar</h6>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">9361087223</p>
+                </div>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">abc@gmail.com</p>
+                </div>
+              </div>
+            </div> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

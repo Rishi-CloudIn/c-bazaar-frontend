@@ -1,0 +1,134 @@
+<app-top-nav></app-top-nav>
+<app-steps-side-nav [id]="id" [currentStep]="5"></app-steps-side-nav>
+<app-popups [info]="info"></app-popups>
+
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container mx-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 marg-mob">
+        <div class="title my-5">{{ data.type }}</div>
+      </div>
+      <div class="col-12 col-sm-10 marg-mob">
+        <h4 class="application-sub-title mb-3">{{ data.noteTitle }}</h4>
+        <p class="label-text">
+          {{ data.note }}
+        </p>
+      </div>
+
+      <div class="col-12 col-sm-10 marg-mob mt-5">
+        <h4 class="application-sub-title mb-3">Upload Digital Signature</h4>
+        <div class="fs-div">
+          <!-- <h4 class="form-sub-title mb-3 mt-4">Upload Comapany ID Card*</h4> -->
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'sign')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput.files, 'sign')"
+                    #fileInput
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted && this.docsUploadForm.controls['sign'].invalid
+                }"
+              >
+                Digital signature is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['sign'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["sign"].value }}
+            </p>
+            <img
+              (click)="removeFile('sign')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-10 marg-mob mt-5">
+        <h4 class="preview-title mb-3">Verify & Submit</h4>
+
+        <div class="d-flex align-items-center mt-3">
+          <div class="form-group ms-4">
+            <input type="checkbox" id="html" [(ngModel)]="termAccepted" />
+            <label class="application-p" for="html"
+              >I authorize that the details furnished were True</label
+            >
+          </div>
+        </div>
+        <small
+          *ngIf="!termAccepted && isSubmitted"
+          class="form-element-hint ms-4"
+          >*Please Accept terms to continue.</small
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container mx-4">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-sm-10">
+        <a
+          class="btn btn-danger float-start px-5"
+          (click)="cancel()"
+          >Cancel
+        </a>
+        <a class="btn btn-1 float-end px-5" (click)="submit()">Proceed </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- data-bs-toggle="modal"
+data-bs-target="#info" -->

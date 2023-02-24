@@ -1,0 +1,144 @@
+<app-dsa-sidenav></app-dsa-sidenav>
+<div class="side-nav-div mb-5 justify-content-center">
+  <div class="container">
+    <h5 class="page-crump mb-4">My Applications</h5>
+    <div class="row mb-3 justify-content-between">
+      <div class="col-12 col-lg-3 my-2">
+        <div class="search-box">
+          <input
+            class="search-input"
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="getApplications()"
+            type="text"
+            placeholder="Type to Search ..."
+          />
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 my-2">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          (change)="ontypeChange($event.target)"
+        >
+          <option value="">Select Product</option>
+          <option
+            value="{{ item.name }}"
+            *ngFor="let item of products; let i = index"
+          >
+            {{ item.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="card" *ngIf="applicationList.length > 0 && !isLoading">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Applicant Name</th>
+                <th scope="col">Application Number</th>
+                <th scope="col">Loan Type</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Requested Amount</th>
+                <th scope="col">Loan Terms</th>
+                <th scope="col">Date & Time</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let application of applicationList; let i = index"
+                [ngClass]="{ 'last-row': i + 1 == applicationList.length }"
+                (click)="
+                  applyOffer(
+                    application.offerId,
+                    application.status,
+                    application.cibilId,
+                    application.applicationId
+                  )
+                "
+              >
+                <td class="t-text">{{ i + 1 }}</td>
+                <td class="t-text">{{ application.applicantName }}</td>
+                <td class="t-text">{{ application.applicationId }}</td>
+                <td class="t-text">{{ application.applicationType }}</td>
+                <td class="t-text">{{ application.bankName }}</td>
+                <td
+                  class="t-text g-text"
+                  *ngIf="application.applicationType !== 'Credit Card'"
+                >
+                  {{ application.requestedAmount | currency: "INR" }}
+                </td>
+                <td
+                  class="t-text g-text"
+                  *ngIf="application.applicationType == 'Credit Card'"
+                >
+                  Applied for card
+                </td>
+                <td class="t-text">{{ application.loanTerm || "-" }}</td>
+                <td class="t-text">{{ application.appliedOn || "-" }}</td>
+                <td class="t-text">{{ application.statusName }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <app-loader *ngIf="isLoading"> </app-loader> -->
+  <app-empty
+    [title]="'No Applications Found'"
+    *ngIf="applicationList.length == 0 && !isLoading"
+  ></app-empty>
+  <!-- <p>fasdfsdfsdfsd</p> -->
+</div>
+
+<div
+  class="modal fade"
+  id="homeLoan"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">
+              Please wait until verification process, once verification is
+              completed successfully, able to upload your documents
+            </p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="closeHomeLoanPop()"
+              >
+                <p class="approve-btn-p pe-2">Done</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

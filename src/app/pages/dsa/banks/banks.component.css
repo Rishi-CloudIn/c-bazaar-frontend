@@ -1,0 +1,141 @@
+.card {
+  width: 93%;
+  border-radius: 20px;
+  padding-bottom: 0px !important;
+}
+
+.t-text {
+  font-family: Montserrat;
+  font-size: small;
+  line-height: 1.2;
+  font-weight: 500;
+  text-align: center;
+  color: #4d4d4d;
+}
+
+th {
+  font-size: 15px;
+  font-weight: bolder;
+  line-height: 1.2;
+  text-align: center;
+  color: #1a1a1a;
+  padding: 20px 0;
+}
+
+td {
+  padding: 20px 0;
+  cursor: pointer;
+}
+
+.last-row {
+  border-bottom: transparent !important;
+  /* margin-bottom: -50px !important; */
+}
+
+.last-row td {
+  padding-bottom: 0px;
+}
+
+.modal-header {
+  background-color: #003813;
+  color: white;
+  margin: 0;
+  padding: 0;
+  border: none !important;
+}
+.btn-close {
+  color: white !important;
+  background: url(../../../../assets/img/nav/close.png);
+  margin-top: 10px;
+  background-repeat: no-repeat;
+}
+
+.btn-close:focus {
+  box-shadow: none !important;
+}
+.modal {
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 20px;
+}
+
+.modal-title {
+  font-size: small;
+  text-align: center;
+}
+
+.form-input-div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 13px;
+}
+
+.form-input-label {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-input-group select {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #868686;
+  font-size: 13px;
+}
+
+.form-input-date {
+  font-size: 13px;
+  padding: 5px 0px;
+}
+
+.form-input-select {
+  /* font-size: 13px; */
+  padding: 2px 0px;
+}
+
+.form-input-select {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #868686;
+}
+
+.form-input {
+  width: 100%;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #868686;
+  margin-bottom: 0;
+}
+
+.form-input:focus {
+  border-color: #20bf55;
+}
+
+.form-input-group select {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #868686;
+  font-size: 13px;
+}
+
+input,
+select {
+  font-size: small;
+}
+
+.offer-detail-button {
+  background-image: linear-gradient(to right, #20bf55 0%, #01baef 100%);
+  padding: 6px 20px;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 9px;
+}

@@ -1,0 +1,432 @@
+<app-side-nav> </app-side-nav>
+
+<div class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container" *ngIf="!onBoarded">
+    <section class="credit-score-section container">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6 col-12">
+          <div class="credit-score-div-1">
+            <img
+              src="../../../../assets/img/score-img.png"
+              class="credit-score-img"
+            />
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-12">
+          <div class="credit-score-div-1">
+            <h2 class="credit-score-h2">{{ dashboardData.title }}</h2>
+            <h6 class="credit-score-h6">
+              {{ dashboardData.note }}
+            </h6>
+
+            <div
+              class="credit-score-inner-div"
+              *ngFor="let item of dashboardData.values; let i = index"
+            >
+              <h5 class="credit-score-inner-h5">
+                {{ item.title }}
+              </h5>
+              <p class="credit-score-inner-p">
+                {{ item.value }}
+              </p>
+            </div>
+            <button (click)="onboard()" class="credit-score-btn">
+              Get Your Free Credit Score
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="container" *ngIf="onBoarded">
+    <section class="credit-report-section container mt-5 mt-md-0">
+      <div class="row credit-row" style="padding: 0">
+        <div
+          class="col-4"
+          (click)="changeReportProvider(item.type)"
+          *ngFor="let item of dashboardData.values; let i = index"
+        >
+          <div class="credit-report-content-div">
+            <div class="credit-report-content-1">
+              <img src="{{ item.imageUrl }}" class="credit-report-img" />
+            </div>
+            <div
+              class="credit-report-line"
+              [ngClass]="{
+                'credit-report-line-active': item.type === selectedReport
+              }"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="credit-content-section container">
+      <div class="row">
+        <h4 class="credit-content-h4 col-12 order-xl-1">
+          {{ dashboardData.title }}
+        </h4>
+
+        <div class="col-xl-4 order-xl-3 col-12">
+          <!-- <div class="credit-content-div-2">
+            <div class="credit-content-img-div">
+              <img src="./Images/credit img.png" class="credit-content-img" />
+            </div>
+            <button class="credit-content-btn">
+              <img src="./Images/gearGreen.svg" class="credit-content-icon" />
+              <p class="credit-content-p-1">Download Report</p>
+            </button>
+          </div> -->
+          <div class="gauge-chart-section mt-5">
+            <div class="gauge-chart-div">
+              <div class="gauge-chart-img-div">
+                <img
+                  src="../../../../assets/img/Dashboard/gauge.svg"
+                  class="gauge-chart-img"
+                />
+                <div class="gauge-chart-content">
+                  <div class="gauge-chart-icon-div">
+                    <div class="gauge-chart-icon-div-1">
+                      <img
+                        src="../../../../assets/img/Dashboard/up-arrow.svg"
+                        class="gauge-chart-icon"
+                      />
+                    </div>
+                    <p class="gauge-chart-p">{{ selectedReportData.change }}</p>
+                  </div>
+                  <h2
+                    id="nbr"
+                    class="gauge-chart-h2"
+                    [countUp]="selectedReportData.cibilScore"
+                    [duration]="1500"
+                  >
+                    <!-- {{ selectedReportData.cibilScore }} -->
+                  </h2>
+                  <h6 class="gauge-chart-h6">
+                    {{ selectedReportData.status }}
+                  </h6>
+                </div>
+              </div>
+
+              <button class="gauge-btn">
+                <img
+                  src="../../../../assets/img/Dashboard/download.svg"
+                  class="credit-content-icon"
+                />
+                <p class="gauge-p-1">Download Report</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 order-xl-2 col-12">
+          <div class="credit-content-div-1">
+            <h6 class="credit-content-h6">
+              What does EXCELLENT credit score mean?
+            </h6>
+            <p class="credit-content-p">
+              Great ! You are considered to be financially responsible when it
+              comes to money management. Most of your loan payments are made on
+              time. With your score and history , banks love you !
+            </p>
+          </div>
+        </div>
+
+        <div class="col-xl-4 order-xl-4 col-12">
+          <div class="credit-content-div-3">
+            <div class="credit-content-inner-div">
+              <img
+                src="../../../../assets/img/Score_Impact.svg"
+                class="credit-content-inner-img"
+              />
+              <div class="credit-content-inner-div-2">
+                <h5 class="credit-content-h5 mb-2">
+                  See details that impact your score
+                </h5>
+                <p
+                  class="credit-content-p-2"
+                  routerLink="/dashboard/credit-factors"
+                >
+                  Check Score Factors
+                </p>
+              </div>
+            </div>
+
+            <div class="credit-content-inner-div">
+              <img
+                src="../../../../assets/img/Dashboard/Credit Factor.svg"
+                class="credit-content-inner-img"
+              />
+              <div class="credit-content-inner-div-2">
+                <h5 class="credit-content-h5 mb-2">
+                  Check your Credit History
+                </h5>
+                <p
+                  class="credit-content-p-2"
+                  routerLink="/dashboard/credit-factors"
+                >
+                  View Score Trend
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div
+    class="container py-2 d-offer-div mt-5"
+    *ngIf="offerData.values.length !== 0"
+  >
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="d-flex align-items-center mb-4">
+          <div>
+            <img src="{{ offerData.bannerImg }}" alt="" width="35px" />
+          </div>
+          <div class="heading-flex d-flex flex-column px-3">
+            <h6>{{ offerData.title }}</h6>
+            <p class="o-text-1">{{ offerData.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 my-2">
+        <div class="row px-2">
+          <div
+            class="col-12 col-lg-6 my-4"
+            *ngFor="let offer of offerData.values; let i = index"
+          >
+            <section class="approve-section mt-3">
+              <div class="approve-card h-100 pb-4">
+                <h6 class="approve-h6">Pre approved</h6>
+                <div class="approve-content-div">
+                  <p class="approve-p">{{ offer.title }}</p>
+                  <div class="approve-content-div-1 mb-4">
+                    <img src="{{ offer.imageUrl }}" class="approve-logo" />
+                    <h5 class="approve-h5 mx-3 o-text-1">
+                      {{ offer.description }}
+                    </h5>
+                  </div>
+
+                  <div
+                    class="approve-content-div-2"
+                    *ngFor="let item of offer.features; let i = index"
+                  >
+                    <div
+                      *ngIf="i <= 2"
+                      class="approve-content-1 d-flex align-items-center px-2 py-1"
+                    >
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        width="13px"
+                      />
+                      <p class="approve-p-1 o-text-1 mb-0">{{ item }}</p>
+                    </div>
+                  </div>
+
+                  <h6
+                    class="approve-h6-1 mt-2"
+                    (click)="viewOffer(offer.offerId)"
+                  >
+                    View Details >>
+                  </h6>
+                  <button
+                    *ngIf="!onBoarded"
+                    (click)="onboard()"
+                    class="approve-btn py-2 d-flex align-items-center"
+                  >
+                    <p class="approve-btn-p pe-2">Get Credit Score</p>
+                  </button>
+                  <div *ngIf="onBoarded && !offer.interested">
+                    <button
+                      (click)="applyOffer(offer.offerId, offer.status)"
+                      *ngIf="offer.status == 10"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/right-arrow.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="offer.status == 0 || offer.status == 6"
+                      class="approve-btn py-2 d-flex align-items-center"
+                      (click)="applyOffer(offer.offerId, offer.status)"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="
+                        offer.status !== 0 &&
+                        offer.status !== 6 &&
+                        offer.status !== 10
+                      "
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">{{ offer.statusName }}</p>
+                      <img
+                        src="../../../../assets/img/tick.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                  </div>
+                  <div *ngIf="onBoarded && offer.interested">
+                    <button
+                      (click)="interestPop(offer.offerId)"
+                      *ngIf="!offer.offerInterest"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">Show Interest</p>
+                      <img
+                        src="../../../../assets/img/right-arrow.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                    <button
+                      *ngIf="offer.offerInterest"
+                      class="approve-btn py-2 d-flex align-items-center"
+                    >
+                      <p class="approve-btn-p pe-2">Interested</p>
+                      <img
+                        src="../../../../assets/img/right-arrow.svg"
+                        alt=""
+                        class="mx-1"
+                        width="15px"
+                      />
+                    </button>
+                  </div>
+                  <!-- <button
+                    *ngIf="onBoarded"
+                    class="approve-btn py-2 d-flex align-items-center"
+                  >
+                    <p class="approve-btn-p pe-2">Apply Now</p>
+                    <img
+                      src="../../../../assets/img/right-arrow.svg"
+                      alt=""
+                      class="mx-1"
+                      width="15px"
+                    />
+                  </button> -->
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container py-2 mt-4 d-offer-div" *ngIf="onBoarded">
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="d-flex align-items-center mb-4">
+          <div>
+            <img src="{{ creditData.bannerImg }}" alt="" width="35px" />
+          </div>
+          <div class="heading-flex d-flex flex-column px-3">
+            <h6>{{ creditData.title }}</h6>
+            <p>{{ creditData.description }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 my-2 h-100">
+        <div class="row justify-content-center">
+          <div
+            class="col-12 col-lg-4 .offset-md-4 my-4"
+            *ngFor="let offer of creditData.values; let i = index"
+          >
+            <section class="factor-section">
+              <div class="factor-card my-3">
+                <div class="factor-content-div">
+                  <img src="{{ offer.imageUrl }}" class="factor-icon" />
+                  <div class="factor-text-space">
+                    <h5 class="factor-h5">{{ offer.title | titlecase }}</h5>
+                    <h6
+                      class="factor-h6"
+                      [ngClass]="{
+                        'imp-bg-r': offer.impact === 'high',
+                        'imp-bg-y': offer.impact === 'medium'
+                      }"
+                    >
+                      {{ offer.impact | titlecase }}
+                    </h6>
+                  </div>
+                </div>
+
+                <h2 class="factor-h2">{{ offer.value }}</h2>
+                <p class="factor-p">payments on Time</p>
+
+                <button
+                  class="factor-btn"
+                  routerLink="/dashboard/credit-factors"
+                >
+                  More >
+                </button>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="interest"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- <button
+        type="button"
+        class="btn-close me-0"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button> -->
+
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <div align="center">
+              <img
+                class="m-auto my-3"
+                src="../../../assets/img/logo-nav.svg"
+                alt=""
+                width="25%"
+              />
+            </div>
+            <hr />
+            <p class="my-3">Are you sure wants to show interest?</p>
+            <div>
+              <button
+                class="approve-btn py-2 my-3 d-flex align-items-center"
+                (click)="showInterest()"
+              >
+                <p class="approve-btn-p pe-2">Yes</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

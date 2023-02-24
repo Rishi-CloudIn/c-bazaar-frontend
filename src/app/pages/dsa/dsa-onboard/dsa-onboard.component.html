@@ -1,0 +1,162 @@
+<section>
+  <div class="split left">
+    <div class="">
+      <img
+        src="../../../../assets/img/logo.svg"
+        class="p-5"
+        alt="logo"
+        width="250px"
+      />
+
+      <div class="container centered w-75">
+        <h5 class="left-title">Your credit score health is matters</h5>
+        <p>
+          Your credit score is more than just a number. A better score can help
+          unlock the things you want most - like a new credit card or the best
+          loan rates in the market.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="split right">
+    <div class="">
+      <div class="container px-3 py-4">
+        <h5 class="title">Hi {{ name }},</h5>
+        <p class="title-description mb-5">
+          Get your credit report for free, with monthly updates
+        </p>
+        <!-- <h4 class="sub-title mb-4 mt-2">Login</h4>
+         -->
+        <form
+          id="login-form"
+          method="POST"
+          (ngSubmit)="submit()"
+          [formGroup]="onboardForm"
+        >
+          <div class="form-input mb-5">
+            <input
+              id="panNumber"
+              class="form-element-input hasValue"
+              type="text"
+              autocomplete="off"
+              formControlName="panNumber"
+              [maxLength]="10"
+              (input)="changeTextToUppercase('panNumber')"
+              placeholder="Enter your PAN number"
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="name">PAN Number*</label>
+            <small
+              *ngIf="validateOnboard('panNumber')"
+              class="form-element-hint"
+              >*Please enter valid PAN number.</small
+            >
+          </div>
+          <div class="form-input mb-5">
+            <input
+              id="panNumber"
+              class="form-element-input cCase"
+              type="text"
+              autocomplete="false"
+              formControlName="name"
+              [maxLength]="40"
+              placeholder="Enter your Name"
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="name"
+              >Name (As per PAN)*</label
+            >
+            <small *ngIf="validateOnboard('name')" class="form-element-hint"
+              >*Please enter valid Name.</small
+            >
+          </div>
+          <div class="form-input mb-5">
+            <input
+              id="number"
+              class="form-element-input cCase"
+              type="text"
+              autocomplete="false"
+              formControlName="number"
+              [maxLength]="10"
+              placeholder="Enter your Mobile Number"
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="number"
+              >Mobile Number *</label
+            >
+            <small *ngIf="validateOnboard('number')" class="form-element-hint"
+              >*Please enter Mobile Number.</small
+            >
+          </div>
+          <div class="form-input mb-5">
+            <input
+              id="dob"
+              class="form-element-input picker"
+              type="date"
+              formControlName="dob"
+              max="{{ maxDate }}"
+              [maxLength]="10"
+              placeholder="DD-MM-YYYY"
+              required
+            />
+            <div class="form-element-bar"></div>
+            <p class="form-element-label" for="dob">Date of birth*</p>
+            <small *ngIf="validateOnboard('dob')" class="form-element-hint"
+              >*Please enter valid Date of birth.</small
+            >
+          </div>
+          <div class="form-input mb-5">
+            <select
+              id="cars"
+              name="cars"
+              formControlName="gender"
+              class="form-input-select form-element-input"
+            >
+              <option value="">Select Gender</option>
+
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+              <option value="2">Others</option>
+            </select>
+            <!-- <input
+              id="dob"
+              class="form-element-input picker"
+              type="date"
+              formControlName="dob"
+              max="{{ maxDate }}"
+              [maxLength]="10"
+              placeholder="DD-MM-YYYY"
+              required
+            /> -->
+            <div class="form-element-bar"></div>
+            <p class="form-element-label" for="dob">Gender*</p>
+            <small *ngIf="validateOnboard('gender')" class="form-element-hint"
+              >*Please Select Gender.</small
+            >
+          </div>
+          <div class="form-input mb-5">
+            <input
+              id="pincode"
+              class="form-element-input"
+              (keypress)="keyPressNumbers($event)"
+              type="tel"
+              formControlName="pincode"
+              [maxLength]="6"
+              placeholder="Enter your pincode*"
+              required
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="name">Pincode*</label>
+            <small *ngIf="validateOnboard('pincode')" class="form-element-hint"
+              >*Please enter valid pincode.</small
+            >
+          </div>
+          <div align="center" class="mb-5">
+            <a (click)="submit()" class="btn btn-1">Get Cibil & Proceed</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

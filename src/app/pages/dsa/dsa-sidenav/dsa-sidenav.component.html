@@ -1,0 +1,169 @@
+<header class="container-fluid">
+  <div class="row">
+    <div class="nav-section">
+      <div class="nav-logo-div">
+        <img
+          src="../../../assets/img/logo-nav.svg"
+          alt="logo"
+          class="nav-logo"
+          routerLink="/dsa/dashboard"
+        />
+        <div class="nav-button-div">
+          <div class="nav-not-img-div me-4">
+            <img
+              src="../../../../assets/img/nav/notification.svg"
+              alt="img"
+              class="nav-not-img"
+              (click)="showNotification()"
+              (focusout)="hideNotification()"
+              #toggleButton
+            />
+          </div>
+          <div
+            class="not-drop"
+            [ngClass]="{ 'not-drop-active': showNotifications }"
+            (onblur)="hideNotification()"
+            #menu
+          >
+            <app-empty
+              *ngIf="notificationList.length == 0"
+              class="mb-5"
+              [title]="'No Notification Found'"
+            ></app-empty>
+            <ul
+              class="not-ul p-0 m-0"
+              *ngIf="notificationList.length !== 0"
+              #menu
+            >
+              <li
+                #menu
+                *ngFor="let notification of notificationList; let i = index"
+              >
+                <a>{{ notification.message }} <br /> </a>
+                <span class="float-end createdAt">
+                  <small>
+                    {{ notification.createdAt }}
+                  </small>
+                </span>
+                <div class="u-line mt-4"></div>
+              </li>
+            </ul>
+          </div>
+          <!-- <button class="nav-btn d-flex align-items-center">Log Out</button> -->
+          <!-- </div> -->
+        </div>
+        <!-- <img
+          src="
+        ../../../../../../assets/img/nav/notification.svg"
+          alt=""
+          width="20px"
+        /> -->
+      </div>
+
+      <div class="nav-button-div" (click)="logout2()">
+        <button class="nav-btn">Log Out</button>
+      </div>
+
+      <div class="hamburger-menu" (click)="hamToggle()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="nav-ul-div">
+        <div>
+          <ul class="nav-ul" id="nav-ul">
+            <li
+              class="nav-li mt-3"
+              routerLink="/dsa/dashboard"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_c_report.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Dashboard</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/dsa/banks"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../../assets/img/nav/banks.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Banks</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/dsa/onboard"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../../assets/img/nav/nav_loan.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Apply Loan</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/dsa/applications"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav-my-app.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">My Applications</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/dsa/profile"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/Profile.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Profile</p>
+              </a>
+            </li>
+            <li class="nav-li mb-3" (click)="logout2()">
+              <a>
+                <img
+                  src="../../../../assets/img/nav/logout.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Logout</p>
+              </a>
+            </li>
+
+            <!-- <div class="quick-content-div">
+              <div class="quick-card">
+                <h6 class="quick-h6">Get a quick call with C-Bazaar</h6>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">9361087223</p>
+                </div>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">abc@gmail.com</p>
+                </div>
+              </div>
+            </div> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

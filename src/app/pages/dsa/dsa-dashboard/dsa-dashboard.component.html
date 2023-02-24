@@ -1,0 +1,81 @@
+<app-dsa-sidenav *ngIf="role=='dsa'"></app-dsa-sidenav>
+<app-fo-sidenav *ngIf="role=='fo'"></app-fo-sidenav>
+<div class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <h5 class="page-crump mb-4">Dashboard</h5>
+
+    <div
+      class="d-flex flex-wrap align-items-between justify-content-start my-4"
+    >
+      <button
+        class="loan-btn align-items-center mx-3"
+        *ngFor="let count of countList; let i = index"
+      >
+        <div class="loan-btn-div">
+          <img src="{{ count.image }}" class="loan-btn-icon" />
+        </div>
+        <p class="loan-btn-p">{{ count.key }}</p>
+        <div
+          class="loan-btn-div d-flex align-items-center justify-content-center"
+        >
+          <p class="loan-btn-p m-0 px-3 fw-bolder">{{ count.value }}</p>
+        </div>
+      </button>
+    </div>
+    <div class="row mt-5" *ngIf="role == 'dsa'">
+      <div class="col-12 col-lg-6">
+        <h5 class="page-crump mb-4">Total Loan Disbursement</h5>
+
+        <div id="chart" class="me-xl-5">
+          <apx-chart
+            [series]="disbursementGraph"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [dataLabels]="chartOptions.dataLabels"
+            [grid]="chartOptions.grid"
+            [stroke]="chartOptions.stroke"
+            [markers]="chartOptions.markers"
+            [yaxis]="chartOptions.yaxis"
+            [fill]="chartOptions.fill"
+          ></apx-chart>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 mt-4 mt-lg-0">
+        <h5 class="page-crump mb-4">Total Loan Rejection</h5>
+
+        <div id="chart " class="ms-xl-5">
+          <apx-chart
+            [series]="rejectedGraph"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [dataLabels]="chartOptions.dataLabels"
+            [grid]="chartOptions.grid"
+            [stroke]="chartOptions.stroke"
+            [markers]="chartOptions.markers"
+            [yaxis]="chartOptions.yaxis"
+            [fill]="chartOptions.fill"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5" *ngIf="role == 'fo'">
+      <div class="col-12 col-lg-12">
+        <h5 class="page-crump mb-4">Total Loan Disbursement</h5>
+
+        <div id="chart" class="me-xl-5">
+          <apx-chart
+            [series]="disbursementGraph"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [dataLabels]="chartOptions.dataLabels"
+            [grid]="chartOptions.grid"
+            [stroke]="chartOptions.stroke"
+            [markers]="chartOptions.markers"
+            [yaxis]="chartOptions.yaxis"
+            [fill]="chartOptions.fill"
+          ></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

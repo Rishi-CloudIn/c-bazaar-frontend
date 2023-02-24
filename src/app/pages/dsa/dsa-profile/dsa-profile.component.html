@@ -1,0 +1,735 @@
+<app-dsa-sidenav></app-dsa-sidenav>
+
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <div class="profile-section">
+      <div class="profile-section-card">
+        <form id="login-form" [formGroup]="profileForm">
+          <div class="profile-title-div">
+            <h5 class="profile-title" *ngIf="!edit">Profile</h5>
+            <h5 class="profile-title" *ngIf="edit">Edit Profile</h5>
+
+            <div class="profile-edit" (click)="enableEdit()">
+              <div class="profile-edit-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Edit.svg"
+                  class="porfile-edit-icon"
+                  width="16px"
+                />
+              </div>
+              <h6 class="profile-edit-h6">Edit</h6>
+            </div>
+          </div>
+
+          <div class="profile-form-div">
+            <div class="float-end me-5">
+              <a
+                class="btn-emi btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#passwordModal"
+                (click)="resetPasswordForm()"
+                role="button"
+                align="center"
+              >
+                <!-- <img
+                  src="../../../../assets/img/Hamburger/EMI Calculator.svg"
+                  alt=""
+                  class="mx-2"
+                  width="15px"
+                /> -->
+                <i class="fa-solid fa-lock fs-6 mx-2"></i>
+                Change Password</a
+              >
+            </div>
+            <div class="profile-form-head">
+              <div class="profile-form-head-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Personal Details.svg"
+                  class="profile-form-head-img"
+                  width="25px"
+                />
+              </div>
+              <h4 class="profile-form-head-h4">Personal Details</h4>
+            </div>
+
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="profile-form-img-div">
+                    <img src="{{ dpUrl }}" class="profile-form-img" />
+                    <a
+                      class="image-upload wrapper"
+                      id="file"
+                      (click)="hiddenfileinput.click()"
+                    >
+                      <img
+                        src="../../../../assets/img/Profile/Camera.svg"
+                        class="profile-form-img-icon firstDiv"
+                      />
+                      <input
+                        #hiddenfileinput
+                        (change)="onChange($event)"
+                        accept="image/png, image/jpeg, image/jpg, image/webp"
+                        type="file"
+                      />
+                      <!-- <small
+                        *ngIf="validateProfile('name')"
+                        class="form-element-hint"
+                        >*Please enter valid Name.</small
+                      > -->
+                    </a>
+                  </div>
+                  <div class="form-input-div">
+                    <label class="form-input-label">PAN CARD</label>
+                    <input
+                      type="text"
+                      class="form-input uCase disable"
+                      name="panCard"
+                      [disabled]="true"
+                      formControlName="panCard"
+                    />
+                    <small
+                      *ngIf="validateProfile('panCard')"
+                      class="form-element-hint"
+                      >*Please enter valid PAN Number.</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">FULL NAME </label>
+                    <div class="form-input-group d-flex flex-column">
+                      <!-- <select name="name_with_initials">
+                        <option selected>Mr.</option>
+                        <option>Mrs.</option>
+                        <option>Miss.</option>
+                      </select> -->
+                      <input
+                        id="name"
+                        type="text"
+                        maxlength="50"
+                        class="form-input"
+                        formControlName="name"
+                        [attr.disabled]="true"
+                      />
+                      <small
+                        *ngIf="validateProfile('name')"
+                        class="form-element-hint"
+                        >*Please enter valid Name.</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">DATE OF BIRTH</label>
+                    <input
+                      type="date"
+                      [attr.disabled]="true"
+                      class="form-input form-input-date picker"
+                      formControlName="dateOfBirth"
+                    />
+                    <small
+                      *ngIf="validateProfile('dateOfBirth')"
+                      class="form-element-hint"
+                      >*Please pick valid Date of Birth.</small
+                    >
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">EMAIL ID</label>
+
+                    <input
+                      type="text"
+                      [attr.disabled]="true"
+                      maxlength="35"
+                      formControlName="email"
+                      class="form-input"
+                    />
+                    <small
+                      *ngIf="validateProfile('email')"
+                      class="form-element-hint"
+                      >*Please enter valid Mail ID.</small
+                    >
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">MOBILE NUMBER</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="10"
+                      formControlName="mobileNumber"
+                      [attr.disabled]="true"
+                    />
+                    <small
+                      *ngIf="validateProfile('mobileNumber')"
+                      class="form-element-hint"
+                      >*Please enter valid Mobile Number.</small
+                    >
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">Address Line</label>
+                    <input
+                      type="email"
+                      class="form-input"
+                      maxlength="70"
+                      [readonly]="!edit"
+                      formControlName="addressLine"
+                    />
+                    <!-- shake anim -->
+                    <!-- [ngClass]="{
+                      'r-text shake': validateProfile('addressLine')
+                    }" -->
+                    <small
+                      *ngIf="validateProfile('addressLine')"
+                      class="form-element-hint"
+                      >*Please enter Valid Address.</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">LOCALITY</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="50"
+                      formControlName="locality"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateProfile('locality')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Locality.</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">CITY</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="20"
+                      formControlName="city"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateProfile('city')"
+                      class="form-element-hint"
+                      >*Please Enter Valid city.</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">LANDMARK</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="50"
+                      formControlName="landmark"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateProfile('landmark')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Landmark.</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">STATE</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      formControlName="state"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                    >
+                      <option
+                        value="{{ state.value }}"
+                        *ngFor="let state of states; let i = index"
+                      >
+                        {{ state.name }}
+                      </option>
+                    </select>
+                    <!-- <small
+                      *ngIf="validateProfile('state')"
+                      class="form-element-hint"
+                      >*Please Enter Valid state.</small
+                    > -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">PINCODE</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="6"
+                      formControlName="pincode"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateProfile('pincode')"
+                      class="form-element-hint"
+                      >*Please Enter Valid pincode.</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">PINCODE</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      [ngModelOptions]="{ standalone: true }"
+                      [(ngModel)]="pincode"
+                      [disabled]="!edit"
+                    />
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="profile-form-div">
+            <div class="profile-form-head">
+              <div class="profile-form-head-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Professional Details.svg"
+                  class="profile-form-head-img"
+                />
+              </div>
+              <h4 class="profile-form-head-h4">Professional Details</h4>
+            </div>
+
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">DSA CODE</label>
+                    <input
+                      type="text"
+                      class="form-input uCase"
+                      maxlength="20"
+                      [readonly]="!edit"
+                      formControlName="dsa"
+                    />
+                    <small
+                      *ngIf="validateProfile('dsa')"
+                      class="form-element-hint"
+                      >*Please Enter Valid dsa code.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">PROFILE</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      formControlName="profile"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                    >
+                      <option
+                        value="{{ profile.value }}"
+                        *ngFor="let profile of profiles; let i = index"
+                      >
+                        {{ profile.name }}
+                      </option>
+                    </select>
+                    <small
+                      *ngIf="validateProfile('profile')"
+                      class="form-element-hint"
+                      >*Please Enter Valid profile.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">SETUP</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                      formControlName="setup"
+                    >
+                      <option
+                        value="{{ setup.value }}"
+                        *ngFor="let setup of setups; let i = index"
+                      >
+                        {{ setup.name }}
+                      </option>
+                    </select>
+                    <small
+                      *ngIf="validateProfile('setup')"
+                      class="form-element-hint"
+                      >*Please Enter Valid setup.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">PRODUCT</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select disable"
+                      formControlName="productType"
+                    >
+                      <option
+                        value="{{ product.type }}"
+                        *ngFor="let product of products; let i = index"
+                      >
+                        {{ product.name }}
+                      </option>
+                    </select>
+
+                    <small
+                      *ngIf="validateProfile('productType')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Product.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">SOURCE</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                      class="form-input-select"
+                      formControlName="source"
+                    >
+                      <option
+                        value="{{ source.value }}"
+                        *ngFor="let source of sources; let i = index"
+                      >
+                        {{ source.name }}
+                      </option>
+                    </select>
+                    <small
+                      *ngIf="validateProfile('source')"
+                      class="form-element-hint"
+                      >*Please Enter Valid source.</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-form-div">
+            <div class="profile-form-head">
+              <div class="profile-form-head-img-div">
+                <img
+                  src="../../../../assets/img/Profile/account_details.svg"
+                  class="profile-form-head-img"
+                />
+              </div>
+              <h4 class="profile-form-head-h4">Account Details</h4>
+            </div>
+
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">ACCOUNT HOLDER NAME</label>
+                    <input
+                      type="text"
+                      class="form-input cCase"
+                      maxlength="30"
+                      [readonly]="!edit"
+                      formControlName="accountName"
+                    />
+                    <small
+                      *ngIf="validateProfile('accountName')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Account Name.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">BANK NAME</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                      formControlName="accountBank"
+                    >
+                      <option
+                        value="{{ bank.id }}"
+                        *ngFor="let bank of banks; let i = index"
+                      >
+                        {{ bank.name }}
+                      </option>
+                    </select>
+                    <!-- <input
+                      type="text"
+                      class="form-input"
+                      [disabled]="!edit"
+                      formControlName="accountBank"
+                    /> -->
+                    <small
+                      *ngIf="validateProfile('accountBank')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Bank Name.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">BRANCH NAME</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="30"
+                      [readonly]="!edit"
+                      formControlName="accountBranch"
+                    />
+                    <small
+                      *ngIf="validateProfile('accountBranch')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Branch Name.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">ACCOUNT NUMBER</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      [readonly]="!edit"
+                      maxlength="16"
+                      formControlName="accountNumber"
+                    />
+                    <small
+                      *ngIf="validateProfile('accountNumber')"
+                      class="form-element-hint"
+                      >*Please Enter Valid Account Number.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">IFSC CODE</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      maxlength="11"
+                      [disabled]="!edit"
+                      formControlName="ifsc"
+                    />
+                    <small
+                      *ngIf="validateProfile('ifsc')"
+                      class="form-element-hint"
+                      >*Please Enter Valid IFSC code.</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button *ngIf="edit" (click)="submit()" class="profile-submit-button">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="passwordModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="margin-left: 43%" id="exampleModalLabel">
+          Change Password
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="passwordForm">
+          <div class="row my-3 mx-3">
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="oldPassword"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('oldPassword')"
+                    class="form-element-hint mt-2"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">New Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="password"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('password')"
+                    class="form-element-hint mt-2"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8.</small
+                  >
+                  <small
+                    *ngIf="
+                      !validatePassword('password') &&
+                      passwordForm.controls['oldPassword'].value ==
+                        passwordForm.controls['password'].value &&
+                      passwordForm.controls['oldPassword'].value !== ''
+                    "
+                    class="form-element-hint mt-2"
+                    >*New password must differ from old password.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Confirm Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="cPassword"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('cPassword')"
+                    class="form-element-hint mt-2"
+                    >*Password must match with new password.</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="center" class="mb-3 mt-5">
+            <button class="offer-detail-button" (click)="changePwd()">
+              Change
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

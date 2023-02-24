@@ -1,0 +1,115 @@
+.title {
+  font-family: Montserrat;
+  font-size: large;
+  font-weight: bold;
+  line-height: 0.63;
+  text-align: center;
+  color: #868686;
+}
+
+.preview-container {
+  margin: 10px 1%;
+}
+
+.label-text {
+  font-size: small;
+  font-weight: 500;
+  line-height: 1.33;
+  text-align: left;
+  color: #868686;
+  margin-bottom: 0;
+}
+
+.label-sub-text {
+  margin-bottom: 0px;
+  font-size: x-small;
+  font-weight: 600;
+  line-height: 1.71;
+  text-align: left;
+  color: #20bf55;
+}
+
+.preview-title {
+  font-size: medium;
+  font-weight: bold;
+  line-height: 1.21;
+  text-align: left;
+  color: #20bf55;
+}
+
+.sub-title {
+  font-size: medium;
+  font-weight: bold;
+  line-height: 1.45;
+  color: #868686;
+}
+
+.key {
+  font-size: small;
+  font-weight: 700;
+  line-height: 1.61;
+  color: #868686;
+}
+
+.value {
+  font-size: small;
+  font-weight: 700;
+  line-height: 1.61;
+  color: #333;
+  opacity: 0.96;
+}
+
+.form-group {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.form-group label {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-group label:before {
+  content: "";
+  -webkit-appearance: none;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid #7070709c !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.form-group input:checked + label:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  width: 6px;
+  height: 13px;
+  border: solid #20bf55;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+@media (min-width: 767px) {
+  .key,
+  .value {
+    font-size: medium;
+  }
+}

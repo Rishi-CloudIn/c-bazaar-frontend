@@ -1,0 +1,183 @@
+<section class="bg-section container">
+  <div class="row auth-section">
+    <div class="col-lg-5 col-12 d-lg-block d-none" align="center">
+      <div class="auth-left">
+        <div class="d-lg-block d-none">
+          <img
+            class="auth-left-img"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="200px"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-12">
+      <div class="container">
+        <div align="center" class="d-lg-none">
+          <img
+            class="mb-5"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="40%"
+          />
+        </div>
+        <div class="card auth-card" align="left" *ngIf="!otpSented">
+          <div class="card-body p-5">
+            <div class="container px-3 py-4">
+              <h5 class="title">Welcome Back</h5>
+              <p class="title-description mb-4">Login to continue</p>
+              <!-- <h4 class="sub-title mb-4 mt-2">Login</h4>
+               -->
+              <form id="login-form" method="POST" [formGroup]="loginForm">
+                <div class="form-input">
+                  <input
+                    id="name"
+                    class="form-element-input"
+                    type="input"
+                    formControlName="userName"
+                    [maxLength]="10"
+                    (keypress)="keyPressNumbers($event)"
+                    placeholder="Enter your mobile number"
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Mobile Number*</label
+                  >
+                  <small
+                    *ngIf="validateLogin('userName')"
+                    class="form-element-hint"
+                    >*Please enter valid mobile number.</small
+                  >
+                </div>
+                <div align="center">
+                  <a (click)="login()" class="btn btn-1">Login</a>
+                  <p class="title-description mt-2">
+                    New user? <span (click)="register()"> Register</span>
+                  </p>
+                  <p class="title-description my-2">OR LOGIN USING</p>
+
+                  <button class="btn-g" (click)="gLogin()">
+                    <img
+                      class="ggl-img"
+                      src="../../../../assets/img/ggl.svg"
+                    />Google
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card auth-card" align="left" *ngIf="otpSented">
+          <div class="card-body p-5">
+            <div class="container px-4 py-4">
+              <h5 class="title">Verify your identity</h5>
+              <p class="title-description" *ngIf="!otpWhatsapp">
+                Verification code sent to your mobile number
+                <span> {{ hideMobile() }}</span>
+                <!-- <i class="ms-2 fa-solid fa-edit fs-9" (click)="edit()"></i> -->
+              </p>
+              <p class="title-description" *ngIf="otpWhatsapp">
+                Verification code sent to your whatsapp number
+                <span> {{ hideMobile() }}</span>
+                <!-- <i class="ms-2 fa-solid fa-edit fs-9" (click)="edit()"></i> -->
+              </p>
+              <!-- <label class="radio-title ms-1">OTP*</label> -->
+              <form
+                id="otp"
+                [formGroup]="otpForm"
+                autocomplete="off"
+                class="inputs d-flex flex-row justify-content-center mt-2"
+              >
+                <input
+                  #digitOne
+                  formControlName="d1"
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+                <input
+                  #digitTwo
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d2"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+                <input
+                  #digitThree
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d3"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+                <input
+                  #digitFour
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d4"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+                <input
+                  #digitFive
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d5"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+                <input
+                  #digitSix
+                  class="m-2 text-center form-control rounded"
+                  type="text"
+                  maxlength="1"
+                  formControlName="d6"
+                  (keypress)="keyPressNumbers($event)"
+                  (keyup)="keyPressNumbers($event) && onDigitInput($event)"
+                />
+              </form>
+              <label
+                for="name"
+                class="form-element-hint"
+                *ngIf="otpForm.invalid && isChecked"
+                >*Please enter valid otp code</label
+              >
+              <div class="my-3" align="center">
+                <p class="title-description">
+                  Didn't received your code?
+                  <span (click)="resentOtp()" *ngIf="count <= 0">
+                    Resend OTP</span
+                  >
+                  <span *ngIf="count > 0"> 00 : {{ count }} </span>
+                </p>
+                <p class="title-description mt-2" *ngIf="!otpWhatsapp">
+                  Receive code on
+                  <span (click)="resentOtpW()"> Whatsapp</span>
+                </p>
+                <p class="title-description mt-2" *ngIf="otpWhatsapp">
+                  Receive code on
+                  <span (click)="resentOtp()"> Mobile Number</span>
+                </p>
+              </div>
+
+              <div align="center">
+                <a (click)="validateOTP()" class="btn btn-1">Verify OTP</a>
+                <p class="title-description mt-2">
+                  <small>Your OTP will expire in 5 minutes</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

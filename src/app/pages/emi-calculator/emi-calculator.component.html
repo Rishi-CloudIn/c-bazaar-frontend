@@ -1,0 +1,383 @@
+<app-side-nav> </app-side-nav>
+<section class="side-nav-div mb-5">
+  <div class="container">
+    <h5 class="page-crump mb-3">EMI Calculator</h5>
+  </div>
+  <section class="container" *ngIf="!isLoading">
+    <div class="emi-content-div px-lg-5">
+      <div class="row">
+        <section class="emi-calculator-section container">
+          <div class="row credit-row d-flex justify-content-center p-0 mb-4">
+            <div class="col-6">
+              <div class="emi-calculator-content-div">
+                <div
+                  class="emi-calculator-content-1"
+                  (click)="toggleLoanType('Home Loan')"
+                >
+                  <!-- <img src="./Images/logo-1.svg" class="emi-calculator-img"> -->
+                  <h3 class="emi-calculator-h5">Home Loan</h3>
+                </div>
+                <div
+                  class="emi-calculator-line"
+                  [ngClass]="{
+                    'emi-calculator-line-active': loanType == 'Home Loan'
+                  }"
+                ></div>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="emi-calculator-content-div">
+                <div
+                  class="emi-calculator-content-1"
+                  (click)="toggleLoanType('Personal Loan')"
+                >
+                  <!-- <img src="./Images/logo-3.svg" class="emi-calculator-img"> -->
+                  <h3 class="emi-calculator-h5">Personal Loan</h3>
+                </div>
+                <div
+                  class="emi-calculator-line"
+                  [ngClass]="{
+                    'emi-calculator-line-active': loanType !== 'Home Loan'
+                  }"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <form [formGroup]="emiForm">
+          <!-- loan amount -->
+
+          <div class="loan-amount-div mt-5">
+            <div
+              class="loan-amount-text d-flex justify-content-between align-items-baseline px-4 mt-4 mb-3"
+            >
+              <h4 class="emi-calculator-h5">Loan Amount</h4>
+              <div>
+                <div class="loan-input">
+                  ₹
+                  <input
+                    appPasteRestrict
+                    type="text"
+                    class="loan-input-1"
+                    autocomplete="off"
+                    (keypress)="keyPressNumbers($event)"
+                    name="principal"
+                    formControlName="principal"
+                    (change)="scaleChange('amount', 1)"
+                    maxlength="8"
+                    size="10"
+                  />
+                </div>
+                <!-- <small
+                  *ngIf="
+                    emiForm.controls['principal'].errors && isSubmitted
+                  "
+                  class="form-element-hint"
+                  >*Enter valid amount</small
+                > -->
+                <small
+                  *ngIf="
+                    emiForm.controls['principal'].value < 100000 &&
+                    isSubmitted &&
+                    loanType == 'Home Loan'
+                  "
+                  class="form-element-hint"
+                  >*Enter amount over ₹1,00,000</small
+                >
+                <small
+                  *ngIf="
+                    emiForm.controls['principal'].value < 50000 &&
+                    isSubmitted &&
+                    loanType !== 'Home Loan'
+                  "
+                  class="form-element-hint"
+                  >*Enter amount over ₹50,000</small
+                >
+              </div>
+            </div>
+            <div class="loan-amount-range d-none d-lg-block mb-4">
+              <Input
+                class="range pt-4 pb-3"
+                name="principalRange"
+                ngDefaultControl
+                formControlName="principalRange"
+                (change)="scaleChange('amount', 0)"
+                type="range"
+                [step]="principal.step"
+                [min]="principal.min"
+                [max]="principal.max"
+              />
+
+              <ul class="d-flex px-2 flex-row justify-content-between">
+                <!-- <li class="loan-range-big"></li> -->
+
+                <li
+                  class="loan-range-big"
+                  [ngClass]="{
+                    'loan-range-sm': i % 5 !== 0,
+                    'loan-range-big': i % 5 == 0,
+                    'd-none': i == 0
+                  }"
+                  *ngFor="let item of loanAmountScale; let i = index"
+                >
+                  <span class="label-span" *ngIf="i % 5 == 0">{{ item }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- tenure -->
+
+          <div class="loan-amount-div mt-5">
+            <div
+              class="loan-amount-text d-flex justify-content-between align-items-baseline px-4 mt-4 mb-3"
+            >
+              <h4 class="emi-calculator-h5">Tenure</h4>
+              <div>
+                <div class="loan-input">
+                  <input
+                    type="text"
+                    class="loan-input-1"
+                    (keypress)="keyPressNumbers($event)"
+                    name="tenure"
+                    autocomplete="off"
+                    formControlName="tenure"
+                    (change)="scaleChange('tenure', 1)"
+                    maxlength="3"
+                    value="1"
+                    size="4"
+                  />
+                  (Months)
+                </div>
+                <!-- <small
+                  *ngIf="emiForm.controls['tenure'].invalid && isSubmitted"
+                  class="form-element-hint"
+                  >*Enter valid tenure</small
+                > -->
+                <small
+                  *ngIf="
+                    emiForm.controls['tenure'].value < 12 &&
+                    isSubmitted &&
+                    loanType == 'Home Loan'
+                  "
+                  class="form-element-hint"
+                  >*Enter Tenure from 12 months to 30 years</small
+                >
+                <small
+                  *ngIf="
+                    emiForm.controls['tenure'].value < 12 &&
+                    isSubmitted &&
+                    loanType !== 'Home Loan'
+                  "
+                  class="form-element-hint"
+                  >*Enter Tenure from 12 months to 5 years</small
+                >
+              </div>
+            </div>
+            <div class="loan-amount-range d-none d-lg-block mb-4">
+              <Input
+                class="range pt-4 pb-3"
+                type="range"
+                [step]="tenure.step"
+                name="tenureRange"
+                ngDefaultControl
+                formControlName="tenureRange"
+                (change)="scaleChange('tenure', 0)"
+                [min]="tenure.min"
+                [max]="tenure.max"
+              />
+
+              <ul
+                class="d-flex px-2 flex-row justify-content-between"
+                *ngIf="loanType == 'Home Loan'"
+              >
+                <!-- <li class="loan-range-big"></li> -->
+                <li
+                  class="loan-range-big"
+                  [ngClass]="{
+                    'loan-range-sm': i % 5 !== 0,
+                    'loan-range-big': i % 5 == 0,
+                    'd-none': i == 0
+                  }"
+                  *ngFor="let item of tenureScale; let i = index"
+                >
+                  <span class="label-span" *ngIf="i % 5 == 0">{{ item }}</span>
+                </li>
+              </ul>
+              <ul
+                class="d-flex px-2 flex-row justify-content-between"
+                *ngIf="loanType !== 'Home Loan'"
+              >
+                <li
+                  class="loan-range-big"
+                  [ngClass]="{
+                    'loan-range-sm': i % 6 !== 0,
+                    'loan-range-big': i % 6 == 0
+                  }"
+                  *ngFor="let item of tenureScale; let i = index"
+                >
+                  <span class="label-span" *ngIf="i % 6 == 0">{{ item }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Interest Rate -->
+
+          <div class="loan-amount-div mt-5">
+            <div
+              class="loan-amount-text d-flex align-items-baseline justify-content-between justify-content-md-start px-4 mt-4 mb-2"
+            >
+              <h4 class="emi-calculator-h5 me-4">Interest Rate</h4>
+              <div class="loan-input">
+                <input
+                  type="text"
+                  class="loan-input-1"
+                  name="rate"
+                  autocomplete="off"
+                  formControlName="rate"
+                  maxlength="5"
+                  size="10"
+                />
+                %
+              </div>
+            </div>
+            <small
+              *ngIf="emiForm.controls['rate'].invalid && isSubmitted"
+              class="form-element-hint ms-4"
+              >*Please enter valid rate of interest.</small
+            >
+          </div>
+        </form>
+      </div>
+      <div align="center">
+        <button class="btn btn-1 my-5" (click)="calculate()">Calculate</button>
+      </div>
+
+      <div class="row mx-1" *ngIf="calculated">
+        <h4 class="emi-calculator-h5 ps-2">
+          Break-up of all total amount payable
+        </h4>
+        <div class="col-md-6 col-12">
+          <div class="loan-chart-div-1">
+            <div id="chart">
+              <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [colors]="chartOptions.colors"
+                [plotOptions]="chartOptions.plotOptions"
+                [labels]="chartOptions.labels"
+              ></apx-chart>
+            </div>
+            <!-- <div class="loan-chart"></div> -->
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="loan-chart-div-main">
+            <div class="loan-chart-div-2 my-md-0 my-4">
+              <div
+                class="loan-chart-content d-flex flex-row align-items-center my-3"
+              >
+                <!-- <div class="chart-box-1"></div> -->
+                <h6 class="loan-chart-h6">Monthly EMI &nbsp; :</h6>
+                <h6 class="loan-chart-h6-1">
+                  {{ floteMonthlyEMI | currency : "INR" : "symbol" : "3.0" }}
+                </h6>
+              </div>
+              <div
+                class="loan-chart-content d-flex flex-row align-items-center"
+              >
+                <!-- <div class="chart-box-1"></div> -->
+                <h6 class="loan-chart-h6">Loan Amount :</h6>
+                <h6 class="loan-chart-h6-1">
+                  {{
+                    emiForm.controls["principal"].value
+                      | currency : "INR" : "symbol" : "3.0"
+                  }}
+                </h6>
+              </div>
+
+              <div
+                class="loan-chart-content d-flex flex-row align-items-center my-3"
+              >
+                <!-- <div class="chart-box-1"></div> -->
+                <h6 class="loan-chart-h6">Total Interest &nbsp; :</h6>
+                <h6 class="loan-chart-h6-1">
+                  {{
+                    emiForm.controls["tenure"].value * floteMonthlyEMI -
+                      emiForm.controls["principal"].value
+                      | currency : "INR" : "symbol" : "3.0"
+                  }}
+                </h6>
+              </div>
+              <div
+                class="loan-chart-content d-flex flex-row align-items-center"
+              >
+                <!-- <div class="chart-box-1"></div> -->
+                <h6 class="loan-chart-h6">Total Amount &nbsp; :</h6>
+                <h6 class="loan-chart-h6-1">
+                  {{
+                    emiForm.controls["tenure"].value * floteMonthlyEMI
+                      | currency : "INR" : "symbol" : "3.0"
+                  }}
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="my-4 table-responsive-md" *ngIf="calculated">
+        <h4 class="emi-calculator-h5 mb-4">EMI Statement</h4>
+        <table class="table table-condensed text-center table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="table-dark">Year</th>
+              <th scope="col" class="table-warning">Principal Paid</th>
+              <th scope="col" class="table-success">Interest Paid</th>
+              <th scope="col" class="table-info">Total Payment</th>
+              <th scope="col" class="table-danger">Outstanding Loan</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let year of tableData; let j = index">
+            <tr
+              class="pointer"
+              data-bs-toggle="collapse"
+              [attr.href]="'#tr' + j"
+              *ngIf="year.principalPaid !== 0"
+            >
+              <td>
+                {{ year.year }}
+              </td>
+              <td>{{ year.principalPaid | currency : "INR" }}</td>
+              <td>{{ year.intrerstPaid | currency : "INR" }}</td>
+              <td>{{ year.totalPayment | currency : "INR" }}</td>
+              <td>
+                {{
+                  year.monthData[year.monthData.length - 1].balance
+                    | currency : "INR"
+                }}
+              </td>
+            </tr>
+            <tr
+              class="collapse table-secondary"
+              id="tr{{ j }}"
+              *ngFor="let month of year.monthData; let i = index"
+            >
+              <td>{{ month.month }}</td>
+              <td>{{ month.principalPaid | currency : "INR" }}</td>
+              <td>{{ month.intrerstPaid | currency : "INR" }}</td>
+              <td>{{ month.totalPayment | currency : "INR" }}</td>
+              <td>{{ month.balance | currency : "INR" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf="calculated" class="emi-calculator-h5">
+        Note: Calculations Shown here may change according to the bank norms and
+        other circumstances. so kindly consider this as a referance modal only.
+      </p>
+    </div>
+  </section>
+</section>

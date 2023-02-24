@@ -1,0 +1,185 @@
+<app-dsa-sidenav></app-dsa-sidenav>
+
+<div class="side-nav-div mb-5 justify-content-center">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-5">
+      <h5 class="page-crump">Bank Accounts</h5>
+      <button
+        class="offer-detail-button me-md-5"
+        data-bs-toggle="modal"
+        data-bs-target="#bankModal"
+      >
+        Add Bank
+      </button>
+    </div>
+    <div class="card me-4" *ngIf="bankList.length > 0 && !isLoading">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Bank Name</th>
+                <th scope="col">Bank Code</th>
+                <th scope="col">DSA Code</th>
+                <th scope="col">Product</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let bank of bankList; let i = index"
+                [ngClass]="{ 'last-row': i + 1 == bankList.length }"
+              >
+                <td class="t-text">{{ i + 1 }}</td>
+                <td class="t-text">{{ bank.bankName | titlecase }}</td>
+                <td class="t-text">{{ bank.bankCode | uppercase }}</td>
+                <td class="t-text">{{ bank.dsaCode | uppercase }}</td>
+                <td class="t-text">{{ bank.product | titlecase }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <app-loader *ngIf="isLoading"> </app-loader> -->
+
+  <app-empty
+    [title]="'No Banks Found'"
+    *ngIf="bankList.length == 0 && !isLoading"
+  ></app-empty>
+  <!-- <p>fasdfsdfsdfsd</p> -->
+</div>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="bankModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="margin-left: 43%" id="exampleModalLabel">
+          Add Bank
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="bankForm">
+          <div class="row my-3 mx-3">
+            <div class="col-md-6 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Bank Name</label>
+                  <select
+                    id="bankId"
+                    name="bankId"
+                    class="form-input-select"
+                    formControlName="bankId"
+                  >
+                    <option value="null">Select Bank</option>
+                    <option
+                      value="{{ bank.id }}"
+                      *ngFor="let bank of banks; let i = index"
+                    >
+                      {{ bank.name }}
+                    </option>
+                  </select>
+                  <small
+                    *ngIf="validateBank('bankId')"
+                    class="form-element-hint"
+                    >*Please Select Bank Name.</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Bank Code</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    maxlength="20"
+                    formControlName="bankCode"
+                  />
+                  <small
+                    *ngIf="validateBank('bankCode')"
+                    class="form-element-hint"
+                    >*Please Enter Valid Bank Code.</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label"
+                    >Loan Type </label
+                  >
+                  <select
+                    id="cars"
+                    name="cars"
+                    (change)="setCat()"
+                    class="form-input-select"
+                    formControlName="product"
+                  >
+                    <option value="null">Select Loan Type</option>
+
+                    <option
+                      value="{{ product.name }}"
+                      *ngFor="let product of products; let i = index"
+                    >
+                      {{ product.name }}
+                    </option>
+                  </select>
+
+                  <small *ngIf="validateBank('type')" class="form-element-hint"
+                    >*Please select Valid Product.</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">DSA CODE</label>
+                  <input
+                    type="text"
+                    class="form-input"
+                    maxlength="20"
+                    formControlName="dsaCode"
+                  />
+                  <small
+                    *ngIf="validateBank('dsaCode')"
+                    class="form-element-hint"
+                    >*Please Enter Valid DSA Code.</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="center" class="mb-3 mt-5">
+            <button class="offer-detail-button" (click)="addBank()">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

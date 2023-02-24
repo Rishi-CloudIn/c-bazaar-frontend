@@ -1,0 +1,294 @@
+<app-side-nav> </app-side-nav>
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <div class="profile-section">
+      <div class="profile-section-card">
+        <form id="login-form" [formGroup]="profileForm">
+          <div class="profile-title-div">
+            <h5 class="profile-title" *ngIf="!edit">Profile</h5>
+            <h5 class="profile-title" *ngIf="edit">Edit Profile</h5>
+
+            <div class="profile-edit" (click)="enableEdit()">
+              <div class="profile-edit-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Edit.svg"
+                  class="porfile-edit-icon"
+                  width="16px"
+                />
+              </div>
+              <h6 class="profile-edit-h6">Edit</h6>
+            </div>
+          </div>
+
+          <div class="profile-form-div">
+            <div class="profile-form-head">
+              <div class="profile-form-head-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Personal Details.svg"
+                  class="profile-form-head-img"
+                  width="25px"
+                />
+              </div>
+              <h4 class="profile-form-head-h4">Personal Details</h4>
+            </div>
+
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="profile-form-img-div">
+                    <img src="{{ dpUrl }}" class="profile-form-img" />
+                    <a
+                      class="image-upload wrapper"
+                      id="file"
+                      (click)="hiddenfileinput.click()"
+                    >
+                      <img
+                        src="../../../../assets/img/Profile/Camera.svg"
+                        class="profile-form-img-icon firstDiv"
+                      />
+                      <input
+                        #hiddenfileinput
+                        (change)="onChange($event)"
+                        accept="image/png, image/jpeg, image/jpg, image/webp"
+                        type="file"
+                      />
+                    </a>
+                  </div>
+                  <div class="form-input-div" *ngIf="onBoarded">
+                    <label class="form-input-label">PAN CARD</label>
+                    <input
+                      type="text"
+                      [value]="personalData.panCard"
+                      class="form-input"
+                      disabled
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div" *ngIf="!onBoarded">
+                    <div align="center" class="my-3">
+                      <button
+                        class="profile-onboard-button"
+                        routerLink="/onboard"
+                      >
+                        Complete Onboard
+                      </button>
+                    </div>
+                  </div>
+                  <div class="form-input-div">
+                    <label class="form-input-label">FULL NAME</label>
+                    <div class="form-input-group d-flex flex-column">
+                      <!-- <select name="name_with_initials">
+                        <option selected>Mr.</option>
+                        <option>Mrs.</option>
+                        <option>Miss.</option>
+                      </select> -->
+                      <input
+                        id="name"
+                        type="text"
+                        formControlName="name"
+                        class="form-input"
+                        [(ngModel)]="name"
+                        [readonly]="!edit"
+                      />
+                      <small
+                        *ngIf="validateLogin('name')"
+                        class="form-element-hint"
+                        >*Please enter valid Name.</small
+                      >
+                    </div>
+                  </div>
+
+                  <div class="form-input-div" *ngIf="onBoarded">
+                    <label class="form-input-label">DATE OF BIRTH</label>
+                    <input
+                      type="text"
+                      class="form-input form-input-date"
+                      [value]="personalData.dateOfBirth"
+                      disabled
+                    />
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">EMAIL ID</label>
+
+                    <input
+                      type="text"
+                      [(ngModel)]="email"
+                      [readonly]="!edit"
+                      formControlName="email"
+                      class="form-input"
+                    />
+                    <small
+                      *ngIf="validateLogin('email')"
+                      class="form-element-hint"
+                      >*Please enter valid Email ID.</small
+                    >
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label">MOBILE NUMBER</label>
+                    <input
+                      type="text"
+                      [value]="personalData.mobileNumber"
+                      class="form-input"
+                      disabled
+                    />
+                  </div>
+
+                  <div class="form-input-div d-flex" *ngIf="onBoarded">
+                    <label class="form-input-label">PINCODE</label>
+                    <input
+                      type="text"
+                      class="form-input"
+                      formControlName="pincode"
+                      [(ngModel)]="pincode"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateLogin('pincode')"
+                      class="form-element-hint"
+                      >*Please enter valid Pincode.</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-form-div">
+            <div class="profile-form-head">
+              <div class="profile-form-head-img-div">
+                <img
+                  src="../../../../assets/img/Profile/Professional Details.svg"
+                  class="profile-form-head-img"
+                />
+              </div>
+              <h4 class="profile-form-head-h4">Professional Details</h4>
+            </div>
+
+            <div class="row profile-form-content-1">
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label">OCCUPATION TYPE</label>
+                    <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      [ngModelOptions]="{ standalone: true }"
+                      [(ngModel)]="type"
+                      [disabled]="!edit"
+                    >
+                      <option value="1">Salaried</option>
+                      <option value="2">Self - Business</option>
+                    </select>
+                  </div>
+
+                  <div class="form-input-div">
+                    <label class="form-input-label" *ngIf="type == '1'"
+                      >MONTHLY INCOME</label
+                    >
+                    <label class="form-input-label" *ngIf="type == '2'"
+                      >ANNUAL TURNOVER</label
+                    >
+
+                    <input
+                      type="text"
+                      class="form-input"
+                      formControlName="income"
+                      maxlength="9"
+                      (keypress)="keyPressNumbers($event)"
+                      [(ngModel)]="amount"
+                      [readonly]="!edit"
+                    />
+                    <small
+                      *ngIf="validateLogin('income') && type == '1'"
+                      class="form-element-hint"
+                      >*Please enter valid Income.</small
+                    >
+                    <small
+                      *ngIf="validateLogin('income') && type == '2'"
+                      class="form-element-hint"
+                      >*Please enter valid Turnover.</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-12">
+                <div class="profile-form-content">
+                  <div class="form-input-div">
+                    <label class="form-input-label" *ngIf="type == '1'"
+                      >ORGANIZATION NAME</label
+                    >
+                    <label class="form-input-label" *ngIf="type == '2'"
+                      >BUSINESS NAME</label
+                    >
+                    <input
+                      type="text"
+                      class="form-input"
+                      list="datalistOptions"
+                      formControlName="organizationId"
+                      maxlength="50"
+                      [(ngModel)]="organization"
+                      (ngModelChange)="
+                        getOrg(
+                          this.profileForm.controls['organizationId'].value
+                        )
+                      "
+                      [readonly]="!edit"
+                    />
+                    <datalist id="datalistOptions">
+                      <option
+                        value="{{ org.name }}"
+                        *ngFor="let org of orgList; let i = index"
+                      ></option>
+                    </datalist>
+                    <!-- <select
+                      id="cars"
+                      name="cars"
+                      class="form-input-select"
+                      formControlName="organizationId"
+                      [(ngModel)]="organization"
+                      [ngClass]="{
+                        disable: !edit
+                      }"
+                    >
+                      <option selected>
+                        {{ professionalData.organizationName }}
+                      </option>
+                      <option
+                        value="{{ item.name }}"
+                        *ngFor="let item of orgList; let i = index"
+                      >
+                        {{ item.name }}
+                      </option>
+                    </select> -->
+                    <small
+                      *ngIf="validateLogin('organizationId') && type == '2'"
+                      class="form-element-hint"
+                      >*Please enter valid Business Name.</small
+                    >
+                    <small
+                      *ngIf="validateLogin('organizationId') && type == '1'"
+                      class="form-element-hint"
+                      >*Please enter valid Organization Name.</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button *ngIf="edit" (click)="submit()" class="profile-submit-button">
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

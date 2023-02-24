@@ -1,0 +1,222 @@
+<app-side-nav> </app-side-nav>
+<div class="side-nav-div" *ngIf="!isLoading">
+  <div class="main-factory">
+    <section class="cibil-history-section">
+      <div class="cibil-history-dark-card">
+        <div class="cibil-history-btn-group">
+          <div class="row justify-content-around">
+            <div
+              class="col-auto"
+              *ngFor="let factor of factorsList; let i = index"
+            >
+              <a
+                (click)="selectFactor(factor.value)"
+                class="cibil-history-btn"
+                [ngClass]="{
+                  'cibil-history-btn-active': factor.value === selectedFactor
+                }"
+                >{{ factor.name | titlecase }}</a
+              >
+            </div>
+          </div>
+
+          <!-- <a href="#" class="cibil-history-btn">Credit Card Utilization</a>
+          <a href="#" class="cibil-history-btn">Credit History</a>
+          <a href="#" class="cibil-history-btn">Total Accounts</a>
+          <a href="#" class="cibil-history-btn">Credit Enquiries</a> -->
+        </div>
+
+        <div class="cibil-history-card">
+          <div class="col-8">
+            <div class="cibil-history-div-1">
+              <div class="cibil-history-img-div">
+                <img
+                  src="{{ cardData.icon }}"
+                  width="25px"
+                  class="cibil-history-img"
+                />
+              </div>
+              <div class="cibil-history-content">
+                <h5 class="cibil-history-h5">
+                  {{ cardData.title | titlecase }}
+                </h5>
+                <h6
+                  class="cibil-history-h6"
+                  [ngClass]="{
+                    'imp-bg-r': cardData.valueImpact === 'low',
+                    'imp-bg-y': cardData.valueImpact === 'medium'
+                  }"
+                >
+                  {{ cardData.valueImpact | titlecase }} Impact
+                </h6>
+              </div>
+            </div>
+
+            <div class="cibil-history-div-2">
+              <h4 class="cibil-history-h4">
+                {{ cardData.description[0].title }}
+              </h4>
+              <h2 class="cibil-history-h2">
+                {{ cardData.description[0].value }}
+              </h2>
+            </div>
+          </div>
+
+          <div class="col-4 cibil-history-div-3">
+            <div>
+              <div class="cibil-history-inner-div">
+                <h3 class="cibil-history-h3">{{ cardData.value }}</h3>
+                <h4 class="cibil-history-h4-1">{{ cardData.valueTitle }}</h4>
+              </div>
+
+              <div
+                class="cibil-history-inner-div-1"
+                *ngFor="let item of cardData.valueData; let i = index"
+              >
+                <h3 class="cibil-history-h3" *ngIf="i == 0">
+                  {{ item.value }}
+                </h3>
+                <h4 class="cibil-history-h4-1" *ngIf="i == 0">
+                  {{ item.title }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="cibil-factor-head-section my-5"
+      *ngIf="ccData.bankData.length !== 0"
+    >
+      <h1>{{ ccData.title }}</h1>
+      <div
+        class="cibil-factor-card"
+        *ngFor="let item of ccData.bankData; let i = index"
+      >
+        <div class="cibil-factor-bank">
+          <div class="cibil-factor-img-div">
+            <img src="{{ item.bankIcon }}" class="cibil-factor-img" />
+          </div>
+          <div>
+            <h5 class="cibil-factor-h5">{{ item.bankName }}</h5>
+            <h6 class="cibil-factor-h6">{{ ccData.title }}</h6>
+          </div>
+        </div>
+
+        <p class="cibil-factor-p">
+          Credit Card on :<span class="cibil-factor-span"> 31 Jul, 2022</span>
+        </p>
+
+        <div class="cibil-factor-div">
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">Account Number</h6>
+              <h5 class="cibil-factor-h5-1">{{ item.accountNumber }}</h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">{{ item.valueDescription }}</h6>
+              <h5 class="cibil-factor-h5-1">{{ item.value }}</h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">status</h6>
+              <p class="cibil-factor-p-1">Active</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="cibil-factor-head-section my-5"
+      *ngIf="loanData.bankData.length !== 0"
+    >
+      <h1>{{ loanData.title }}</h1>
+      <div
+        class="cibil-factor-card"
+        *ngFor="let item of loanData.bankData; let i = index"
+      >
+        <div class="cibil-factor-bank">
+          <div class="cibil-factor-img-div">
+            <img src="{{ item.bankIcon }}" class="cibil-factor-img" />
+          </div>
+          <div>
+            <h5 class="cibil-factor-h5">{{ item.bankName }}</h5>
+            <h6 class="cibil-factor-h6">{{ loanData.title }}</h6>
+          </div>
+        </div>
+
+        <p class="cibil-factor-p">
+          Credit Card on :<span class="cibil-factor-span"> 07 Sep, 2022</span>
+        </p>
+
+        <div class="cibil-factor-div">
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">Account Number</h6>
+              <h5 class="cibil-factor-h5-1">{{ item.accountNumber }}</h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">{{ item.valueDescription }}</h6>
+              <h5 class="cibil-factor-h5-1">{{ item.value }}</h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">status</h6>
+              <p class="cibil-factor-p-1">Active</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="cibil-factor-head-section my-5"
+      *ngIf="detailsData.bankData.length !== 0"
+    >
+      <h1>{{ detailsData.title }}</h1>
+      <div
+        class="cibil-factor-card"
+        *ngFor="let item of detailsData.bankData; let i = index"
+      >
+        <!-- <p class="cibil-factor-p">
+      Credit Card on :<span class="cibil-factor-span"> 07 Sep, 2022</span>
+    </p> -->
+
+        <div class="cibil-factor-div" style="top: 35%">
+          <div class="col-3">
+            <div class="cibil-factor-bank">
+              <div class="cibil-factor-img-div">
+                <img src="{{ item.bankIcon }}" class="cibil-factor-img" />
+              </div>
+              <div>
+                <h5 class="cibil-factor-h5">{{ item.bankName }}</h5>
+                <h6 class="cibil-factor-h6">{{ loanData.title }}</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">{{ item.valueDescription }}</h6>
+              <h5 class="cibil-factor-h5-1">{{ item.value }}</h5>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="cibil-factor-inner-div">
+              <h6 class="cibil-factor-h6-1">status</h6>
+              <p class="cibil-factor-p-1">Active</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

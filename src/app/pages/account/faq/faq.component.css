@@ -1,0 +1,137 @@
+/* -------------------------------- faq section ---------------------------------------- */
+
+.faq-card {
+  cursor: pointer;
+  width: 92%;
+  height: auto;
+  opacity: 0.7 !important;
+  border: solid 1px #b3b3b3 !important;
+  background-color: #fafafa !important;
+  border-radius: 10px !important;
+  padding: 10px 10px;
+  margin: 20px auto;
+}
+
+/* line */
+
+.faq-plus-icon {
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  height: auto;
+  position: relative;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.faq-bar {
+  width: 4px;
+  height: 30px;
+  background-color: #20bf55;
+  position: absolute;
+  bottom: 45%;
+  left: 50%;
+  transform: translateY(55%);
+}
+
+.faq-plus-icon-clicked .faq-bar {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translateX(-35%);
+  width: 30px;
+  height: 4px;
+  background-color: #20bf55;
+}
+
+.faq-bar-1 {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translateX(-29%);
+  width: 30px;
+  height: 4px;
+  background-color: #20bf55;
+}
+
+.faq-h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.faq-content-p {
+  margin: 20px auto 0px auto;
+}
+
+.faq-p {
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 3px;
+}
+
+.faq-content-p-active {
+  height: 100%;
+  overflow: hidden;
+  -moz-animation: slide 1s ease 0s forwards;
+  -webkit-animation: slide 1s ease 0s forwards;
+  -o-animation: slide 1s ease 0s forwards;
+  -ms-animation: slide 1s ease 0s forwards;
+  animation: slide 1s ease 0s forwards;
+}
+
+@keyframes slide {
+  from {
+    height: 40px;
+  }
+  to {
+    height: 0px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .faq-card {
+    width: 90%;
+    height: auto;
+    opacity: 0.7 !important;
+    border: solid 1px #b3b3b3 !important;
+    background-color: #fafafa !important;
+    border-radius: 10px !important;
+    padding: 4px 10px;
+    margin: 20px auto;
+  }
+
+  .faq-plus-icon {
+    width: 100px;
+    height: 100px;
+    height: auto;
+    position: relative;
+    top: 40%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-h3 {
+    font-size: small;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .faq-content-p {
+    margin: 7px auto 0px auto;
+  }
+
+  .faq-p {
+    font-size: small;
+    font-weight: 400;
+    margin-bottom: 3px;
+  }
+
+  .faq-content-p-active {
+    display: none;
+  }
+}
+
+.cus-col {
+  cursor: pointer;
+}

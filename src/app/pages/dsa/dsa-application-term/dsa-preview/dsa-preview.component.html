@@ -1,0 +1,98 @@
+<app-top-nav-dsa></app-top-nav-dsa>
+<app-steps-side-nav
+  [id]="id"
+  [cibilId]="cibilId"
+  [currentStep]="4"
+></app-steps-side-nav>
+
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 marg-mob">
+        <div class="title my-5">{{ data.type }}</div>
+      </div>
+      <div class="col-12 col-sm-10 marg-mob">
+        <h4 class="application-sub-title mb-3">{{ data.title }}</h4>
+        <p class="label-text">
+          {{ data.description }}
+        </p>
+      </div>
+      <div
+        class="col-12 col-sm-10 marg-mob mt-4"
+        *ngFor="let item of previewData; let i = index"
+      >
+        <h4 class="preview-title mb-3">{{ item.key }}</h4>
+        <div class="container">
+          <div class="row justify-content-between preview-container">
+            <div
+              class="col-12 col-sm-5"
+              [ngClass]="{
+                'col-sm-10 ': detail.type == 'title'
+              }"
+              *ngFor="let detail of item.value; let i = index"
+            >
+            <div class="row my-2">
+              <div class="col-12">
+                <div
+                  class="my-4 sub-title"
+                  *ngIf="detail.type == 'title'"
+                  align="center"
+                >
+                  {{ detail.key }}
+                </div>
+              </div>
+              <div class="col-6 value" *ngIf="detail.type !== 'title'">
+                {{ detail.key | titlecase }}
+              </div>
+              <div class="col-6 key" *ngIf="detail.type !== 'title'">
+                {{ detail.value }}
+              </div>
+            </div>
+              <!-- <div class="">
+                <div
+                  class="my-3 sub-title"
+                  *ngIf="detail.type == 'title'"
+                  align="center"
+                >
+                  {{ detail.key }}
+                </div>
+                <p *ngIf="detail.type !== 'title'" class="key">
+                  {{ detail.key | titlecase }}
+                  <span class="value ms-1">{{ detail.value }}</span>
+                </p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-sm-10 marg-mob mt-4">
+        <h4 class="preview-title mb-3">Verify & Submit</h4>
+
+        <div class="d-flex align-items-center mt-3">
+          <div class="form-group ms-4">
+            <input type="checkbox" id="html" [(ngModel)]="termAccepted" />
+            <label class="application-p" for="html"
+              >I authorize that the details furnished were True</label
+            >
+          </div>
+        </div>
+        <small *ngIf="!termAccepted && isSubmitted" class="form-element-hint"
+          >*Please Accept terms to continue.</small
+        >
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-sm-10">
+        <a class="btn btn-1 float-start px-5" (click)="back()">Back </a>
+        <!-- <a
+          class="btn btn-1 float-end px-5"
+          routerLink="/offer/application/details/{{ id }}"
+          >Next
+        </a> -->
+        <a class="btn btn-1 float-end px-5" (click)="submit()">Next </a>
+      </div>
+    </div>
+  </div>
+</section>

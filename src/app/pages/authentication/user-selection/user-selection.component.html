@@ -1,0 +1,67 @@
+<section class="bg-section container">
+  <div class="row auth-section">
+    <div class="col-lg-5 col-12 container-div d-lg-block d-none" align="center">
+      <div class="auth-left">
+        <div class="d-lg-block d-none">
+          <img
+            class="auth-left-img"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="200px"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-12 container-div">
+      <div class="container">
+        <div align="center" class="d-lg-none">
+          <img
+            class="mb-5"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="40%"
+          />
+        </div>
+        <div class="card auth-card" align="left">
+          <div class="card-body p-5">
+            <div class="container px-3 py-4">
+              <h5 class="title">Welcome Back</h5>
+              <p class="title-description mb-2">How do you like to continue?</p>
+              <h5 class="title sec-title mb-4">As a,</h5>
+
+              <div class="d-flex justify-content-center align-items-center">
+                <div
+                  class="d-flex flex-column align-items-centerustify-content-center user-div"
+                  (click)="redirectClient()"
+                >
+                  <img
+                    src="../../../../assets/img/Authentication/User.svg"
+                    alt=""
+                    class="user-selection-img"
+                  />
+                  <div align="center">
+                    <h6 class="mt-3 user-text">USER</h6>
+                  </div>
+                </div>
+                <h5 class="or-div mx-3 mx-lg-5">OR</h5>
+                <div
+                  class="d-flex flex-column align-items-centerustify-content-center user-div"
+                  (click)="redirectDsa()"
+                >
+                  <img
+                    src="../../../../assets/img/Authentication/DSA_FA.svg"
+                    alt=""
+                    class="user-selection-img"
+                  />
+                  <div align="center">
+                    <h6 class="mt-3 user-text">DSA/FO</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

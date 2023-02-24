@@ -1,0 +1,272 @@
+<header class="container-fluid">
+  <div class="row">
+    <div class="nav-section">
+      <div class="nav-logo-div">
+        <img
+          src="../../../assets/img/logo-nav.svg"
+          alt="logo"
+          class="nav-logo"
+          routerLink="/fo/dashboard"
+        />
+        <div class="nav-button-div">
+          <div class="nav-not-img-div me-4">
+            <img
+              src="../../../../assets/img/nav/notification.svg"
+              alt="img"
+              class="nav-not-img"
+              (click)="showNotification()"
+              (focusout)="hideNotification()"
+              #toggleButton
+            />
+          </div>
+          <div class="not-drop" (onblur)="hideNotification()" #menu>
+            <app-empty
+              *ngIf="notificationList.length == 0"
+              class="mb-5"
+              [title]="'No Notification Found'"
+            ></app-empty>
+            <ul
+              class="not-ul p-0 m-0"
+              *ngIf="notificationList.length !== 0"
+              #menu
+            >
+              <li
+                #menu
+                *ngFor="let notification of notificationList; let i = index"
+              >
+                <a>{{ notification.message }} <br /> </a>
+                <span class="float-end createdAt">
+                  <small>
+                    {{ notification.createdAt }}
+                  </small>
+                </span>
+                <div class="u-line"></div>
+              </li>
+            </ul>
+          </div>
+          <!-- <button class="nav-btn d-flex align-items-center">Log Out</button> -->
+          <!-- </div> -->
+        </div>
+        <!-- <img
+          src="
+        ../../../../../../assets/img/nav/notification.svg"
+          alt=""
+          width="20px"
+        /> -->
+      </div>
+
+      <div class="nav-button-div" (click)="logout2()">
+        <button class="nav-btn">Log Out</button>
+      </div>
+
+      <div class="hamburger-menu" (click)="hamToggle()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="nav-ul-div">
+        <div>
+          <ul class="nav-ul" id="nav-ul">
+            <li
+              class="nav-li mt-3"
+              routerLink="/fo/dashboard"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav_c_report.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Dashboard</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              routerLink="/fo/applications"
+              routerLinkActive="nav-active"
+            >
+              <a>
+                <img
+                  src="../../../assets/img/nav/nav-my-app.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Document Requests</p>
+              </a>
+            </li>
+            <li
+              class="nav-li"
+              data-bs-toggle="modal"
+              data-bs-target="#passwordModal"
+              (click)="resetPasswordForm()"
+            >
+              <a>
+                <img
+                  src="../../../../assets/img/nav/changePassword.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Change Password</p>
+              </a>
+            </li>
+            <li class="nav-li mb-3" (click)="logout2()">
+              <a>
+                <img
+                  src="../../../../assets/img/nav/logout.svg"
+                  class="nav-icon"
+                />
+                <p class="nav-p">Logout</p>
+              </a>
+            </li>
+
+            <!-- <div class="quick-content-div">
+              <div class="quick-card">
+                <h6 class="quick-h6">Get a quick call with C-Bazaar</h6>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">9361087223</p>
+                </div>
+                <div class="quick-card-1">
+                  <img src="./Images/gearGreen.svg" class="quick-icon" />
+                  <p class="quick-p">abc@gmail.com</p>
+                </div>
+              </div>
+            </div> -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div
+  class="modal fade"
+  id="passwordModal"
+  data-bs-backdrop="static"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="fs-6 change my-3" id="exampleModalLabel">Change Password</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          (click)="unCheck()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="passwordForm">
+          <div class="row my-3 mx-3">
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="oldPassword"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('oldPassword')"
+                    class="form-element-hint mt-2"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">New Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="password"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('password')"
+                    class="form-element-hint mt-2"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8.</small
+                  >
+                  <small
+                    *ngIf="
+                      !validatePassword('password') &&
+                      passwordForm.controls['oldPassword'].value ==
+                        passwordForm.controls['password'].value &&
+                      passwordForm.controls['oldPassword'].value !== ''
+                    "
+                    class="form-element-hint mt-2"
+                    >*New password must differ from old password.</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-12 my-1">
+              <div class="profile-form-content">
+                <div class="form-input-div">
+                  <label class="form-input-label">Confirm Password</label>
+                  <input
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    class="form-input"
+                    maxlength="30"
+                    (keyup)="enterPassword()"
+                    formControlName="cPassword"
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <small
+                    *ngIf="validatePassword('cPassword')"
+                    class="form-element-hint mt-2"
+                    >*Password must match with new password.</small
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div align="center" class="mb-3 mt-5">
+            <button class="offer-detail-button" (click)="changePwd()">
+              Change
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

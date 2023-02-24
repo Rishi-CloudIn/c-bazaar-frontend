@@ -1,0 +1,539 @@
+<section class="bg-section container">
+  <div class="row auth-section">
+    <div class="col-lg-5 col-md-12 col-sm-12" align="center">
+      <div class="auth-left">
+        <div class="mob-none">
+          <img
+            class="auth-left-img"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="200px"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-md-12 col-sm-12">
+      <div class="container">
+        <div class="card auth-card" align="left">
+          <div class="card-body p-5">
+            <div class="container px-4 py-4">
+              <h5 class="title">Create Account as DSA</h5>
+              <p class="title-description">
+                Already have an account?
+                <span (click)="login()"> Signin</span>
+              </p>
+              <h4 class="sub-title mb-4 mt-2">Signup</h4>
+              <form
+                id="login-form"
+                method="POST"
+                (ngSubmit)="register()"
+                [formGroup]="registerForm"
+              >
+                <div class="form-input">
+                  <input
+                    id="name"
+                    class="form-element-input cCase"
+                    formControlName="name"
+                    type="text"
+                    [maxLength]="30"
+                    placeholder="Enter your Full Name"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Full Name (as per PAN)*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('name')"
+                    class="form-element-hint"
+                    >*Please enter valid name</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="mobile"
+                    class="form-element-input"
+                    type="tel"
+                    (keypress)="keyPressNumbers($event)"
+                    formControlName="number"
+                    [maxLength]="10"
+                    placeholder="Enter your Phone number"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+
+                  <label class="form-element-label" for="number"
+                    >Phone Number*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('number')"
+                    class="form-element-hint"
+                    >*Please enter valid Mobile Number.</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="name"
+                    class="form-element-input lCase"
+                    type="input"
+                    [maxLength]="35"
+                    formControlName="email"
+                    placeholder="Enter your Mail ID"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name">Email ID*</label>
+                  <small
+                    *ngIf="validateRegister('email')"
+                    class="form-element-hint"
+                    >*Please enter valid Mail ID</small
+                  >
+                </div>
+                <div class="form-input pre-radio">
+                  <input
+                    id="date"
+                    class="form-element-input picker"
+                    type="date"
+                    max="{{ maxDate }}"
+                    formControlName="dob"
+                    placeholder="Enter your DOB"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name">DOB*</label>
+                  <small
+                    *ngIf="validateRegister('dob')"
+                    class="form-element-hint"
+                    >*Please select valid DOB</small
+                  >
+                </div>
+                <label class="mb-1 radio-title mt-3" for="name">Gender*</label>
+                <div class="d-flex my-2">
+                  <input
+                    type="radio"
+                    [defaultChecked]="true"
+                    formControlName="gender"
+                    id="male"
+                    name="gender"
+                    value="1"
+                  />
+                  <label for="male" class="mx-2">Male</label><br />
+                  <input
+                    type="radio"
+                    formControlName="gender"
+                    id="female"
+                    name="gender"
+                    value="2"
+                  />
+                  <label for="female" class="mx-2">Female</label><br />
+                  <input
+                    type="radio"
+                    formControlName="gender"
+                    id="others"
+                    name="gender"
+                    value="3"
+                  />
+                  <label for="others" class="mx-2">Others</label><br />
+                </div>
+
+                <div class="form-input mt-5">
+                  <input
+                    id="addressLine"
+                    class="form-element-input cCase"
+                    formControlName="addressLine"
+                    type="text"
+                    [maxLength]="50"
+                    placeholder="Enter your addressLine"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Address Line*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('addressLine')"
+                    class="form-element-hint"
+                    >*Please enter valid Address Line</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="locality"
+                    class="form-element-input cCase"
+                    formControlName="locality"
+                    type="text"
+                    [maxLength]="50"
+                    placeholder="Enter your Locality"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="locality"
+                    >Locality*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('locality')"
+                    class="form-element-hint"
+                    >*Please enter valid locality</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="locality"
+                    class="form-element-input cCase"
+                    formControlName="landmark"
+                    type="text"
+                    [maxLength]="50"
+                    placeholder="Enter your Landmark"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="landmark"
+                    >Landmark*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('landmark')"
+                    class="form-element-hint"
+                    >*Please enter valid Landmark</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input cCase"
+                    formControlName="city"
+                    type="text"
+                    [maxLength]="30"
+                    placeholder="Enter your City"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="locality">City*</label>
+                  <small
+                    *ngIf="validateRegister('city')"
+                    class="form-element-hint"
+                    >*Please enter valid city</small
+                  >
+                </div>
+                <div class="form-input mt-4">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="states"
+                    bindLabel="name"
+                    bindValue="value"
+                    [searchable]="true"
+                    formControlName="state"
+                    placeholder="Select State"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <small
+                    *ngIf="validateRegister('state')"
+                    class="form-element-hint"
+                    >*Please select State</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="pincode"
+                    type="text"
+                    [maxLength]="6"
+                    placeholder="Enter your Pincode"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="locality"
+                    >Pincode*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('pincode')"
+                    class="form-element-hint"
+                    >*Please enter valid pincode</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="pan"
+                    type="text"
+                    (input)="changeTextToUppercase('pan')"
+                    [maxLength]="10"
+                    placeholder="Enter your PAN Number"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="locality"
+                    >PAN Number*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('pan')"
+                    class="form-element-hint"
+                    >*Please enter valid PAN Number</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="dsa"
+                    type="text"
+                    [maxLength]="15"
+                    placeholder="Enter your DSA Code"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="dsa">DSA Code*</label>
+                  <small
+                    *ngIf="validateRegister('dsa')"
+                    class="form-element-hint"
+                    >*Please enter valid DSA Code</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="password"
+                    class="form-element-input"
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    formControlName="password"
+                    autocomplete="off"
+                    [maxLength]="20"
+                    placeholder="Enter your Password"
+                    required
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name">Password*</label>
+                  <small
+                    *ngIf="validateRegister('password')"
+                    class="form-element-hint"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="password"
+                    class="form-element-input"
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    formControlName="cPassword"
+                    autocomplete="off"
+                    [maxLength]="20"
+                    placeholder="Enter your Password"
+                    required
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Confirm Password*</label
+                  >
+                  <small
+                    *ngIf="
+                      registerForm.controls['password'].value !==
+                        registerForm.controls['cPassword'].value &&
+                      registerForm.controls['cPassword'].value !== ''
+                    "
+                    class="form-element-hint"
+                    >*Confirm password must match with password</small
+                  >
+                </div>
+
+                <h6 class="sub-title mb-4 my-2">Work Details</h6>
+
+                <div class="form-input mt-4">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="profiles"
+                    bindLabel="name"
+                    bindValue="value"
+                    [searchable]="true"
+                    formControlName="profile"
+                    placeholder="Select Profile"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <small
+                    *ngIf="validateRegister('profile')"
+                    class="form-element-hint"
+                    >*Please select Profile</small
+                  >
+                </div>
+                <div class="form-input mt-4">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="setups"
+                    bindLabel="name"
+                    bindValue="value"
+                    [searchable]="true"
+                    formControlName="setup"
+                    placeholder="Select setup"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <small
+                    *ngIf="validateRegister('setup')"
+                    class="form-element-hint"
+                    >*Please select Setup</small
+                  >
+                </div>
+                <div class="form-input mt-4">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="products"
+                    bindLabel="name"
+                    (change)="setCat($event)"
+                    bindValue="type"
+                    #selectProd
+                    [searchable]="true"
+                    formControlName="product"
+                    placeholder="Select Product"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <small
+                    *ngIf="validateRegister('product')"
+                    class="form-element-hint"
+                    >*Please Select Product</small
+                  >
+                </div>
+                <div class="form-input mt-4">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="sources"
+                    bindLabel="name"
+                    bindValue="value"
+                    [searchable]="true"
+                    formControlName="source"
+                    placeholder="Select Sourcing Model"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <small
+                    *ngIf="validateRegister('source')"
+                    class="form-element-hint"
+                    >*Please select source</small
+                  >
+                </div>
+                <h6 class="sub-title mb-4 my-2">Account Details</h6>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="accountName"
+                    type="text"
+                    [maxLength]="30"
+                    placeholder="Enter Account Holder Name"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="accountName"
+                    >Account Holder Name*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('accountName')"
+                    class="form-element-hint"
+                    >*Please enter valid Name</small
+                  >
+                </div>
+                <div class="form-input">
+                  <ng-select
+                    class="form__field form__select"
+                    [items]="banks"
+                    bindLabel="name"
+                    bindValue="id"
+                    [searchable]="true"
+                    formControlName="accountBank"
+                    placeholder="Select Bank"
+                  >
+                  </ng-select>
+                  <div class="form-element-bar"></div>
+                  <!-- <label class="form-element-label" for="accountBank"
+                    >Bank Name*</label
+                  > -->
+                  <small
+                    *ngIf="validateRegister('accountBank')"
+                    class="form-element-hint"
+                    >*Please enter valid Bank Name</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="accountBranch"
+                    type="text"
+                    [maxLength]="25"
+                    placeholder="Enter Branch"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="accountBranch"
+                    >Branch Name*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('accountBranch')"
+                    class="form-element-hint"
+                    >*Please enter valid Branch Name</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="city"
+                    class="form-element-input"
+                    formControlName="accountNumber"
+                    type="text"
+                    [maxLength]="16"
+                    placeholder="Enter your Account Number"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="accountNumber"
+                    >Account Number*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('accountNumber')"
+                    class="form-element-hint"
+                    >*Please enter valid Account Number</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="ifsc"
+                    class="form-element-input"
+                    formControlName="ifsc"
+                    type="text"
+                    [maxLength]="11"
+                    placeholder="Enter your IFSC Code"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="ifsc"
+                    >IFSC Code*</label
+                  >
+                  <small
+                    *ngIf="validateRegister('ifsc')"
+                    class="form-element-hint"
+                    >*Please enter valid IFSC Code</small
+                  >
+                </div>
+              </form>
+              <div align="center">
+                <a class="btn btn-1" (click)="register()">Sign up</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

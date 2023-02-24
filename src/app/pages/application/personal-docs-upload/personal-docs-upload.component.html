@@ -1,0 +1,3080 @@
+<app-top-nav></app-top-nav>
+<app-steps-side-nav [id]="id" [currentStep]="3"></app-steps-side-nav>
+<!-- d-none d-md-block -->
+<section class="side-nav-div mb-5" *ngIf="!isLoading">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 marg-mob">
+        <div align="center" class="title mt-5">{{ data.type }}</div>
+      </div>
+      <div class="col-12 col-sm-10 mt-5">
+        <h4 class="application-sub-title mb-3">{{ data.title }}</h4>
+        <p class="label-text">
+          {{ data.description }}
+        </p>
+        <h4 class="application-sub-title mb-1 mt-5">Personal Information</h4>
+        <div class="fs-div">
+          <h4 class="form-sub-title mb-3 mt-4">Upload Photo*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'photo')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput.files, 'photo')"
+                    #fileInput
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted && this.docsUploadForm.controls['photo'].invalid
+                }"
+              >
+                Passport size photo is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['photo'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["photo"].value }}
+            </p>
+            <img
+              (click)="removeFile('photo')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div">
+          <h4 class="form-sub-title mb-3 mt-4">
+            {{
+              type !== "Education Loan"
+                ? "Upload Pan Card*"
+                : "Upload Pan Card (Optional)"
+            }}
+          </h4>
+
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'pan')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput2.files, 'pan')"
+                    #fileInput2
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput2.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted && this.docsUploadForm.controls['pan'].invalid
+                }"
+              >
+                Pan card is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['pan'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["pan"].value }}
+            </p>
+            <img
+              (click)="removeFile('pan')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Education Loan'">
+          <h4 class="form-sub-title mb-3 mt-4">Upload Nominee Pan Card*</h4>
+
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'nomineePan')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput30.files, 'nomineePan')"
+                    #fileInput30
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput30.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['nomineePan'].invalid
+                }"
+              >
+                Pan card is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="priview d-flex align-items-center mt-3"
+          *ngIf="this.docsUploadForm.controls['nomineePan'].value !== ''"
+        >
+          <img
+            src="../../../../assets/img/application/Picture.svg"
+            alt=""
+            width="30px"
+          />
+          <p class="label-text ms-3">
+            {{ this.docsUploadForm.controls["nomineePan"].value }}
+          </p>
+          <img
+            (click)="removeFile('nomineePan')"
+            class="ms-2 del-icon"
+            src="../../../../assets/img/application/Wrong_Circle.svg "
+            alt=""
+            width="15px"
+          />
+        </div>
+        <div class="fs-div">
+          <div class="d-flex align-items-center">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Aadhar Card*</h4>
+            <img
+              *ngIf="!aadharBackEnabled"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="Add back side image of Aadhar"
+              class="add-icon mb-3 mt-4 ms-2"
+              src="../../../../assets/img/application/Add.svg"
+              alt=""
+              width="20px"
+              (click)="addAadharBack()"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'aadhar1')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    (change)="addFiles(fileInput35.files, 'aadhar1')"
+                    #fileInput35
+                    id="test"
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput35.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['aadhar1'].invalid
+                }"
+              >
+                Aadhar card is required* <br />
+                (Front & Back)
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <p class="label-sub-text mt-3 ms-3" *ngIf="aadharBackEnabled">
+            Back-side of Aadhar Card
+          </p>
+          <div class="d-flex align-items-center mt-1" *ngIf="aadharBackEnabled">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'aadhar2')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    (change)="addFiles(fileInput36.files, 'aadhar2')"
+                    #fileInput36
+                    id="test"
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput36.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <img
+              *ngIf="aadharBackEnabled"
+              (click)="addAadharBack()"
+              class="ms-4 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="20px"
+            />
+            <p
+              *ngIf="isSubmitted"
+              class="label-text ms-2"
+              [ngClass]="{
+                'r-text':
+                  isSubmitted && this.docsUploadForm.controls['aadhar2'].invalid
+              }"
+            >
+              Aadhar back is required*
+            </p>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['aadhar1'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["aadhar1"].value }}
+            </p>
+            <img
+              (click)="removeFile('aadhar1')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['aadhar2'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["aadhar2"].value }}
+            </p>
+            <img
+              (click)="removeFile('aadhar2')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Education Loan'">
+          <div class="d-flex align-items-center">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload Nominee Aadhar Card*
+            </h4>
+            <img
+              *ngIf="!nomineeAadharBackEnabled"
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="Add back sid image of Aadhar"
+              class="add-icon mb-3 mt-4 ms-2"
+              src="../../../../assets/img/application/Add.svg"
+              alt=""
+              width="20px"
+              (click)="addNomineeAadharBack()"
+            />
+          </div>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'nomineeAadhar1')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    (change)="addFiles(fileInput33.files, 'nomineeAadhar1')"
+                    #fileInput33
+                    id="test"
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput33.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['nomineeAadhar1'].invalid
+                }"
+              >
+                Aadhar card is required* <br />
+                (Front & Back)
+                {{ this.docsUploadForm.controls["nomineeAadhar1"].value }}
+                {{
+                  this.docsUploadForm.controls["nomineeAadhar1"].errors | json
+                }}
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <p class="label-sub-text mt-3 ms-3" *ngIf="nomineeAadharBackEnabled">
+            Back-side of Aadhar Card
+          </p>
+          <div
+            class="d-flex align-items-center mt-1"
+            *ngIf="nomineeAadharBackEnabled"
+          >
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'nomineeAadhar2')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    (change)="addFiles(fileInput34.files, 'nomineeAadhar2')"
+                    #fileInput34
+                    id="test"
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput34.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <img
+              *ngIf="nomineeAadharBackEnabled"
+              (click)="addNomineeAadharBack()"
+              class="ms-4 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="20px"
+            />
+            <p
+              *ngIf="isSubmitted"
+              class="label-text ms-2"
+              [ngClass]="{
+                'r-text':
+                  isSubmitted &&
+                  this.docsUploadForm.controls['nomineeAadhar2'].invalid
+              }"
+            >
+              Aadhar back is required*
+            </p>
+          </div>
+        </div>
+        <div
+          class="priview d-flex align-items-center mt-3"
+          *ngIf="this.docsUploadForm.controls['nomineeAadhar1'].value !== ''"
+        >
+          <img
+            src="../../../../assets/img/application/Picture.svg"
+            alt=""
+            width="30px"
+          />
+          <p class="label-text ms-3">
+            {{ this.docsUploadForm.controls["nomineeAadhar1"].value }}
+          </p>
+          <img
+            (click)="removeFile('nomineeAadhar1')"
+            class="ms-2 del-icon"
+            src="../../../../assets/img/application/Wrong_Circle.svg "
+            alt=""
+            width="15px"
+          />
+        </div>
+        <div
+          class="priview d-flex align-items-center mt-3"
+          *ngIf="
+            this.docsUploadForm.controls['nomineeAadhar2'].value !== '' &&
+            nomineeAadharBackEnabled
+          "
+        >
+          <img
+            src="../../../../assets/img/application/Picture.svg"
+            alt=""
+            width="30px"
+          />
+          <p class="label-text ms-3">
+            {{ this.docsUploadForm.controls["nomineeAadhar2"].value }}
+          </p>
+          <img
+            (click)="removeFile('nomineeAadhar2')"
+            class="ms-2 del-icon"
+            src="../../../../assets/img/application/Wrong_Circle.svg "
+            alt=""
+            width="15px"
+          />
+        </div>
+        <h4
+          class="application-sub-title mt-5 mb-0"
+          *ngIf="type !== 'Gold Loan' && type !== 'Education Loan'"
+        >
+          {{ data.title }}
+        </h4>
+        <div
+          class="fs-div"
+          *ngIf="
+            role == 'Salaried' &&
+            type !== 'Gold Loan' &&
+            type !== 'Business Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Form16*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'form16')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput5.files, 'form16')"
+                    #fileInput5
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput5.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['form16'].invalid
+                }"
+              >
+                Last 3 months form 16 is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['form16'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["form16"].value }}
+            </p>
+            <img
+              (click)="removeFile('form16')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            role == 'Salaried' &&
+            type !== 'Gold Loan' &&
+            type !== 'Business Loan'
+          "
+        >
+          <div class="d-flex align-items-center">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Payslip*</h4>
+
+            <img
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="Add another payslip"
+              class="add-icon mb-3 mt-4 ms-2"
+              src="../../../../assets/img/application/Add.svg"
+              alt=""
+              width="20px"
+              (click)="addPayslip()"
+            />
+          </div>
+          <div *ngFor="let item of numArrayPayslip; let i = index">
+            <div class="d-flex align-items-center mb-3">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'payslip' + i)"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput6.files, 'payslip' + i)"
+                      #fileInput6
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput6.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['payslip' + i].invalid
+                  }"
+                >
+                  Current 3 months payslip is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+
+              <img
+                *ngIf="i !== 0"
+                (click)="
+                  removeItr2(
+                    ('payslip' + i).toString(),
+                    ('payslip' + i).toString(),
+                    'payslip'
+                  )
+                "
+                class="ms-4 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="20px"
+              />
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3 mb-2"
+              *ngIf="this.docsUploadForm.controls['payslip' + i].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["payslip" + i].value }}
+              </p>
+              <img
+                (click)="removeFile('payslip' + i)"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            role == 'Salaried' &&
+            type !== 'Gold Loan' &&
+            type !== 'Business Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Bank Statement*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'bankStatement')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput7.files, 'bankStatement')"
+                    #fileInput7
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput7.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['bankStatement'].invalid
+                }"
+              >
+                Current 6 months bank statement <br />
+                is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['bankStatement'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["bankStatement"].value }}
+            </p>
+            <img
+              (click)="removeFile('bankStatement')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            role == 'Salaried' &&
+            type !== 'Gold Loan' &&
+            type !== 'Business Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Offer Letter*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'offerLetter')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput8.files, 'offerLetter')"
+                    #fileInput8
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput8.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['offerLetter'].invalid
+                }"
+              >
+                Offer letter is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['offerLetter'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["offerLetter"].value }}
+            </p>
+            <img
+              (click)="removeFile('offerLetter')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="type !== 'Gold Loan' && type !== 'Education Loan'"
+        >
+          <div class="d-flex align-items-center">
+            <h4 class="form-sub-title mb-3 mt-4">Upload ITR*</h4>
+            <img
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="Add another ITR"
+              class="add-icon mb-3 mt-4 ms-2"
+              src="../../../../assets/img/application/Add.svg"
+              alt=""
+              width="20px"
+              (click)="addItr()"
+            />
+          </div>
+          <div *ngFor="let item of numArray; let i = index">
+            <div class="d-flex align-items-center mb-3">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'itr' + i)"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput9.files, 'itr' + i)"
+                      #fileInput9
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div class="d-flex" [formGroup]="docsUploadForm">
+                    <select
+                      name="year"
+                      id="year"
+                      class="upload-btn form-control"
+                      formControlName="itrYear{{ i }}"
+                    >
+                      <option value="">Year</option>
+                      <option
+                        value="{{ year }}"
+                        *ngFor="let year of itrYears; let i = index"
+                        [ngClass]="{
+                          'd-none':
+                            this.docsUploadForm.controls['itrYear0'].value ==
+                              year ||
+                            this.docsUploadForm.controls['itrYear1'].value ==
+                              year ||
+                            this.docsUploadForm.controls['itrYear2'].value ==
+                              year
+                        }"
+                      >
+                        {{ year }}
+                      </option>
+                    </select>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput9.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4" *ngIf="i == 0">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['itr' + i].invalid
+                  }"
+                >
+                  Current 3 years company ITR is required*
+                </p>
+                <p
+                  *ngIf="
+                    isSubmitted &&
+                    this.docsUploadForm.controls['itrYear' + i].invalid
+                  "
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['itrYear' + i].invalid
+                  }"
+                >
+                  Year of ITR is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+
+              <img
+                *ngIf="i !== 0"
+                (click)="
+                  removeItr2(
+                    ('itrYear' + i).toString(),
+                    ('itr' + i).toString(),
+                    'itr'
+                  )
+                "
+                class="ms-4 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="20px"
+              />
+              <div class="d-flex flex-column ms-4">
+                <p
+                  *ngIf="
+                    isSubmitted &&
+                    this.docsUploadForm.controls['itrYear' + i].invalid &&
+                    i !== 0
+                  "
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['itrYear' + i].invalid
+                  }"
+                >
+                  Year of ITR is required*
+                </p>
+                <p
+                  *ngIf="
+                    isSubmitted &&
+                    this.docsUploadForm.controls['itrYear' + i].invalid &&
+                    i !== 0
+                  "
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['itr' + i].invalid
+                  }"
+                >
+                  ITR statement is required*
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3 mb-2"
+              *ngIf="this.docsUploadForm.controls['itr' + i].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["itr" + i].value }}
+              </p>
+              <img
+                (click)="removeFile('itr' + i)"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            role == 'Salaried' &&
+            type !== 'Gold Loan' &&
+            type !== 'Business Loan' &&
+            type !== 'Education Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Comapany ID Card*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'idCard')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput10.files, 'idCard')"
+                    #fileInput10
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput10.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['idCard'].invalid
+                }"
+              >
+                Id card is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['idCard'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["idCard"].value }}
+            </p>
+            <img
+              (click)="removeFile('idCard')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            (role == 'Self' || type == 'Business Loan') &&
+            type !== 'Gold Loan' &&
+            type !== 'Education Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Comapany Sales Tax*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'salesTax')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput11.files, 'salesTax')"
+                    #fileInput11
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput11.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['salesTax'].invalid
+                }"
+              >
+                Last 3 years company sales tax is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['salesTax'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["salesTax"].value }}
+            </p>
+            <img
+              (click)="removeFile('salesTax')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            (role == 'Self' || type == 'Business Loan') &&
+            type !== 'Gold Loan' &&
+            type !== 'Education Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">Upload Comapany Pan Card*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'companyPan')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput12.files, 'companyPan')"
+                    #fileInput12
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput12.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['companyPan'].invalid
+                }"
+              >
+                Company pan card is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['companyPan'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["companyPan"].value }}
+            </p>
+            <img
+              (click)="removeFile('companyPan')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div
+          class="fs-div"
+          *ngIf="
+            (role == 'Self' || type == 'Business Loan') &&
+            type !== 'Gold Loan' &&
+            type !== 'Education Loan'
+          "
+        >
+          <h4 class="form-sub-title mb-3 mt-4">
+            Upload Current Account Statement*
+          </h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'currentAccount')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput13.files, 'currentAccount')"
+                    #fileInput13
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput13.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['currentAccount'].invalid
+                }"
+              >
+                Current Account Statement is required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['currentAccount'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["currentAccount"].value }}
+            </p>
+            <img
+              (click)="removeFile('currentAccount')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+
+        <div class="fs-div" *ngIf="type == 'Business Loan'">
+          <h4 class="form-sub-title mb-3 mt-4">Upload GST*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'gst')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput21.files, 'gst')"
+                    #fileInput21
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput21.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted && this.docsUploadForm.controls['gst'].invalid
+                }"
+              >
+                GST Details*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['gst'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["gst"].value }}
+            </p>
+            <img
+              (click)="removeFile('gst')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Business Loan'">
+          <h4 class="form-sub-title mb-3 mt-4">
+            Upload Sole Prop. Declaration Or Certified Copy of Partnership Deed
+          </h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'soleProp')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput22.files, 'soleProp')"
+                    #fileInput22
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput22.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['soleProp'].invalid
+                }"
+              >
+                Sole Prop. Declaration Or <br />Certified Copy of Partnership
+                Deed <br />
+                is required
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['soleProp'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["soleProp"].value }}
+            </p>
+            <img
+              (click)="removeFile('soleProp')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Business Loan'">
+          <h4 class="form-sub-title mb-3 mt-4">
+            Upload Certified true copy of Memorandum & Articles of Association
+            (certified by Director)*
+          </h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'memorandum')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput23.files, 'memorandum')"
+                    #fileInput23
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput23.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['memorandum'].invalid
+                }"
+              >
+                Certified true copy of Memorandum & <br />
+                Articles of Association (certified by Director)
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['memorandum'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["memorandum"].value }}
+            </p>
+            <img
+              (click)="removeFile('memorandum')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Business Loan'">
+          <h4 class="form-sub-title mb-3 mt-4">Balance Sheet*</h4>
+          <div class="d-flex align-items-center">
+            <div
+              class="file-div d-flex align-items-center justify-content-between"
+            >
+              <div class="drag-div py-0" align="center">
+                <label
+                  class="drag-zone"
+                  [appDragDrop]="dragDropEnabled"
+                  (dropped)="handleFileDrop($event, 'balanceSheet')"
+                >
+                  <img
+                    src="../../../../assets/img/application/Upload.svg"
+                    alt=""
+                    width="60px"
+                  />
+                  <div class="form-sub-title mt-2">Drag and Drop</div>
+                  <input
+                    type="file"
+                    [accept]="fileType"
+                    [multiple]="multiple"
+                    id="test"
+                    (change)="addFiles(fileInput24.files, 'balanceSheet')"
+                    #fileInput24
+                    class="visually-hidden"
+                  />
+                  <ng-content></ng-content>
+                </label>
+              </div>
+              <div class="or-div form-sub-title">OR</div>
+              <div class="upload-div" align="center">
+                <div>
+                  <a
+                    class="btn btn-primary btn-sm upload-btn"
+                    (click)="fileInput24.click()"
+                    role="button"
+                    >Upload File
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+              <p
+                class="label-text"
+                [ngClass]="{
+                  'r-text':
+                    isSubmitted &&
+                    this.docsUploadForm.controls['balanceSheet'].invalid
+                }"
+              >
+                Balance Sheet is Required*
+              </p>
+              <p class="label-sub-text">
+                File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+              </p>
+            </div>
+          </div>
+          <div
+            class="priview d-flex align-items-center mt-3"
+            *ngIf="this.docsUploadForm.controls['balanceSheet'].value !== ''"
+          >
+            <img
+              src="../../../../assets/img/application/Picture.svg"
+              alt=""
+              width="30px"
+            />
+            <p class="label-text ms-3">
+              {{ this.docsUploadForm.controls["balanceSheet"].value }}
+            </p>
+            <img
+              (click)="removeFile('balanceSheet')"
+              class="ms-2 del-icon"
+              src="../../../../assets/img/application/Wrong_Circle.svg "
+              alt=""
+              width="15px"
+            />
+          </div>
+        </div>
+        <div class="fs-div" *ngIf="type == 'Business Loan'">
+          <div class="d-flex align-items-center">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload Cancelled Checkleaf*
+            </h4>
+            <img
+              data-bs-toggle="tooltip"
+              data-bs-placement="right"
+              title="Add another file"
+              class="add-icon mb-3 mt-4 ms-2"
+              src="../../../../assets/img/application/Add.svg"
+              alt=""
+              width="20px"
+              (click)="addChequeLeaf()"
+            />
+          </div>
+          <div *ngFor="let item of numArrayCancelledLeaves; let i = index">
+            <div class="d-flex align-items-center mb-3">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'cancelledCheckLeaf' + i)"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="
+                        addFiles(fileInput25.files, 'cancelledCheckLeaf' + i)
+                      "
+                      #fileInput25
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput25.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['cancelledCheckLeaf' + i]
+                        .invalid
+                  }"
+                >
+                  3 Cancelled checkleaf is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+              <img
+                *ngIf="i !== 0"
+                (click)="
+                  removeItr2(
+                    ('cancelledCheckLeaf' + i).toString(),
+                    ('cancelledCheckLeaf' + i).toString(),
+                    'chequeLeaf'
+                  )
+                "
+                class="ms-4 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="20px"
+              />
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3 mb-2"
+              *ngIf="
+                this.docsUploadForm.controls['cancelledCheckLeaf' + i].value !==
+                ''
+              "
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{
+                  this.docsUploadForm.controls["cancelledCheckLeaf" + i].value
+                }}
+              </p>
+              <img
+                (click)="removeFile('cancelledCheckLeaf' + i)"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="type == 'Home Loan'">
+          <h4 class="application-sub-title mt-5 mb-0">Mortage</h4>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Land Documents*</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'landDocument')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput14.files, 'landDocument')"
+                      #fileInput14
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput14.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['landDocument'].invalid
+                  }"
+                >
+                  Land documents is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['landDocument'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["landDocument"].value }}
+              </p>
+              <img
+                (click)="removeFile('landDocument')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Pataa*</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'patta')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput15.files, 'patta')"
+                      #fileInput15
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput15.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['patta'].invalid
+                  }"
+                >
+                  Patta is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['patta'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["patta"].value }}
+              </p>
+              <img
+                (click)="removeFile('patta')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Sitta</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'sitta')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput16.files, 'sitta')"
+                      #fileInput16
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput16.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['sitta'].invalid
+                  }"
+                >
+                  Upload Sitta
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['sitta'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["sitta"].value }}
+              </p>
+              <img
+                (click)="removeFile('sitta')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Building Approval</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'buildingApproval')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput17.files, 'buildingApproval')"
+                      #fileInput17
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput17.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['buildingApproval'].invalid
+                  }"
+                >
+                  Building approval
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="
+                this.docsUploadForm.controls['buildingApproval'].value !== ''
+              "
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["buildingApproval"].value }}
+              </p>
+              <img
+                (click)="removeFile('buildingApproval')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Plan Approval</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'planApproval')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput18.files, 'planApproval')"
+                      #fileInput18
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput18.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['planApproval'].invalid
+                  }"
+                >
+                  Plan approval
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['planApproval'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["planApproval"].value }}
+              </p>
+              <img
+                (click)="removeFile('planApproval')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload Blue Print*</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'blueprint')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput19.files, 'blueprint')"
+                      #fileInput19
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput19.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['blueprint'].invalid
+                  }"
+                >
+                  Blue print is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['blueprint'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["blueprint"].value }}
+              </p>
+              <img
+                (click)="removeFile('blueprint')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload EB Bill*</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'electricBill')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput20.files, 'electricBill')"
+                      #fileInput20
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput20.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['electricBill'].invalid
+                  }"
+                >
+                  EB Bill is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['electricBill'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["electricBill"].value }}
+              </p>
+              <img
+                (click)="removeFile('electricBill')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="type === 'Education Loan'">
+          <h4 class="application-sub-title mt-5 mb-0">Educational Documents</h4>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">Upload 10th Marksheet*</h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'sslcMarkSheet')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput21.files, 'sslcMarkSheet')"
+                      #fileInput21
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput21.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      docsUploadForm.controls['sslcMarkSheet'].invalid
+                  }"
+                >
+                  SSLC Marksheet is required*
+                  {{ docsUploadForm.controls["sslcMarkSheet"].invalid }}
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['sslcMarkSheet'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["sslcMarkSheet"].value }}
+              </p>
+              <img
+                (click)="removeFile('sslcMarkSheet')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload 12th / Diploma Marksheet*
+            </h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'hscMarkSheet')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput22.files, 'hscMarkSheet')"
+                      #fileInput22
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput22.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['hscMarkSheet'].invalid
+                  }"
+                >
+                  Marksheet is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['hscMarkSheet'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["hscMarkSheet"].value }}
+              </p>
+              <img
+                (click)="removeFile('hscMarkSheet')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload College Fee Structure*
+            </h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'feesStructure')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput23.files, 'feesStructure')"
+                      #fileInput23
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput23.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['feesStructure'].invalid
+                  }"
+                >
+                  Fee Structure is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['feesStructure'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["feesStructure"].value }}
+              </p>
+              <img
+                (click)="removeFile('feesStructure')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload College Bonafide Certificate*
+            </h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'bonafideCertificate')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="
+                        addFiles(fileInput24.files, 'bonafideCertificate')
+                      "
+                      #fileInput24
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput24.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['bonafideCertificate']
+                        .invalid
+                  }"
+                >
+                  Bonafide Certificate is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="
+                this.docsUploadForm.controls['bonafideCertificate'].value !== ''
+              "
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["bonafideCertificate"].value }}
+              </p>
+              <img
+                (click)="removeFile('bonafideCertificate')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <div class="fs-div">
+            <h4 class="form-sub-title mb-3 mt-4">
+              Upload College Fees paid bill*
+            </h4>
+            <div class="d-flex align-items-center">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'feesPaidBill')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput25.files, 'feesPaidBill')"
+                      #fileInput25
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput25.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['feesPaidBill'].invalid
+                  }"
+                >
+                  Fees paid bill is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['feesPaidBill'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["feesPaidBill"].value }}
+              </p>
+              <img
+                (click)="removeFile('feesPaidBill')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+          <!-- Modification Done -->
+        </div>
+        <!--
+        <div [formGroup]="docsUploadForm">
+          <div class="fs-div">
+            <div class="d-flex align-items-center">
+              <h4 class="form-sub-title mb-3 mt-4">Upload Form16*</h4>
+              <img
+                data-bs-toggle="tooltip"
+                data-bs-placement="right"
+                title="Add back side image of Aadhar"
+                class="add-icon mb-3 mt-4 ms-2"
+                src="../../../../assets/img/application/Add.svg"
+                alt=""
+                width="20px"
+                (click)="addDocs('form16Years')"
+              />
+            </div>
+
+            <div class="d-flex align-items-center" *ngFor="
+            let data1 of docsdata('form16Years').controls;
+            let i = index
+          "
+          [formGroupName]="i">
+              <div
+                class="file-div d-flex align-items-center justify-content-between"
+              >
+                <div class="drag-div py-0" align="center">
+                  <label
+                    class="drag-zone"
+                    [appDragDrop]="dragDropEnabled"
+                    (dropped)="handleFileDrop($event, 'form16')"
+                  >
+                    <img
+                      src="../../../../assets/img/application/Upload.svg"
+                      alt=""
+                      width="60px"
+                    />
+                    <div class="form-sub-title mt-2">Drag and Drop</div>
+                    <input
+                      type="file"
+                      [accept]="fileType"
+                      [multiple]="multiple"
+                      id="test"
+                      (change)="addFiles(fileInput5.files, 'form16')"
+                      #fileInput5
+                      class="visually-hidden"
+                    />
+                    <ng-content></ng-content>
+                  </label>
+                </div>
+                <div class="or-div form-sub-title">OR</div>
+                <div class="upload-div" align="center">
+                  <div>
+                    <a
+                      class="btn btn-primary btn-sm upload-btn"
+                      (click)="fileInput5.click()"
+                      role="button"
+                      >Upload File
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex flex-column ms-4">
+                <p
+                  class="label-text"
+                  [ngClass]="{
+                    'r-text':
+                      isSubmitted &&
+                      this.docsUploadForm.controls['form16'].invalid
+                  }"
+                >
+                  Last 3 months form 16 is required*
+                </p>
+                <p class="label-sub-text">
+                  File size: 8 MB in JPEG, PNG, PDF & WEBP Format
+                </p>
+              </div>
+            </div>
+            <div
+              class="priview d-flex align-items-center mt-3"
+              *ngIf="this.docsUploadForm.controls['form16'].value !== ''"
+            >
+              <img
+                src="../../../../assets/img/application/Picture.svg"
+                alt=""
+                width="30px"
+              />
+              <p class="label-text ms-3">
+                {{ this.docsUploadForm.controls["form16"].value }}
+              </p>
+              <img
+                (click)="removeFile('form16')"
+                class="ms-2 del-icon"
+                src="../../../../assets/img/application/Wrong_Circle.svg "
+                alt=""
+                width="15px"
+              />
+            </div>
+          </div>
+        </div> -->
+
+        <h4 class="form-sub-title mb-3 mt-5" style="color: #20bf55">
+          Confirm & Submit*
+        </h4>
+        <div class="d-flex align-items-center mt-3">
+          <div class="form-group">
+            <input type="checkbox" id="html" [(ngModel)]="termAccepted" />
+            <label class="application-p" for="html"
+              >I authorize that the details furnished were True</label
+            >
+          </div>
+        </div>
+        <small *ngIf="!termAccepted && isSubmitted" class="form-element-hint"
+          >*Please Accept terms to continue.</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-sm-10">
+        <a
+          class="btn btn-1 float-start px-5"
+          routerLink="/offer/application/details/{{ id }}"
+          >Back
+        </a>
+        <!-- <a
+          class="btn btn-1 float-end px-5"
+          routerLink="/offer/application/details/{{ id }}"
+          >Next
+        </a> -->
+        <a class="btn btn-1 float-end px-5" (click)="submit()">Next </a>
+      </div>
+    </div>
+  </div>
+</section>

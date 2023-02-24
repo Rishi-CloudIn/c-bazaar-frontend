@@ -1,0 +1,105 @@
+<section class="bg-section container">
+  <div class="row auth-section">
+    <div class="col-lg-5 col-md-12 col-sm-12" align="center">
+      <div class="auth-left">
+        <div class="mob-none">
+          <img
+            class="auth-left-img"
+            src="../../../../assets/img/logo.svg"
+            alt=""
+            width="200px"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-md-12 col-sm-12">
+      <div class="container">
+        <div class="card auth-card" align="left">
+          <div class="card-body p-5">
+            <div class="container px-3 py-4">
+              <h5 class="title">Welcome Back</h5>
+              <p class="title-description mb-4">Login to continue</p>
+              <!-- <h4 class="sub-title mb-4 mt-2">Login</h4>
+               -->
+              <form id="login-form" method="POST" [formGroup]="loginForm">
+                <div class="form-input">
+                  <input
+                    id="name"
+                    class="form-element-input"
+                    type="input"
+                    autocomplete="off"
+                    formControlName="userName"
+                    [maxLength]="30"
+                    placeholder="Enter your Email ID"
+                    required
+                  />
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name">Email ID*</label>
+                  <small
+                    *ngIf="validateLogin('userName')"
+                    class="form-element-hint"
+                    >*Please enter valid mail Id.</small
+                  >
+                </div>
+                <div class="form-input">
+                  <input
+                    id="password"
+                    class="form-element-input"
+                    type="{{ showPassword ? 'text' : 'password' }}"
+                    formControlName="password"
+                    autocomplete="off"
+                    [maxLength]="30"
+                    placeholder="Enter your Password"
+                    required
+                  />
+                  <span
+                    toggle="#password-field"
+                    (click)="togglePassword()"
+                    class="fa fa-fw field-icon toggle-password"
+                    [ngClass]="{
+                      'fa-eye': showPassword,
+                      'fa-eye-slash': !showPassword
+                    }"
+                  ></span>
+                  <div class="form-element-bar"></div>
+                  <label class="form-element-label" for="name"
+                    >Password*
+                  </label>
+                  <small
+                    *ngIf="validateLogin('password')"
+                    class="form-element-hint"
+                    >*Your password must contain atleast (1 upper case, 1
+                    numeric, 1 special character and lower cases) and the length
+                    should be minimum 8</small
+                  >
+                </div>
+                <p
+                  class="title-description text-end mb-2"
+                  style="margin-top: -2rem"
+                >
+                  <span routerLink="/dsa/forgot_password">
+                    Forgot password?</span
+                  >
+                </p>
+                <div align="center">
+                  <a (click)="login()" class="btn btn-1">Login</a>
+                  <p class="title-description mt-3">
+                    New user? <span (click)="register()"> Register</span>
+                  </p>
+                  <p class="title-description my-2">OR LOGIN USING</p>
+
+                  <button class="btn-g mt-1" (click)="gLogin()">
+                    <img
+                      class="ggl-img"
+                      src="../../../../assets/img/ggl.svg"
+                    />Google
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

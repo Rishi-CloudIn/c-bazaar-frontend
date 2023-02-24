@@ -1,0 +1,75 @@
+<app-side-nav> </app-side-nav>
+<section class="side-nav-div mb-5">
+  <h5 class="page-crump mb-4 ms-5">FAQ's</h5>
+
+  <section class="faq-section">
+    <div class="faq-content-div">
+      <div
+        class="card faq-card"
+        *ngFor="let item of faq; let i = index"
+        (click)="click(i)"
+      >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-1 cus-col">
+              <div
+                class="faq-plus-icon"
+                [ngClass]="{
+                  'faq-plus-icon-clicked': item.status
+                }"
+              >
+                <div class="faq-bar"></div>
+                <div class="faq-bar-1"></div>
+              </div>
+            </div>
+            <div class="col-11">
+              <div class="faq-content-div-1">
+                <h3 class="faq-h3">{{ item.question }}</h3>
+                <div
+                  class="faq-content-p faq-content-p-active"
+                  [ngClass]="{
+                    'faq-content-p-active': !item.status
+                  }"
+                >
+                  <p class="faq-p">
+                    {{ item.answer }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- card-2 -->
+
+      <!-- <div class="card faq-card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2">
+              <div class="faq-plus-icon faq-plus-icon-clicked">
+                <div class="faq-bar"></div>
+                <div class="faq-bar-1"></div>
+              </div>
+            </div>
+            <div class="col-10">
+              <div class="faq-content-div-1">
+                <h3 class="faq-h3">
+                  What is the eligibility criteria to become a C-Bazaar DSA
+                  Partner?
+                </h3>
+                <div class="faq-content-p faq-content-p-active">
+                  <p class="faq-p">
+                    We need minimal documentation from your side to become
+                    partner that includes Aadhar Card, PAN Card, Cancelled
+                    Cheque, A Photograph, Address Proof
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+</section>
