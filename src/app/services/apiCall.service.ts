@@ -41,7 +41,7 @@ export class ApiCallService {
             this.router.navigate(['/home']);
             localStorage.clear();
             sessionStorage.clear();
-          } else if (err.status == 500|| err.status==429) {
+          } else if (err.status == 500 || err.status == 429) {
             this.alert.fireToastF('Server error, Try again later');
           } else if (err.status == 400) {
             let data: any = this.es.unmaskData(err.error);
@@ -70,7 +70,7 @@ export class ApiCallService {
             return result;
           }
         }),
-        catchError((err) => {
+        catchError((err: any) => {
           console.log(err);
           let data: any = this.es.unmaskData(err.error);
           // console.log(data.message[0]);
@@ -98,7 +98,7 @@ export class ApiCallService {
           //   this.alert.fireToastF(r.response.message[0]);
           // }
         }),
-        catchError((err) => {
+        catchError((err: any) => {
           let data: any = this.es.unmaskData(err.error);
           this.alert.fireToastF(data.message[0]);
           return '';
@@ -121,12 +121,12 @@ export class ApiCallService {
             this.alert.fireToastF(result.response.message[0]);
           }
         }),
-        catchError((err) => {
+        catchError((err: any) => {
           if (err.status == 401 || err.status == 403) {
             this.router.navigate(['/home']);
             localStorage.clear();
             sessionStorage.clear();
-          } else if (err.status == 500 || err.status==429) {
+          } else if (err.status == 500 || err.status == 429) {
             this.alert.fireToastF('Server error, Try again later');
           } else if (err.status == 400) {
             let data: any = this.es.unmaskData(err.error);
@@ -153,7 +153,7 @@ export class ApiCallService {
             return result;
           }
         }),
-        catchError((err) => {
+        catchError((err: any) => {
           let data: any = this.es.unmaskData(err.error);
           // console.log(data.message[0]);
           this.alert.fireToastF(data.message[0]);

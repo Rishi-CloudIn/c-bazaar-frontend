@@ -26,7 +26,7 @@ export class TermsComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private app: LoanApplicationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id') || '';
@@ -39,6 +39,8 @@ export class TermsComponent implements OnInit {
       offerId: this.id,
     };
     this.app.applicationResolver(body).subscribe((r: any) => {
+      console.log(r);
+
       for (let i = 0; i < r.response.data.length; i++) {
         if (r.response.data[i].step == 'step 1') {
           this.data = r.response.data[i];
@@ -99,7 +101,8 @@ export class TermsComponent implements OnInit {
         this.commonFB(r);
         break;
 
-      default:
+        // NEW CHANGE
+      default: this.commonFB(r);
     }
   }
 

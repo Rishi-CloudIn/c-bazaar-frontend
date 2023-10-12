@@ -44,6 +44,32 @@
   </head>
   <body onload="script();">
     <app-root></app-root>
+
+    <script>
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+      });
+    </script>
+
+    <script>
+      window.addEventListener("keyup", function (e) {
+        if (e.key === "PrintScreen" || e.keyCode === 44) {
+          e.preventDefault();
+          alert("Screenshots are disabled on this website.");
+        }
+      });
+    </script>
+
+    <!-- <script>
+      navigator.mediaDevices
+        .getDisplayMedia({ video: true })
+        .then(function (stream) {
+          alert("Screen recording detected.");
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    </script> -->
     <script src="./assets/js/custom.js" defer></script>
   </body>
 </html>

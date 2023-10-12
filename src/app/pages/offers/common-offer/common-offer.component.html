@@ -9,12 +9,12 @@
         [ngClass]="{ 'loan-btn-active': category.selected === true }"
         *ngFor="let category of categoryList; let i = index"
       >
-        <div class="loan-btn-div">
-          <img src="{{ category.imageUrl }}" class="loan-btn-icon" />
-        </div>
-        <p class="loan-btn-p" style="white-space: wrap">
-          {{ category.category }}
-        </p>
+          <div class="loan-btn-div">
+            <img src="{{ category.imageUrl }}" class="loan-btn-icon" />
+          </div>
+          <p class="loan-btn-p" style="white-space: wrap">
+            {{ category.category }}
+          </p>
       </button>
     </div>
   </div>

@@ -12,7 +12,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class CommonOfferComponent implements OnInit {
   isLoading: boolean = true;
   selectedCat: any = null;
-  badgeName: string = 'Home Loan';
+  badgeName: string = 'Vehicle Loan';
   categoryList: any[] = [];
   offerList: any[] = [];
   onBoarded: boolean = true;
@@ -23,7 +23,7 @@ export class CommonOfferComponent implements OnInit {
     private app: LoanApplicationService,
     private router: Router,
     private ps: ProfileService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.onBoarded = this.ps.onBoarded;
@@ -39,13 +39,14 @@ export class CommonOfferComponent implements OnInit {
     this.offer.getOffers(data).subscribe((r: any) => {
       this.isLoading = false;
       if (r.status) {
-        console.log(r.response.onBoarded);
+        console.log(r.response);
         this.categoryList = r.response.categoryList;
         this.offerList = r.response.offers;
+        console.log(r.response.offers);
         this.offersCount = r.response.totalCount;
         // this.badgeName = r.response.categoryList[0].category;
       }
-      console.log(r);
+      // console.log(r);
     });
   }
 
@@ -102,7 +103,7 @@ export class CommonOfferComponent implements OnInit {
     }
   }
 
-  viewOffer(id:any) {
+  viewOffer(id: any) {
     this.router.navigate(['/offer/view'], {
       queryParams: { offerId: id, cibilId: '' },
     });
